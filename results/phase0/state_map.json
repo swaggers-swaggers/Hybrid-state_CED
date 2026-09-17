@@ -1,0 +1,6596 @@
+{
+  "schema_version": 1,
+  "settings": {
+    "model_path": "/home/liu/CED/models/Qwen3.5-0.8B-Base",
+    "output_dir": "/home/liu/CED/results/phase0",
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "seed": 20260916,
+    "context_lengths": [
+      512,
+      2048,
+      8192
+    ],
+    "warmup_runs": 1,
+    "profile_runs": 3,
+    "roundtrip_length": 64,
+    "boundary_length": 64,
+    "causal_length": 32,
+    "tolerances": {
+      "roundtrip_max_abs": 0.0001,
+      "boundary_max_abs": 0.25,
+      "boundary_max_kl": 0.001,
+      "boundary_min_cosine": 0.999,
+      "causal_max_abs": 0.0001
+    },
+    "expected": {
+      "num_hidden_layers": 24,
+      "hidden_size": 1024,
+      "linear_attention_layers": 18,
+      "full_attention_layers": 6,
+      "full_attention_indices": [
+        3,
+        7,
+        11,
+        15,
+        19,
+        23
+      ]
+    },
+    "config_path": "/home/liu/CED/configs/qwen35_08b_state_map.yaml"
+  },
+  "environment": {
+    "timestamp": "2026-09-16T18:55:44.234883+08:00",
+    "model_path": "/home/liu/CED/models/Qwen3.5-0.8B-Base",
+    "python": "3.12.13",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.12.1",
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "compute_capability": "12.0",
+    "driver": "595.84",
+    "attention_backend": "sdpa",
+    "backend_fingerprint": {
+      "attention": "sdpa",
+      "gdn_prefill": "transformers.models.qwen3_5.modeling_qwen3_5.torch_chunk_gated_delta_rule",
+      "gdn_decode": "transformers.models.qwen3_5.modeling_qwen3_5.torch_recurrent_gated_delta_rule",
+      "causal_conv_prefill": "none",
+      "causal_conv_decode": "transformers.models.qwen3_5.modeling_qwen3_5.torch_causal_conv1d_update"
+    },
+    "model_vram_bytes": 1736535040,
+    "model_revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
+    "weights_etag_sha256": "c2b1e5a17d9c1e27685d92ed9b382911ebb99955ecd89052d1721241adfbab6c"
+  },
+  "static_state_map": {
+    "architecture": {
+      "num_hidden_layers": 24,
+      "hidden_size": 1024,
+      "linear_attention_layers": 18,
+      "full_attention_layers": 6,
+      "full_attention_indices": [
+        3,
+        7,
+        11,
+        15,
+        19,
+        23
+      ],
+      "conv_kernel_size": 4,
+      "native_context": 262144
+    },
+    "assumptions": {
+      "batch_size": 1,
+      "activation_dtype": "bfloat16"
+    },
+    "layers": [
+      {
+        "layer": 0,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 1,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 2,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 3,
+        "type": "full_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "attention_kv",
+          "raw_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "knorm_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "final_k_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "v_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "k_bytes_formula": "1024 * N",
+          "v_bytes_formula": "1024 * N",
+          "growth": "sequence",
+          "dependency": "normalized hidden -> k/v projections; KNorm and RoPE for K; cache concatenation by position"
+        }
+      },
+      {
+        "layer": 4,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 5,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 6,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 7,
+        "type": "full_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "attention_kv",
+          "raw_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "knorm_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "final_k_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "v_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "k_bytes_formula": "1024 * N",
+          "v_bytes_formula": "1024 * N",
+          "growth": "sequence",
+          "dependency": "normalized hidden -> k/v projections; KNorm and RoPE for K; cache concatenation by position"
+        }
+      },
+      {
+        "layer": 8,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 9,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 10,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 11,
+        "type": "full_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "attention_kv",
+          "raw_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "knorm_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "final_k_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "v_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "k_bytes_formula": "1024 * N",
+          "v_bytes_formula": "1024 * N",
+          "growth": "sequence",
+          "dependency": "normalized hidden -> k/v projections; KNorm and RoPE for K; cache concatenation by position"
+        }
+      },
+      {
+        "layer": 12,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 13,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 14,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 15,
+        "type": "full_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "attention_kv",
+          "raw_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "knorm_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "final_k_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "v_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "k_bytes_formula": "1024 * N",
+          "v_bytes_formula": "1024 * N",
+          "growth": "sequence",
+          "dependency": "normalized hidden -> k/v projections; KNorm and RoPE for K; cache concatenation by position"
+        }
+      },
+      {
+        "layer": 16,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 17,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 18,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 19,
+        "type": "full_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "attention_kv",
+          "raw_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "knorm_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "final_k_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "v_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "k_bytes_formula": "1024 * N",
+          "v_bytes_formula": "1024 * N",
+          "growth": "sequence",
+          "dependency": "normalized hidden -> k/v projections; KNorm and RoPE for K; cache concatenation by position"
+        }
+      },
+      {
+        "layer": 20,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 21,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 22,
+        "type": "linear_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "gdn",
+          "conv_shape": [
+            1,
+            6144,
+            4
+          ],
+          "conv_bytes": 49152,
+          "recurrent_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "recurrent_bytes": 524288,
+          "growth": "static",
+          "dependency": "last convolution window plus prefix-folded DeltaNet associative recurrence"
+        }
+      },
+      {
+        "layer": 23,
+        "type": "full_attention",
+        "hidden": {
+          "shape_formula": [
+            1,
+            "N",
+            1024
+          ],
+          "bytes_formula": "2048 * N",
+          "growth": "sequence",
+          "dependency": "previous layer residual stream"
+        },
+        "cache": {
+          "kind": "attention_kv",
+          "raw_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "knorm_k_shape_formula": [
+            1,
+            "N",
+            2,
+            256
+          ],
+          "final_k_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "v_shape_formula": [
+            1,
+            2,
+            "N",
+            256
+          ],
+          "k_bytes_formula": "1024 * N",
+          "v_bytes_formula": "1024 * N",
+          "growth": "sequence",
+          "dependency": "normalized hidden -> k/v projections; KNorm and RoPE for K; cache concatenation by position"
+        }
+      }
+    ]
+  },
+  "architecture_errors": [],
+  "runs": [
+    {
+      "status": "ok",
+      "context_length": 512,
+      "cache_bytes": 16613376,
+      "baseline_vram_bytes": 1736539136,
+      "peak_vram_bytes": 1816697344,
+      "prefill_ms": {
+        "median": 62.836639404296875,
+        "min": 62.46467208862305,
+        "max": 63.45356750488281,
+        "runs": 3
+      },
+      "decode_ms": {
+        "median": 14.38361644744873,
+        "min": 14.245504379272461,
+        "max": 28.645856857299805,
+        "runs": 3
+      },
+      "cache_layers": [
+        {
+          "layer": 0,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 1,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 2,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 3,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 1048576
+        },
+        {
+          "layer": 4,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 5,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 6,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 7,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 1048576
+        },
+        {
+          "layer": 8,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 9,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 10,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 11,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 1048576
+        },
+        {
+          "layer": 12,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 13,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 14,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 15,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 1048576
+        },
+        {
+          "layer": 16,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 17,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 18,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 19,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 1048576
+        },
+        {
+          "layer": 20,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 21,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 22,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 23,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                512,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 1048576
+        }
+      ],
+      "layer_timings": [
+        {
+          "layer": 0,
+          "prefill_ms": 3.5339200496673584,
+          "decode_ms": 0.6307839751243591
+        },
+        {
+          "layer": 1,
+          "prefill_ms": 3.200511932373047,
+          "decode_ms": 0.587552011013031
+        },
+        {
+          "layer": 2,
+          "prefill_ms": 3.177056074142456,
+          "decode_ms": 0.6036800146102905
+        },
+        {
+          "layer": 3,
+          "prefill_ms": 0.6764159798622131,
+          "decode_ms": 0.5167359709739685
+        },
+        {
+          "layer": 4,
+          "prefill_ms": 3.061984062194824,
+          "decode_ms": 0.6376640200614929
+        },
+        {
+          "layer": 5,
+          "prefill_ms": 3.236448049545288,
+          "decode_ms": 0.574783980846405
+        },
+        {
+          "layer": 6,
+          "prefill_ms": 3.2752959728240967,
+          "decode_ms": 0.5812159776687622
+        },
+        {
+          "layer": 7,
+          "prefill_ms": 0.6793280243873596,
+          "decode_ms": 0.5071359872817993
+        },
+        {
+          "layer": 8,
+          "prefill_ms": 3.184000015258789,
+          "decode_ms": 0.5956799983978271
+        },
+        {
+          "layer": 9,
+          "prefill_ms": 3.242271900177002,
+          "decode_ms": 0.5697600245475769
+        },
+        {
+          "layer": 10,
+          "prefill_ms": 3.265727996826172,
+          "decode_ms": 0.5782719850540161
+        },
+        {
+          "layer": 11,
+          "prefill_ms": 0.6734079718589783,
+          "decode_ms": 0.5123519897460938
+        },
+        {
+          "layer": 12,
+          "prefill_ms": 3.219264030456543,
+          "decode_ms": 0.6308479905128479
+        },
+        {
+          "layer": 13,
+          "prefill_ms": 3.2456319332122803,
+          "decode_ms": 0.5494719743728638
+        },
+        {
+          "layer": 14,
+          "prefill_ms": 2.991328001022339,
+          "decode_ms": 0.6164159774780273
+        },
+        {
+          "layer": 15,
+          "prefill_ms": 0.6787840127944946,
+          "decode_ms": 0.49859198927879333
+        },
+        {
+          "layer": 16,
+          "prefill_ms": 3.0983359813690186,
+          "decode_ms": 0.5703679919242859
+        },
+        {
+          "layer": 17,
+          "prefill_ms": 3.27839994430542,
+          "decode_ms": 0.5569919943809509
+        },
+        {
+          "layer": 18,
+          "prefill_ms": 3.3265280723571777,
+          "decode_ms": 0.5541759729385376
+        },
+        {
+          "layer": 19,
+          "prefill_ms": 0.6781439781188965,
+          "decode_ms": 0.4851840138435364
+        },
+        {
+          "layer": 20,
+          "prefill_ms": 3.1565439701080322,
+          "decode_ms": 0.5694079995155334
+        },
+        {
+          "layer": 21,
+          "prefill_ms": 3.2374401092529297,
+          "decode_ms": 0.5479999780654907
+        },
+        {
+          "layer": 22,
+          "prefill_ms": 3.2374401092529297,
+          "decode_ms": 0.5468479990959167
+        },
+        {
+          "layer": 23,
+          "prefill_ms": 0.6734399795532227,
+          "decode_ms": 0.4903999865055084
+        }
+      ],
+      "hook_observations": [
+        {
+          "layer": 0,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 1,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 2,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 3,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              512,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 4,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 5,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 6,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 7,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              512,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 8,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 9,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 10,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 11,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              512,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 12,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 13,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 14,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 15,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              512,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 16,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 17,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 18,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 19,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              512,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 20,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 21,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 22,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 23,
+          "hidden_input": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              512,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              512,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 524288,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              512,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 1048576,
+            "requires_grad": false
+          }
+        }
+      ]
+    },
+    {
+      "status": "ok",
+      "context_length": 2048,
+      "cache_bytes": 35487744,
+      "baseline_vram_bytes": 1745071104,
+      "peak_vram_bytes": 1987523584,
+      "prefill_ms": {
+        "median": 173.4439697265625,
+        "min": 172.52426147460938,
+        "max": 174.2360382080078,
+        "runs": 3
+      },
+      "decode_ms": {
+        "median": 13.823007583618164,
+        "min": 13.483488082885742,
+        "max": 14.333919525146484,
+        "runs": 3
+      },
+      "cache_layers": [
+        {
+          "layer": 0,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 1,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 2,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 3,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            }
+          },
+          "bytes": 4194304
+        },
+        {
+          "layer": 4,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 5,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 6,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 7,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            }
+          },
+          "bytes": 4194304
+        },
+        {
+          "layer": 8,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 9,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 10,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 11,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            }
+          },
+          "bytes": 4194304
+        },
+        {
+          "layer": 12,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 13,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 14,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 15,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            }
+          },
+          "bytes": 4194304
+        },
+        {
+          "layer": 16,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 17,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 18,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 19,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            }
+          },
+          "bytes": 4194304
+        },
+        {
+          "layer": 20,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 21,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 22,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 23,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                2048,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 2097152,
+              "requires_grad": false
+            }
+          },
+          "bytes": 4194304
+        }
+      ],
+      "layer_timings": [
+        {
+          "layer": 0,
+          "prefill_ms": 8.04867172241211,
+          "decode_ms": 0.5967040061950684
+        },
+        {
+          "layer": 1,
+          "prefill_ms": 8.696736335754395,
+          "decode_ms": 0.5520319938659668
+        },
+        {
+          "layer": 2,
+          "prefill_ms": 8.721343994140625,
+          "decode_ms": 0.5441280007362366
+        },
+        {
+          "layer": 3,
+          "prefill_ms": 2.763040065765381,
+          "decode_ms": 0.5044479966163635
+        },
+        {
+          "layer": 4,
+          "prefill_ms": 8.674112319946289,
+          "decode_ms": 0.6079360246658325
+        },
+        {
+          "layer": 5,
+          "prefill_ms": 8.288512229919434,
+          "decode_ms": 0.568992018699646
+        },
+        {
+          "layer": 6,
+          "prefill_ms": 8.750176429748535,
+          "decode_ms": 0.5362240076065063
+        },
+        {
+          "layer": 7,
+          "prefill_ms": 2.759903907775879,
+          "decode_ms": 0.48214399814605713
+        },
+        {
+          "layer": 8,
+          "prefill_ms": 8.384320259094238,
+          "decode_ms": 0.5388799905776978
+        },
+        {
+          "layer": 9,
+          "prefill_ms": 8.744000434875488,
+          "decode_ms": 0.5639680027961731
+        },
+        {
+          "layer": 10,
+          "prefill_ms": 8.434911727905273,
+          "decode_ms": 0.5280320048332214
+        },
+        {
+          "layer": 11,
+          "prefill_ms": 3.612895965576172,
+          "decode_ms": 0.5067840218544006
+        },
+        {
+          "layer": 12,
+          "prefill_ms": 7.8700480461120605,
+          "decode_ms": 0.5725759863853455
+        },
+        {
+          "layer": 13,
+          "prefill_ms": 9.231488227844238,
+          "decode_ms": 0.5535680055618286
+        },
+        {
+          "layer": 14,
+          "prefill_ms": 8.291616439819336,
+          "decode_ms": 0.5561919808387756
+        },
+        {
+          "layer": 15,
+          "prefill_ms": 2.763040065765381,
+          "decode_ms": 0.4661119878292084
+        },
+        {
+          "layer": 16,
+          "prefill_ms": 8.737567901611328,
+          "decode_ms": 0.5429440140724182
+        },
+        {
+          "layer": 17,
+          "prefill_ms": 8.389984130859375,
+          "decode_ms": 0.5862720012664795
+        },
+        {
+          "layer": 18,
+          "prefill_ms": 8.6976957321167,
+          "decode_ms": 0.5213760137557983
+        },
+        {
+          "layer": 19,
+          "prefill_ms": 3.7313919067382812,
+          "decode_ms": 0.46700799465179443
+        },
+        {
+          "layer": 20,
+          "prefill_ms": 8.730239868164062,
+          "decode_ms": 0.5626559853553772
+        },
+        {
+          "layer": 21,
+          "prefill_ms": 8.357791900634766,
+          "decode_ms": 0.5925120115280151
+        },
+        {
+          "layer": 22,
+          "prefill_ms": 9.33193588256836,
+          "decode_ms": 0.5352640151977539
+        },
+        {
+          "layer": 23,
+          "prefill_ms": 2.755743980407715,
+          "decode_ms": 0.4745599925518036
+        }
+      ],
+      "hook_observations": [
+        {
+          "layer": 0,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 1,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 2,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 3,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              2048,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 4,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 5,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 6,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 7,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              2048,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 8,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 9,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 10,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 11,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              2048,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 12,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 13,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 14,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 15,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              2048,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 16,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 17,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 18,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 19,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              2048,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 20,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 21,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 22,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 23,
+          "hidden_input": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              2048,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              2048,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 2097152,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              2048,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 4194304,
+            "requires_grad": false
+          }
+        }
+      ]
+    },
+    {
+      "status": "ok",
+      "context_length": 8192,
+      "cache_bytes": 110985216,
+      "baseline_vram_bytes": 1745120256,
+      "peak_vram_bytes": 2668862464,
+      "prefill_ms": {
+        "median": 870.5988159179688,
+        "min": 869.5234985351562,
+        "max": 871.7909545898438,
+        "runs": 3
+      },
+      "decode_ms": {
+        "median": 13.277440071105957,
+        "min": 13.02790355682373,
+        "max": 13.545920372009277,
+        "runs": 3
+      },
+      "cache_layers": [
+        {
+          "layer": 0,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 1,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 2,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 3,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            }
+          },
+          "bytes": 16777216
+        },
+        {
+          "layer": 4,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 5,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 6,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 7,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            }
+          },
+          "bytes": 16777216
+        },
+        {
+          "layer": 8,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 9,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 10,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 11,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            }
+          },
+          "bytes": 16777216
+        },
+        {
+          "layer": 12,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 13,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 14,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 15,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            }
+          },
+          "bytes": 16777216
+        },
+        {
+          "layer": 16,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 17,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 18,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 19,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            }
+          },
+          "bytes": 16777216
+        },
+        {
+          "layer": 20,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 21,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 22,
+          "kind": "gdn",
+          "initialized": true,
+          "states": {
+            "conv": {
+              "shape": [
+                1,
+                6144,
+                4
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 49152,
+              "requires_grad": false
+            },
+            "recurrent": {
+              "shape": [
+                1,
+                16,
+                128,
+                128
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 524288,
+              "requires_grad": false
+            }
+          },
+          "bytes": 573440
+        },
+        {
+          "layer": 23,
+          "kind": "attention_kv",
+          "initialized": true,
+          "states": {
+            "keys": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            },
+            "values": {
+              "shape": [
+                1,
+                2,
+                8192,
+                256
+              ],
+              "dtype": "bfloat16",
+              "device": "cuda:0",
+              "bytes": 8388608,
+              "requires_grad": false
+            }
+          },
+          "bytes": 16777216
+        }
+      ],
+      "layer_timings": [
+        {
+          "layer": 0,
+          "prefill_ms": 41.223838806152344,
+          "decode_ms": 0.5962880253791809
+        },
+        {
+          "layer": 1,
+          "prefill_ms": 41.648704528808594,
+          "decode_ms": 0.5987520217895508
+        },
+        {
+          "layer": 2,
+          "prefill_ms": 42.07455825805664,
+          "decode_ms": 0.5526400208473206
+        },
+        {
+          "layer": 3,
+          "prefill_ms": 19.83363151550293,
+          "decode_ms": 0.47145599126815796
+        },
+        {
+          "layer": 4,
+          "prefill_ms": 42.07548904418945,
+          "decode_ms": 0.5418559908866882
+        },
+        {
+          "layer": 5,
+          "prefill_ms": 41.27619171142578,
+          "decode_ms": 0.5479040145874023
+        },
+        {
+          "layer": 6,
+          "prefill_ms": 41.971710205078125,
+          "decode_ms": 0.5828160047531128
+        },
+        {
+          "layer": 7,
+          "prefill_ms": 19.491392135620117,
+          "decode_ms": 0.5454720258712769
+        },
+        {
+          "layer": 8,
+          "prefill_ms": 42.07878494262695,
+          "decode_ms": 0.5526080131530762
+        },
+        {
+          "layer": 9,
+          "prefill_ms": 41.602622985839844,
+          "decode_ms": 0.538752019405365
+        },
+        {
+          "layer": 10,
+          "prefill_ms": 41.33091354370117,
+          "decode_ms": 0.5684159994125366
+        },
+        {
+          "layer": 11,
+          "prefill_ms": 20.230976104736328,
+          "decode_ms": 0.4898560047149658
+        },
+        {
+          "layer": 12,
+          "prefill_ms": 41.16281509399414,
+          "decode_ms": 0.2568320035934448
+        },
+        {
+          "layer": 13,
+          "prefill_ms": 42.12268829345703,
+          "decode_ms": 0.5383039712905884
+        },
+        {
+          "layer": 14,
+          "prefill_ms": 41.07936096191406,
+          "decode_ms": 0.5454720258712769
+        },
+        {
+          "layer": 15,
+          "prefill_ms": 19.700639724731445,
+          "decode_ms": 0.4758079946041107
+        },
+        {
+          "layer": 16,
+          "prefill_ms": 41.73731231689453,
+          "decode_ms": 0.5546240210533142
+        },
+        {
+          "layer": 17,
+          "prefill_ms": 41.80259323120117,
+          "decode_ms": 0.5475519895553589
+        },
+        {
+          "layer": 18,
+          "prefill_ms": 42.05897521972656,
+          "decode_ms": 0.5421440005302429
+        },
+        {
+          "layer": 19,
+          "prefill_ms": 19.354047775268555,
+          "decode_ms": 0.4737600088119507
+        },
+        {
+          "layer": 20,
+          "prefill_ms": 41.97590255737305,
+          "decode_ms": 0.5479679703712463
+        },
+        {
+          "layer": 21,
+          "prefill_ms": 41.419071197509766,
+          "decode_ms": 0.5384320020675659
+        },
+        {
+          "layer": 22,
+          "prefill_ms": 41.77657699584961,
+          "decode_ms": 0.5410879850387573
+        },
+        {
+          "layer": 23,
+          "prefill_ms": 19.439584732055664,
+          "decode_ms": 0.47516798973083496
+        }
+      ],
+      "hook_observations": [
+        {
+          "layer": 0,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 1,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 2,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 3,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              8192,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 4,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 5,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 6,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 7,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              8192,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 8,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 9,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 10,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 11,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              8192,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 12,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 13,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 14,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 15,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              8192,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 16,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 17,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 18,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 19,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              8192,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 20,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 21,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 22,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        },
+        {
+          "layer": 23,
+          "hidden_input": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          },
+          "raw_k": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "knorm_k": {
+            "shape": [
+              1,
+              8192,
+              2,
+              256
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "raw_v": {
+            "shape": [
+              1,
+              8192,
+              512
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 8388608,
+            "requires_grad": false
+          },
+          "hidden_output": {
+            "shape": [
+              1,
+              8192,
+              1024
+            ],
+            "dtype": "bfloat16",
+            "device": "cuda:0",
+            "bytes": 16777216,
+            "requires_grad": false
+          }
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "cache_roundtrip": {
+      "status": "PASS",
+      "detail": "max_abs=0.0, top1_equal=True",
+      "tolerance": 0.0001,
+      "logits": {
+        "shape_equal": true,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0000001192092896,
+        "top1_equal": true,
+        "kl_left_to_right": 0.0,
+        "relative_l2": 0.0
+      },
+      "reinjected_states": {
+        "all_exact_equal": true,
+        "states": [
+          {
+            "layer": 0,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0000001192092896,
+            "top1_equal": true
+          },
+          {
+            "layer": 0,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 1,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 1,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 2,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0000001192092896,
+            "top1_equal": true
+          },
+          {
+            "layer": 2,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999998807907104,
+            "top1_equal": true
+          },
+          {
+            "layer": 3,
+            "state": "keys",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 3,
+            "state": "values",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0000001192092896,
+            "top1_equal": true
+          },
+          {
+            "layer": 4,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 4,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 5,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 5,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 6,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 6,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999999403953552,
+            "top1_equal": true
+          },
+          {
+            "layer": 7,
+            "state": "keys",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999998807907104,
+            "top1_equal": true
+          },
+          {
+            "layer": 7,
+            "state": "values",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 8,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 8,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999999403953552,
+            "top1_equal": true
+          },
+          {
+            "layer": 9,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0000001192092896,
+            "top1_equal": true
+          },
+          {
+            "layer": 9,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 10,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 10,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999998807907104,
+            "top1_equal": true
+          },
+          {
+            "layer": 11,
+            "state": "keys",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 11,
+            "state": "values",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 12,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999999403953552,
+            "top1_equal": true
+          },
+          {
+            "layer": 12,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 13,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999999403953552,
+            "top1_equal": true
+          },
+          {
+            "layer": 13,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 14,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999999403953552,
+            "top1_equal": true
+          },
+          {
+            "layer": 14,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 15,
+            "state": "keys",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 15,
+            "state": "values",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.000000238418579,
+            "top1_equal": true
+          },
+          {
+            "layer": 16,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 16,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 17,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 17,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999999403953552,
+            "top1_equal": true
+          },
+          {
+            "layer": 18,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0000001192092896,
+            "top1_equal": true
+          },
+          {
+            "layer": 18,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 19,
+            "state": "keys",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 19,
+            "state": "values",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 20,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 20,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999999403953552,
+            "top1_equal": true
+          },
+          {
+            "layer": 21,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 21,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 0.9999999403953552,
+            "top1_equal": true
+          },
+          {
+            "layer": 22,
+            "state": "conv_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 22,
+            "state": "recurrent_states",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0,
+            "top1_equal": true
+          },
+          {
+            "layer": 23,
+            "state": "keys",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0000001192092896,
+            "top1_equal": true
+          },
+          {
+            "layer": 23,
+            "state": "values",
+            "exact_equal": true,
+            "shape_equal": true,
+            "max_abs": 0.0,
+            "mean_abs": 0.0,
+            "cosine": 1.0000001192092896,
+            "top1_equal": true
+          }
+        ]
+      }
+    },
+    "attention_cache_injection": {
+      "status": "PASS",
+      "detail": "12 K/V tensors copied exactly; functional continuation=PASS"
+    },
+    "gdn_cache_injection": {
+      "status": "PASS",
+      "detail": "36 recurrent/conv tensors copied exactly; functional continuation=PASS"
+    },
+    "boundary": {
+      "status": "PASS",
+      "detail": "max_abs=0.1875, top1_equal=True",
+      "tolerances": {
+        "max_abs": 0.25,
+        "max_kl": 0.001,
+        "min_cosine": 0.999
+      },
+      "logits": {
+        "shape_equal": true,
+        "max_abs": 0.1875,
+        "mean_abs": 0.03201475739479065,
+        "cosine": 0.9998638033866882,
+        "top1_equal": true,
+        "kl_left_to_right": 0.0008584860479459167,
+        "relative_l2": 0.017017913982272148
+      }
+    },
+    "causal": {
+      "status": "PASS",
+      "detail": "unchanged prefix max_abs=0.0",
+      "tolerance": 0.0001,
+      "hidden": {
+        "shape_equal": true,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0,
+        "top1_equal": true
+      }
+    },
+    "backend_parity": {
+      "status": "PASS",
+      "detail": "prefill/decode functions remained unchanged",
+      "before": {
+        "attention": "sdpa",
+        "gdn_prefill": "transformers.models.qwen3_5.modeling_qwen3_5.torch_chunk_gated_delta_rule",
+        "gdn_decode": "transformers.models.qwen3_5.modeling_qwen3_5.torch_recurrent_gated_delta_rule",
+        "causal_conv_prefill": "none",
+        "causal_conv_decode": "transformers.models.qwen3_5.modeling_qwen3_5.torch_causal_conv1d_update"
+      },
+      "after": {
+        "attention": "sdpa",
+        "gdn_prefill": "transformers.models.qwen3_5.modeling_qwen3_5.torch_chunk_gated_delta_rule",
+        "gdn_decode": "transformers.models.qwen3_5.modeling_qwen3_5.torch_recurrent_gated_delta_rule",
+        "causal_conv_prefill": "none",
+        "causal_conv_decode": "transformers.models.qwen3_5.modeling_qwen3_5.torch_causal_conv1d_update"
+      }
+    }
+  },
+  "verdict": {
+    "status": "PASS",
+    "summary": "The complete inference-state map and cache reinjection gates passed.",
+    "reasons": []
+  }
+}

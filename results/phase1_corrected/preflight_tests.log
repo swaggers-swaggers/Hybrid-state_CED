@@ -1,0 +1,28 @@
+test_baseline_advantage_required (test_kv_continuation_pilot.PilotDecisionTest.test_baseline_advantage_required) ... ok
+test_boundary_failure_not_hidden_by_average (test_kv_continuation_pilot.PilotDecisionTest.test_boundary_failure_not_hidden_by_average) ... ok
+test_good_candidate_passes (test_kv_continuation_pilot.PilotDecisionTest.test_good_candidate_passes) ... ok
+test_late_growth_blocks_go (test_kv_continuation_pilot.PilotDecisionTest.test_late_growth_blocks_go) ... ok
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 15579.96it/s]
+test_boundary_token (test_model_roundtrip.RealModelRoundTripTest.test_boundary_token) ... ok
+test_causal_path (test_model_roundtrip.RealModelRoundTripTest.test_causal_path) ... ok
+test_phase1_targets_match_real_normalized_cache (test_model_roundtrip.RealModelRoundTripTest.test_phase1_targets_match_real_normalized_cache) ... ok
+test_teacher_cache_roundtrip (test_model_roundtrip.RealModelRoundTripTest.test_teacher_cache_roundtrip) ... ok
+test_gate_uses_validation_selected_method (test_phase1.MetricTest.test_gate_uses_validation_selected_method) ... ok
+test_legacy_checkpoint_is_rejected (test_phase1.MetricTest.test_legacy_checkpoint_is_rejected) ... ok
+test_nmse (test_phase1.MetricTest.test_nmse) ... ok
+test_paired_bootstrap (test_phase1.MetricTest.test_paired_bootstrap) ... ok
+test_corrected_artifacts_have_real_cache_evidence (test_phase1.Phase1ArtifactTest.test_corrected_artifacts_have_real_cache_evidence) ... skipped 'Corrected full run not produced yet'
+test_data_manifest_has_independent_splits (test_phase1.Phase1ArtifactTest.test_data_manifest_has_independent_splits) ... ok
+test_asymmetric_weights_normalize (test_phase1.ProbeShapeTest.test_asymmetric_weights_normalize) ... ok
+test_low_rank_parameter_count (test_phase1.ProbeShapeTest.test_low_rank_parameter_count) ... ok
+test_probe_output_shapes (test_phase1.ProbeShapeTest.test_probe_output_shapes) ... ok
+test_clone_all_heterogeneous_states (test_state_map.CacheCloneTest.test_clone_all_heterogeneous_states) ... ok
+test_config_matches_downloaded_checkpoint (test_state_map.StaticStateMapTest.test_config_matches_downloaded_checkpoint) ... ok
+test_official_layer_layout (test_state_map.StaticStateMapTest.test_official_layer_layout) ... ok
+test_static_shapes_and_memory (test_state_map.StaticStateMapTest.test_static_shapes_and_memory) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.609s
+
+OK (skipped=1)

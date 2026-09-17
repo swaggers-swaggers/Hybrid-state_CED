@@ -1,0 +1,29 @@
+model_path: models/Qwen3.5-0.8B-Base
+output_dir: results/phase0
+device: cuda
+dtype: bfloat16
+seed: 20260916
+context_lengths:
+  - 512
+  - 2048
+  - 8192
+warmup_runs: 1
+profile_runs: 3
+roundtrip_length: 64
+boundary_length: 64
+causal_length: 32
+tolerances:
+  roundtrip_max_abs: 0.0001
+  # BF16 fallback uses different chunk-prefill and recurrent-decode arithmetic.
+  # Require the same prediction plus close distributions, while retaining a
+  # generous guard against the known reduction-order max-absolute difference.
+  boundary_max_abs: 0.25
+  boundary_max_kl: 0.001
+  boundary_min_cosine: 0.999
+  causal_max_abs: 0.0001
+expected:
+  num_hidden_layers: 24
+  hidden_size: 1024
+  linear_attention_layers: 18
+  full_attention_layers: 6
+  full_attention_indices: [3, 7, 11, 15, 19, 23]

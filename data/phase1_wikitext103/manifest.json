@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "dataset": "Salesforce/wikitext",
+  "dataset_config": "wikitext-103-v1",
+  "split_policy": "Upstream train/validation/test splits are preserved; sequences are packed only within each split.",
+  "tokenizer": "/home/liu/CED/models/Qwen3.5-0.8B-Base",
+  "model_revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
+  "weights_etag_sha256": "c2b1e5a17d9c1e27685d92ed9b382911ebb99955ecd89052d1721241adfbab6c",
+  "sequence_length": 256,
+  "splits": {
+    "train": {
+      "file": "train.int32.bin",
+      "num_sequences": 19531,
+      "num_tokens": 4999936,
+      "nonempty_records_consumed": 47586,
+      "sha256": "f48230436b0d0194b5120ce561852b61fbd6f79f1e84274ac041307ce2256233"
+    },
+    "validation": {
+      "file": "validation.int32.bin",
+      "num_sequences": 1024,
+      "num_tokens": 262144,
+      "nonempty_records_consumed": 2445,
+      "sha256": "b437bdb084f77ba5ef5a307020b052ffcc79aa8e2f8c329f7dcee97a96dc04c7"
+    },
+    "test": {
+      "file": "test.int32.bin",
+      "num_sequences": 1024,
+      "num_tokens": 262144,
+      "nonempty_records_consumed": 2462,
+      "sha256": "6cc939425dcda9c689154e6bb37d91c7dcddbbd2d5d9b06921c27d9e1a9d7e2f"
+    }
+  }
+}

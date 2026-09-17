@@ -1,0 +1,35 @@
+model_path: models/Qwen3.5-0.8B-Base
+data_dir: data/phase1_wikitext103
+output_dir: results/phase1_corrected/layer19
+checkpoint_path: checkpoints/phase1_corrected/layer19_kv_probes.pt
+device: cuda
+dtype: bfloat16
+seed: 20260916
+
+dataset:
+  name: Salesforce/wikitext
+  config: wikitext-103-v1
+  sequence_length: 256
+  train_tokens: 5000000
+  validation_tokens: 262144
+  test_tokens: 262144
+
+probe:
+  source_layers: [3, 7, 11]
+  target_layer: 19
+  low_ranks: [64, 128, 256]
+  batch_size: 16
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  warmup_steps: 100
+  max_grad_norm: 1.0
+  log_every: 100
+
+evaluation:
+  splits: [validation, test]
+  max_sequences: 1024
+  bootstrap_samples: 2000
+
+gate:
+  minimum_point_improvement: 0.10
+  minimum_ci_improvement: 0.0

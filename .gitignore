@@ -1,0 +1,6 @@
+.cache/
+.deps/
+__pycache__/
+*.py[cod]
+# The official checkpoint is reproducibly downloaded and is too large for Git.
+models/

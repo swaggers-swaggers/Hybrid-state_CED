@@ -1,0 +1,28 @@
+{
+  "seed": 20260918,
+  "context_lengths": [
+    256,
+    2048
+  ],
+  "samples_per_length": 16,
+  "batch_size": 4,
+  "decode_steps": 128,
+  "selected_methods": {
+    "15": "low_rank_256",
+    "19": "low_rank_256",
+    "23": "low_rank_256"
+  },
+  "gate": {
+    "maximum_mean_kl": 0.1,
+    "maximum_mean_nll_increase": 0.1,
+    "maximum_late_to_early_kl_ratio": 2.0,
+    "growth_absolute_slack": 0.01,
+    "minimum_baseline_relative_improvement": 0.1,
+    "bootstrap_samples": 2000
+  },
+  "scope": "Corrected target and normalized original-projection baseline; same fixed pilot thresholds; no overlap with previous pilot windows; reused Phase 1 test corpus, not new independent data; no training/tuning on continuation results.",
+  "checkpoint_dir": "checkpoints/phase1_corrected",
+  "require_corrected_checkpoint": true,
+  "normalized_original_projection": true,
+  "exclude_windows_from": "results/kv_continuation_pilot/results.json"
+}
