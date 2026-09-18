@@ -1,208 +1,215 @@
 # Hybrid-State CED · Qwen3.5-0.8B
 
-本仓库是《Hybrid-State CED-Qwen3.5-0.8B 实验计划书 v2.0》的代码实现。
+本项目研究 **部分 block 的 Top-k 检测 → 置信度早退 → 深层 Attention KV 投影 → GDN 状态保持 → 下一 token**，在可接受的质量损失内降低逐 token 解码成本。详细设计见[实验计划书](Hybrid-State_CED_Qwen3.5_0.8B_实验计划书.docx)。
 
-研究目标：对**已完成预训练**的 Qwen3.5-0.8B 做结构 retrofit，在尽量冻结原模型参数的条件下，用较浅层的表示重建上层 decoder 在 decode 开始前所需的历史推理状态（heterogeneous inference-state reconstruction），从而跳过上层 prompt prefill、降低长上下文 TTFT。
+核心猜想：能在浅层被高置信度预测的 token 可能携带较少的增量信息，因此无需对后续深层全量计算与写入。退出后只用投影补 full attention 的 KV，被跳过 Gated DeltaNet 的递归状态和卷积缓存都保持不变。**这是待验证假设；容易预测不直接等于可以省略深层记忆写入。**
 
-与从头训练 CED 模型不同，本项目的核心问题不是"预测某个张量"，而是判断重建出的状态能否**功能上**替代 teacher 状态并支持稳定续写。每个阶段都设 Go/No-Go 门禁。
+项目已开展状态地图、缓存注入和 K/V 可恢复性尝试，当前代码实现了这些实验基础；四点检测、置信度和 GDN 保持的动态解码尚待方案审查后实现。本次文档修改未运行训练或更改实验代码。
 
-## 研究对象
+## 模型与检测位置
 
-Qwen3.5-0.8B-Base 文本主干，24 层，hidden size 1024，由 6 个重复组构成，每组 `3 × Gated DeltaNet + 1 × gated full-attention`：
+使用本地 `models/Qwen3.5-0.8B-Base` 文本主干，冻结主干、嵌入和原 LM head。24 层，隐藏维度 `H=1024`，词表大小 `V=248320`。Full attention 为第 4、8、12、16、20、24 层，使用 8 Q / 2 KV heads、head_dim 256；其余 18 层为 GDN，16 heads、维度 128、conv kernel 4。依据本地配置与 [Qwen 官方配置](https://huggingface.co/Qwen/Qwen3.5-0.8B/raw/main/config.json)。
 
-| 属性 | 值 |
-|:---|:---|
-| Full attention 层（0-based） | 3, 7, 11, 15, 19, 23 |
-| Gated DeltaNet 层 | 其余 18 层 |
-| Full attention | 8 Q heads / 2 KV heads / head_dim 256 |
-| Gated DeltaNet | 16 heads / head_dim 128，causal conv kernel 4 |
-| Native context | 262,144 |
+**文档层号从 1 开始。** 检测头暂定只放在第 **10、12、14、16** 个完整 block 后，对应代码索引 **9、11、13、15**。位置后续根据实验调整，并重新训练或验证、校准。其余 block 不挂检测头；第 16 层仍不退出时，继续至第 24 层使用原最终 Norm 和 LM head。
 
-后续主切分为 layer 11 之后的 12/12：layers 0–11 为 Causal Encoder（产生 `H_E = H_12`），layers 12–23 为 Decoder（prompt 阶段尽量跳过）。
+| 退出深度 | 需要投影 KV 的深层 full attention | 保持 S/C 的深层 GDN 数量 |
+|---:|---|---:|
+| 10 | 12、16、20、24 | 10 |
+| 12 | 16、20、24 | 9 |
+| 14 | 16、20、24 | 7 |
+| 16 | 20、24 | 6 |
 
-## 当前进度
+首轮 prompt 完整 prefill，由最终头给出首个生成 token。其后的单 token decode 才使用早退策略，TTFT 单独统计，不预设改善。
 
-| 阶段 | 内容 | 状态 |
-|:---|:---|:---|
-| Phase 0 | 完整 Inference-State Map 与 cache 抽注重注入验证 | **PASS** |
-| Phase 1 | Upper Attention K/V Recoverability（layers 15/19/23） | **已修复并重训；三层 Gate 1 GO** |
-| K/V continuation pilot | 新版权重，256/2048 长度、128 步续写 | **联合续写仍 HOLD；暂不进入 GDN** |
-| Phase 2 | Gated DeltaNet State Recoverability | 未开始 |
-| Phase 3–6 | Cache Injection / Partial CED / Full Hybrid-State CED / 低秩与 kernel | 未开始 |
+## 检测头
 
-2026-09-17 的首次真实缓存注入 pilot 未通过推进门槛。审计发现旧版 Phase 1 在 input_layernorm 之前捕获目标 hidden，而实际 self_attn 使用归一化之后的输入。当前代码已改为捕获真实 self_attn 输入，并在训练和每个评估 split 的首批数据上强制验证 K/V 与真实缓存逐位一致。新版 checkpoint 带目标口径版本，评估拒绝混用旧权重。Original Projection 基线同样使用目标层输入归一化。旧结果仅供审计，见 [首次实验报告](results/kv_continuation_pilot/report.md) 与 [口径审计](results/kv_continuation_pilot/protocol_and_audit.md)。
+采用行向量约定，每个检测点有独立可训练矩阵 `M_d`，所有检测点共享同一冻结大词表矩阵：
 
-完整修复复验流程（校验已有数据、GPU 回归测试、三层全量重训与评估、续写复验、最终测试）：
+```text
+d ∈ {10,12,14,16}
+h[d,t] : [batch, 1024]          完整 block 的残差输出
+M_d    : [1024, 1024]          可训练，初始为单位矩阵
+W_vocab: [248320, 1024]        原 LM head 权重，共享且冻结
 
-```bash
-conda run -n ai python scripts/run_phase1_corrected.py
+z      = h[d,t] @ M_d
+logits = z @ W_vocab.T
+p      = softmax(logits / T_d)
+候选   = TopK(p, k)
 ```
 
-所有新版产物写入 `results/phase1_corrected/` 和 `checkpoints/phase1_corrected/`，原版不覆盖。续写复验使用不与首次 pilot 重叠的窗口，仍属于既有 test 语料，不能当作全新独立确认集；方法只依照 validation 选择，不按续写结果调参。
+检测支路不额外添加可训练 Norm、非线性网络或独立大词表头。完整模型的最终 Norm/LM head 路径保持原定义。四个矩阵共有 `4×1024² = 4,194,304` 个可训练参数；低秩分解可作后续消融。
 
-修复复验已完成：三层新版 Attention NMSE 相对归一化原始投影分别改善 **48.12%、42.62%、89.54%**，均通过 Gate 1；但联合续写平均 KL 为 **0.1115 / 0.2930**，高于同批窗口原始投影的 **0.0897 / 0.1859**，所以继续暂缓 GDN。全部 **21 项测试通过（含真实 GPU，无跳过）**。详见 [修复与复验结论](results/phase1_corrected/repair_summary.md)。
+冻结完整 teacher 以同前缀最终分布提供蒸馏监督，结合真实下一 token CE 训练 `M_d`。主干与词表不更新，但梯度必须通过冻结词表乘法到达 `M_d`。首轮 greedy、`k=5`，比较 `k∈{1,5,10}`；实际接受 Top-1 并仅输入一个 token，不用 teacher 从 Top-k 中代选。完整 KL 可分块计算；若使用尾部桶近似必须标注。
 
-Phase 1 历史代理目标在 test split 上，K/V 与 attention-output NMSE 相对 Original Projection 的改善：
+按配置推算，每次稠密检测约 `H²+HV≈2.55亿 MAC`；走到第 16 层需要四次检测，不退出还需最终读出。冻结词表减少训练量和参数复制，不免除推理成本。必须测量各头调用率及总耗时。
 
-| Layer | Validation-selected | Attention NMSE 改善 | 95% CI | K/V NMSE 改善 |
-|---:|:---|---:|:---|---:|
-| 15 | low_rank_256 | 93.16% | [93.00%, 93.31%] | 80.51% |
-| 19 | multi_layer_fusion | 86.26% | [85.91%, 86.59%] | 73.95% |
-| 23 | low_rank_256 | 97.11% | [97.04%, 97.17%] | 83.90% |
+## 置信度与退出
 
-Phase 0 实测（batch 1、BF16、RTX 5060 Ti、`sdpa`）：
+**A 连续检测点稳定。** 比较同一位置在相邻检测点（如 10 与 12）的候选，要求最近 `r` 个检测点 Top-1 一致、相邻 Top-k 集合 Jaccard 重合度和首选概率达阈值。连续指检测点序列，不指连续 block，也不比较不同 token。`r=2/3/4` 最早分别在第 `12/14/16` 层退出；第 10 层不能用纯跨点稳定规则退出。
 
-| Context | Cache MiB | Peak VRAM MiB | Prefill ms | Decode ms |
-|---:|---:|---:|---:|---:|
-| 512 | 15.84 | 1732.54 | 62.837 | 14.384 |
-| 2048 | 33.84 | 1895.45 | 173.444 | 13.823 |
-| 8192 | 105.84 | 2545.23 | 870.599 | 13.277 |
+**B 轻量置信度网络。** 输入只含当前已计算隐藏状态、检测点号、概率间隔、熵、可用候选重合度等，估计该出口 Top-1 与完整 teacher 一致的概率。用训练集内检测矩阵的折外特征和 BCE 拟合，独立校准集只做概率校准与阈值选择。第 10 层使用缺失特征掩码，可以独立决策。teacher 最终分布仅用于离线监督。
 
-每层 cache：full-attention 为 `[1, 2, N, 256]` K/V，随 N 线性增长（8192 时 16 MiB/层）；GDN 为 conv `[1, 6144, 4]` + recurrent `[1, 16, 128, 128]`，共 560 KiB/层且不随 N 增长。
+比较 A、B、A+B 的风险—覆盖率；若组合要求 A 与 B 同时成立，则最早出口受 A 约束。按领域和出口报告错误退出率、覆盖率、ECE/Brier、样本数及置信区间。概率阈值与检测点配置在测试前锁定；采样生成另测，不承诺与原模型分布精确等价。
 
-## 环境
+## KV 投影与 GDN 保持
 
-固定使用现有 Conda 环境 `ai`；模型位于 `models/Qwen3.5-0.8B-Base`（`.gitignore` 中忽略，可按官方 checkpoint 重新下载）。
+处理输入 `x_t` 时，`h[d,t]` 预测 `x_(t+1)`。早退后投影追加的是**位置 t** 的深层 KV，而不是尚未处理的下一 token 的 KV。
+
+- **已经执行的层**：正常运行和更新，包括这些层的 GDN。
+- **被跳过的 full attention**：由已计算 `h[a,t], a≤d` 生成目标层 raw K/V；K 经过目标 KNorm 与绝对位置 t 的 RoPE，V 不旋转；每层只追加一次。投影器感知出口 d 和目标层 j。初始使用 `h[d,t]`，融合时不能读取尚未计算的深层特征。
+- **被跳过的 GDN**：`S[j,t]=S[j,t-1]`，`C[j,t]=C[j,t-1]`。不执行递归、不移动卷积窗口、不补零、不衰减、不生成替代 GDN 状态。
+- **再次执行深层 GDN**：从保留的 S/C 直接处理届时输入，不回补跳过 token。因此卷积窗口对应最近实际执行到该层的输入，不一定是全局连续 token；这是明确的研究近似。
+- **位置管理**：全局位置始终推进；所有 attention KV 长度与完整前缀对齐。GDN 另记实际执行次数和跳过位置，不伪造全局位置以适配缓存。
+
+归一化原始投影基线必须先对 source 使用目标层 `input_layernorm`，再使用目标层原 `k_proj/v_proj`。已有 H4/H8/H12 投影尝试提供接口参考，但不能代表四个出口已经支持；第 10 层退出时 H12 不可用。
+
+```mermaid
+flowchart TD
+    A[输入当前 token] --> B[顺序执行主干 block]
+    B --> C{到达 10 12 14 16 检测点}
+    C -- 是 --> D[hidden 乘 M 再乘冻结词表 得到 Top-k]
+    D --> E{置信度足够}
+    E -- 是 --> F[深层 Attention 追加当前位置的投影 KV]
+    F --> G[深层 GDN 的 S 和 C 保持不变]
+    G --> H[提交一个下一 token]
+    E -- 否 --> B
+    C -- 否 --> I{到达第 24 层}
+    I -- 否 --> B
+    I -- 是 --> J[使用原最终 Norm 与 LM head]
+    J --> H
+    H --> A
+```
+
+例如在第 12 层退出：层 1–12 已真实执行；投影补 16/20/24 层的位置 t KV；GDN 13/14/15/17/18/19/21/22/23 的 S/C 不动。下一 token 若走到第 16 层，13/14/15 层从保留状态直接处理它。
+
+KV 投影应验证后统一提交，或能够完整回滚；失败则继续当前 token 的剩余层，不能重复执行已提交层。一次全深度步骤不会自动修复以往预测 KV 或 GDN 省略写入。真实恢复需要从可信检查点重放并计费；主方法不依赖周期性补写 GDN。
+
+## 目前的实验尝试与结果
+
+状态地图与真实缓存 round-trip 已有 PASS 记录，K/V 可恢复性尝试使用 H4/H8/H12 捕获上层真实 self_attn 输入，再生成 raw K/V；训练及评估首批数据验证 KNorm/RoPE 后与真实 cache 一致。比较零、随机线性、归一化原始投影、训练线性、低秩和多层融合。
+
+| 目标层号 | 代码索引 | 方法 | Attention NMSE | 相对原始投影改善 | 局部判定 |
+|---:|---:|---|---:|---:|---|
+| 16 | 15 | low_rank_256 | 0.138790 | 48.12% | GO |
+| 20 | 19 | low_rank_256 | 0.150311 | 42.62% | GO |
+| 24 | 23 | low_rank_256 | 0.033002 | 89.54% | GO |
+
+三层联合注入续写仍 **HOLD_REPAIR_KV**：
+
+| 上下文长度 | 预测三层 Mean KL | 归一化原始投影 Mean KL | 预测 Top-1 一致率 |
+|---:|---:|---:|---:|
+| 256 | 0.111516 | 0.089650 | 88.13% |
+| 2048 | 0.293027 | 0.185859 | 80.76% |
+
+每种长度 16 个窗口、128 步相同 token 续写；每层训练 4,999,936 tokens，报告记载 21 项测试通过。这些是项目已有实验记录，本次未重跑。联合损失主要体现在质量下降，不应描述成已观察到递归爆炸。测试窗口已经查看，只用作工程诊断。
+
+**该尝试保留 teacher GDN 状态，研究前缀 KV 替换，没有测试逐 token 退出或 GDN 保持策略。** 局部 GO 为投影参数化提供证据，不能替代闭环验证。详见[状态地图](results/phase0/state_map.md)、[K/V 实验结论](results/phase1_corrected/repair_summary.md)、[联合续写报告](results/phase1_corrected/continuation/report.md)。
+
+## 如何验证低信息假设
+
+先在完整 teacher 前缀上选择策略接受的单个位置，固定后续输入并提供真实 KV，隔离比较跳过该位置深层 GDN 写入与正常写入后的 1/8/32/128 步 KL、Top-1 和任务质量。随后测试连续退出、深浅交替和自由生成。
+
+按置信度、退出深度、跳过长度和 token 类别分组，加入匹配退出数量与深度的随机位置和低置信度位置对照。teacher surprisal、状态改变量只能作为离线解释变量，不能用于在线决策。特别覆盖姓名、数字、否定词、实体复现、代码标识符与长文检索；不能仅凭标点等容易样本验证假设。
+
+| 对照 | 作用 |
+|---|---|
+| B0 完整模型 | 质量和解码成本基线 |
+| B1 完整计算加四个检测头 | 隔离检测成本，最终输出仍取完整模型 |
+| B2 固定出口 + 投影 KV + GDN 保持 | 深度 10/12/14/16，对比动态决策 |
+| B3 动态退出 + 投影 KV + GDN 保持 | 主方案，比较 A/B/A+B |
+| B4 同轨迹 + 真实 KV + GDN 保持 | 隔离 KV 预测误差，仅 oracle 诊断 |
+| B5 同轨迹 + 投影 KV + 真实 GDN | 隔离 GDN 省略写入损失，仅 oracle 诊断 |
+| B6 同轨迹 + 真实 KV + 真实 GDN | 隔离出口选词误差，仅 oracle 诊断 |
+| B7 同轨迹 + 简单 KV + GDN 保持 | 归一化原始投影和显式零 KV，验证投影器价值 |
+
+B3–B7 固定相同退出轨迹与已接受 token 前缀；teacher 重放该前缀提供 oracle 状态，其计算不能进入部署加速比。真实 GDN 只是检验假设的对照，不属于主方法。
+
+## 训练与评价计划
+
+1. 训练四个 M_d，检查冻结权重不变、梯度正确，并测各出口质量和读出成本。
+2. 固定检测矩阵，训练置信度网络或校准稳定性规则。
+3. 训练出口相关 KV 投影器，验证单次和多层注入；使用 KV、attention 功能和多步 logit 损失。
+4. 检验 GDN 保持假设，以真实 KV 隔离，再加入投影 KV；不训练 GDN 状态生成器。
+5. 在投影 KV 与保留 GDN 状态上滚动运行；teacher 重放学生前缀提供参照，训练矩阵与投影器后重新校准。
+6. 质量达标后测包含全部开销的系统收益，并根据证据调整检测点。
+
+训练、开发、校准、封存测试按文档隔离；已有测试窗口只作诊断。先用 WikiText-103 做工程探针，补充中文、代码、数学和长文检索，固定数据版本、许可和去重。建议 smoke 0.1–0.5M、探针 5–10M、确认阶段 20–50M tokens；初始 batch=1、BF16、prompt 256/2048、生成 128，再测 prompt 8192、生成 512。至少三个训练种子，按文档/窗口做配对 bootstrap，不把相关 token 当独立样本。
+
+以下为待审查的工程初始目标，最终测试前锁定，不代表已有成绩：
+
+| 门槛 | 条件 |
+|---|---|
+| G0 | 禁用退出等价；仅四点检测；深层 GDN S/C 逐位不变；Attention 长度/位置/写入次数正确 |
+| G1 | 接受退出中的错误率 95% 上界 ≤1%，覆盖率 ≥20%，各出口和领域分报 |
+| G2 | 投影优于简单 KV 强基线；同 KV、同退出轨迹下 GDN 保持相对 oracle GDN 的额外平均 KL ≤0.02 nats；联合仍过 G3 |
+| G3 | 受控 PPL 增幅 ≤3%，预注册任务下降 ≤1 个百分点，平均 KL ≤0.05 nats，长程不持续恶化 |
+| G4 | 质量达标后 decode 中位加速 ≥1.10×，95% CI 下界 >1.00×，P95 单 token 时延不劣于基线 |
+
+G2 的“额外 KL”是两组对同前缀完整 teacher 的平均 KL 之差，不是两模型 KL 的代数分解；同时报告置信区间、任务差异和失败样本。统计完整退出深度分布、含回退的平均深度、各 GDN 写入率和最大连续跳过长度，检测头调用率。
+
+质量分受控同前缀、teacher 重放学生前缀、自由生成；测单次及连续 1/4/16/64 次退出、深浅交替，记录逐步与首末 32 步误差、重复和截断。性能包含主干、hM、冻结词表读出、Top-k、置信度、KV 投影、写缓存、同步、回退和重放；固定精度/backend、预热并同步 GPU，至少 30 个配对窗口，报告中位数、P95、95% CI、tokens/s、显存。固定长度与自然 EOS 分开。
+
+状态地图的时延只覆盖 text backbone 和 cache，不含 LM head，不能直接作为端到端基线。GDN 保持质量不达标时应调整退出条件或检测位置，并如实报告假设边界；不把 GDN 补全隐含加入主方法。
+
+## 当前代码与运行入口
+
+固定环境为 Conda `ai`；以下入口用于当前已实现的状态地图、K/V 探针和续写实验，**不是动态早退运行命令**。在项目目录执行：
 
 ```bash
 conda run -n ai python scripts/check_environment.py
 ```
 
-该脚本检查 python/torch/transformers 版本、CUDA 可用性、GPU 与模型文件是否存在；模型或 CUDA 缺失时返回非 0。
-
-## 目录结构
-
-```text
-configs/     Phase 0 / Phase 1 的实验配置（长度、容差、超参、Gate 阈值）
-phase0/      Phase 0 库：静态 state map、异构 cache 抽注、对比与报告
-phase1/      Phase 1 库：K/V probe 模型、teacher 特征捕获、指标、IO、报告
-scripts/     可执行入口：环境检查、state map trace、数据准备、训练、评估、汇总
-tests/       单元测试与（可选的）真实模型 GPU 测试
-data/         打包好的定长 WikiText-103 token shards 与 manifest
-results/      Phase 0 / Phase 1 的实验产物（json / md / png / jsonl）
-checkpoints/  训练好的 K/V probe 权重
-models/       官方 Qwen3.5-0.8B-Base 权重与 tokenizer（gitignore）
-.cache/       本地 HF_HOME（数据集与权重下载缓存，gitignore）
-.deps/        vendored 依赖（socksio），供数据流式下载走代理使用
-```
-
-## Phase 0：Inference-State Map
-
-产出完整状态地图，并验证真实 cache 的"抽取 → 重新注入"链路可信，这是后续一切"预测 cache 注入"实验的前提。
+状态地图与缓存接口验证：
 
 ```bash
 ./scripts/run_phase0.sh
 ```
 
-等价于：环境检查 → `scripts/trace_state_map.py` → 带真实模型的单元测试。
-
-`trace_state_map.py` 依次完成：
-
-1. 由官方 config 静态推导逐层 H/K/V/conv/recurrent 的 shape、dtype、bytes、增长规律与依赖，并与期望结构比对；
-2. 对每个 context 长度做 prefill/decode profiling，hook 捕获逐层张量与 CUDA Event 逐层时延，记录峰值显存；
-3. **cache round-trip**：从 teacher cache 重建新的 `DynamicCache`（attn K/V 与 GDN conv/recurrent state 分路径复制），断言存储独立、张量逐位相等，并用同一 next token 比对 logits；
-4. **boundary**：N-1 prefix + N boundary token 路径 vs 完整 forward，比对 top-1、max_abs、KL、cosine；
-5. **causal**：修改后半段输入，确认前半段 hidden 不变；
-6. **backend parity**：前后两次 backend fingerprint 一致（prefill/decode 使用的 GDN、causal-conv 实现未变）。
-
-输出到 `results/phase0/`：
-
-- `state_map.json` — 机器可读的完整状态地图、运行环境、逐层测量与实验元数据；
-- `state_map.md` — 逐层状态、内存、时延与验收结论；
-- `verification.json` — round-trip / injection / boundary / causal / parity 的数值结果。
-
-显存繁忙时可先做短序列 smoke test：
-
-```bash
-conda run -n ai python scripts/trace_state_map.py \
-  --config configs/qwen35_08b_state_map.yaml \
-  --context-lengths 64 --profile-runs 1 --warmup-runs 0
-```
-
-### 判定标准
-
-Phase 0 只有在以下条件全部满足时才标记 `PASS`：
-
-1. 24 层类型与官方配置一致（18 GDN + 6 full attention，索引 `[3,7,11,15,19,23]`）；
-2. 所有指定 context length 均完成状态与性能采集；
-3. cache clone 后 single-token logits 最大绝对误差不超过阈值且 top-1 一致，且 K/V 与 GDN state 张量逐位相等；
-4. boundary 路径 top-1 一致且误差/KL/cosine 满足阈值；
-5. 因果测试通过；
-6. prefill 与 decode 使用相同 backend fingerprint。
-
-任何 OOM、GPU 被占用、缺失长度或 backend 差异都会记录为未通过，**不以理论值替代实测值**。
-
-## Phase 1：Attention K/V Recoverability
-
-固定 Qwen3.5 teacher，用 H4/H8/H12（decoder layer 3/7/11 输出）构造上层 attention 层的 raw pre-RoPE K/V，比较六类方法：
-
-- `zero`：全零 K/V（下界）；
-- `random_linear`：随机初始化同规模线性层；
-- `original_projection`：对最深 source 使用目标层 `input_layernorm`，再应用原始 `k_proj`/`v_proj`；
-- `trained_linear`：训练 full-rank `P_K`/`P_V`；
-- `low_rank_64/128/256`：`P = A·B` 低秩分解；
-- `multi_layer_fusion`：K 与 V 各自用 softmax 权重融合 H4/H8/H12（对应假设 H2：K/V 最优信息来源不同）。
-
-训练数据为 WikiText-103 官方 split，按 split 独立打包成定长 256 的序列，train 约 5M tokens、validation/test 各 262K tokens。Gate 1 在 validation 上选方法，再在 test 上报 K/V NMSE、cosine 与固定 teacher Query 下的 attention-output NMSE，并对 functional improvement 做 paired bootstrap。
+数据准备、K/V 训练评估与复验：
 
 ```bash
 ./scripts/run_phase1.sh
 ```
 
-该脚本会准备数据（`PYTHONPATH=.deps`、`HF_HOME=.cache/huggingface`），对 layers **19 / 15 / 23** 依次训练与评估，最后汇总并运行真实模型测试。已有数据与 checkpoint 时可分别执行：
+已有数据时运行完整 K/V 复验流程，包含三层训练评估、联合续写与测试：
 
 ```bash
-conda run -n ai python scripts/train_kv_probe.py    --config configs/qwen35_08b_phase1.yaml
+conda run -n ai python scripts/run_phase1_corrected.py
+```
+
+单目标层训练或评估以配置中的 `target_layer` 为准，默认代码索引 19：
+
+```bash
+conda run -n ai python scripts/train_kv_probe.py --config configs/qwen35_08b_phase1.yaml
 conda run -n ai python scripts/evaluate_kv_probe.py --config configs/qwen35_08b_phase1.yaml
 ```
 
-主要输出：
-
-- `results/phase1_corrected/layer{15,19,23}/`：单层报告、JSON、图表、per-batch 指标和训练日志；
-- `results/phase1_corrected/phase1_all_layers.md` / `.json` 与 `phase1_layer_depth.png`：跨层汇总；
-- `checkpoints/phase1_corrected/layer{15,19,23}_kv_probes.pt`：新版权重；
-- `results/phase1_corrected/continuation/`：完整修复流程额外生成的真实续写复验；
-- `results/phase1_corrected/run_stages.json`：各阶段退出状态和耗时。
-
-### Gate 1
-
-测试集上，validation 选出的方法必须同时满足：
-
-1. 平均 K/V NMSE 相对 `original_projection` 改善 ≥ 10%；
-2. attention-output NMSE 相对 `original_projection` 改善 ≥ 10%；
-3. attention 改善的 paired bootstrap 95% CI 下界 > 0；
-4. attention-output NMSE 优于 `random_linear`。
-
-三层均 GO 只代表通过单层重建门槛；是否进入 GDN State Recoverability 还须结合真实缓存联合替换与续写门槛。修复代码不等于实验成功。
-
-## K/V 缓存注入小规模续写实验
-
-```bash
-conda run -n ai python scripts/run_kv_continuation_pilot.py
-```
-
-固定配置位于 `configs/kv_continuation_pilot.json`。256/2048 长度各 16 个不重叠测试窗口，每个窗口 128 步同 token 续写；保留 teacher GDN 状态，比较单层替换、三层替换、original projection、zero K/V 与真实缓存重编码对照。输出为 `results/kv_continuation_pilot/results.json` 和 `report.md`，包括逐窗口逐步数值、checkpoint 哈希、配对 bootstrap 与门槛判定。它不代表自由生成、完整 CED 或速度 benchmark。
-
-首次旧权重 pilot 三层预测的平均 KL 分别为 0.2678、0.4617；旧 original projection 为 0.2422、0.4653，判定 **HOLD_REPAIR_KV**。修复后的 pilot 改用新版权重、归一化的原始投影基线及不同窗口，不能把两轮数值差异完全归因于修复。新版复验由上面的 `run_phase1_corrected.py` 执行；默认 `run_kv_continuation_pilot.py` 仍用于重现首次旧权重实验。
-
-## 测试
-
-无需额外安装 pytest：
+测试入口：
 
 ```bash
 conda run -n ai python -m unittest discover -s tests -v
-```
-
-默认只检查纯 Python/CPU 逻辑（静态 state map、CPU 上的 cache clone 独立性、probe 形状与参数量、指标与 gate 逻辑、已产出的 Phase 1 结果与数据 manifest）。设置 `CED_RUN_MODEL_TESTS=1` 后额外加载真实模型执行 GPU 测试（cache round-trip、boundary、因果性）：
-
-```bash
 CED_RUN_MODEL_TESTS=1 conda run -n ai python -m unittest discover -s tests -v
 ```
 
-## 约定
+| 目录 | 当前作用 |
+|---|---|
+| `configs/` | 状态地图、K/V 探针和续写配置 |
+| `phase0/` | 状态结构、异构 cache 克隆/注入、测量与报告 |
+| `phase1/` | 真实目标捕获、K/V 投影模型、指标与数据 IO |
+| `scripts/` | 环境、数据准备、训练、评估及流程入口 |
+| `tests/` | 接口、形状、指标、缓存和真实模型检查 |
+| `data/phase1_wikitext103/` | token shards 与 manifest |
+| `results/phase0/` | 状态地图与验证记录 |
+| `results/phase1_corrected/` | 三层探针、联合续写及实验报告 |
+| `checkpoints/phase1_corrected/` | K/V probe 权重，不包含检测矩阵或置信度网络 |
+| `models/Qwen3.5-0.8B-Base/` | 模型与 tokenizer |
 
-- **不做理论值替身**：缺测量、OOM、backend 不一致一律记为未通过，并保留原始错误信息作为证据。
-- **teacher 全程冻结**：Phase 1 只训练 probe，probe 初始化在 teacher 加载后重新设种子以保证可复现。
-- **train/validation/test 严格隔离**：上游 split 保留，序列只在 split 内部打包；方法选择只用 validation，test 只用于最终 Gate。
-- **功能指标优先**：state 数值误差是辅助，attention-output NMSE（以及后续阶段的 logits/continuation 误差）才是判据。
-- **可复现性**：结果中记录模型 revision、权重 etag、torch/transformers 版本、GPU 与 backend fingerprint。
+代码实施需增加四点矩阵检测、confidence、按出口的 KV projector 和 GDN 保持调度。必须验证 S/C 跳过时逐位不变、再次执行不补写、全局位置不变形、失败回退不重复写入、浅层不读取未来，以及禁用退出完全恢复完整模型。所有 OOM、backend 差异或未完成实验如实记录。
+
+## 参考依据
+
+- [Qwen3.5 官方配置](https://huggingface.co/Qwen/Qwen3.5-0.8B/raw/main/config.json)与[Transformers 文档](https://huggingface.co/docs/transformers/model_doc/qwen3_5)。Base 精确结构以本地模型 config 为准。
+- [Confident Adaptive Language Modeling](https://arxiv.org/abs/2207.07061)：置信度与动态早退。
+- [Jump to Conclusions](https://arxiv.org/abs/2303.09435)：中间层线性映射读出。
+
+研究关注选择性退出、GDN 写入省略和 KV 投影的联合质量—成本边界，不预先宣称原创性、实验成功或实际加速。
