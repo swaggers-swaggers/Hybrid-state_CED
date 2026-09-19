@@ -1,0 +1,10 @@
+{
+  "process_exit_code": 0,
+  "elapsed_seconds": 70.3,
+  "timed_decode_seconds": 58.268392267994386,
+  "timed_runs": 90,
+  "timed_tokens": 5760,
+  "runtime_validation_groups": 6,
+  "current_source_matches_recorded_hashes": true,
+  "timing_source": "wall-clock duration reported by the launching subprocess wrapper after completion"
+}

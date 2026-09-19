@@ -1,0 +1,33 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 5713.62it/s]
+context=256, prompt=1, repeat=1/5: paired group complete
+context=256, prompt=1, repeat=2/5: paired group complete
+context=256, prompt=1, repeat=3/5: paired group complete
+context=256, prompt=1, repeat=4/5: paired group complete
+context=256, prompt=1, repeat=5/5: paired group complete
+context=256, prompt=2, repeat=1/5: paired group complete
+context=256, prompt=2, repeat=2/5: paired group complete
+context=256, prompt=2, repeat=3/5: paired group complete
+context=256, prompt=2, repeat=4/5: paired group complete
+context=256, prompt=2, repeat=5/5: paired group complete
+context=256, prompt=3, repeat=1/5: paired group complete
+context=256, prompt=3, repeat=2/5: paired group complete
+context=256, prompt=3, repeat=3/5: paired group complete
+context=256, prompt=3, repeat=4/5: paired group complete
+context=256, prompt=3, repeat=5/5: paired group complete
+context=2048, prompt=1, repeat=1/5: paired group complete
+context=2048, prompt=1, repeat=2/5: paired group complete
+context=2048, prompt=1, repeat=3/5: paired group complete
+context=2048, prompt=1, repeat=4/5: paired group complete
+context=2048, prompt=1, repeat=5/5: paired group complete
+context=2048, prompt=2, repeat=1/5: paired group complete
+context=2048, prompt=2, repeat=2/5: paired group complete
+context=2048, prompt=2, repeat=3/5: paired group complete
+context=2048, prompt=2, repeat=4/5: paired group complete
+context=2048, prompt=2, repeat=5/5: paired group complete
+context=2048, prompt=3, repeat=1/5: paired group complete
+context=2048, prompt=3, repeat=2/5: paired group complete
+context=2048, prompt=3, repeat=3/5: paired group complete
+context=2048, prompt=3, repeat=4/5: paired group complete
+context=2048, prompt=3, repeat=5/5: paired group complete
+Complete: /home/liu/CED/results/exit_cost/20260919-115122/summary.csv

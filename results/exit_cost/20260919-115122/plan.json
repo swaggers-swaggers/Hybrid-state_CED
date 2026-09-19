@@ -1,0 +1,76 @@
+{
+  "status": "PLAN_ONLY_NO_MODEL_LOADED",
+  "start": "Full prefill produces output token 1. Timing starts when consuming token 1 to produce token 2.",
+  "end": "Produce output token 65; fixed length, no EOS stopping.",
+  "scenarios": [
+    {
+      "name": "full",
+      "policy": "disabled"
+    },
+    {
+      "name": "gate_reject",
+      "policy": "force_reject"
+    },
+    {
+      "name": "exit_12",
+      "policy": "force_accept"
+    }
+  ],
+  "confidence": {
+    "input": "h12 only; no vocabulary logits",
+    "network": [
+      1024,
+      128,
+      1
+    ],
+    "threshold": 0.9,
+    "trained": false
+  },
+  "projection": {
+    "input": "h12 [B,1,1024]",
+    "outputs": "target raw K and V, each [B,1,512]",
+    "targets": [
+      16,
+      20,
+      24
+    ],
+    "independent_modules": 3
+  },
+  "timed_decode_steps": 5760,
+  "warmup_decode_steps": 144,
+  "profile_decode_steps": 144,
+  "planning_assumption_ms_per_step": [
+    15,
+    40
+  ],
+  "estimated_minutes": [
+    2.5,
+    7.0
+  ],
+  "estimate_note": "Planning budget only; includes 1–3 min for model load, prefill and runtime validation. No performance measured.",
+  "config": {
+    "model_path": "models/Qwen3.5-0.8B-Base",
+    "context_lengths": [
+      256,
+      2048
+    ],
+    "prompt_variants": 3,
+    "repeats": 5,
+    "decode_tokens": 64,
+    "warmup_tokens": 8,
+    "profile_tokens": 8,
+    "dtype": "bfloat16",
+    "attention_backend": "sdpa",
+    "seed": 20260918,
+    "kv_projection": "exit_hidden_linear",
+    "exit_depth": 12,
+    "kv_targets": [
+      16,
+      20,
+      24
+    ],
+    "confidence_hidden_size": 128,
+    "confidence_threshold": 0.9,
+    "include_adaptive": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "model_path": "models/Qwen3.5-0.8B-Base",
+  "context_lengths": [
+    256,
+    2048
+  ],
+  "prompt_variants": 3,
+  "repeats": 5,
+  "decode_tokens": 64,
+  "warmup_tokens": 8,
+  "profile_tokens": 8,
+  "dtype": "bfloat16",
+  "attention_backend": "sdpa",
+  "seed": 20260918,
+  "kv_projection": "exit_hidden_linear",
+  "exit_depth": 12,
+  "kv_targets": [
+    16,
+    20,
+    24
+  ],
+  "confidence_hidden_size": 128,
+  "confidence_threshold": 0.9,
+  "include_adaptive": false
+}
