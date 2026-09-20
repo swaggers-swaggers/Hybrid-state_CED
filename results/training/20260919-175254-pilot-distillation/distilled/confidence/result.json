@@ -1,0 +1,9 @@
+{
+  "status": "CONFIDENCE_TRAINED",
+  "best_dev_bce": 0.3959141788529415,
+  "train_positive_rate": 0.24290747940540314,
+  "checkpoint": "/home/liu/CED/results/training/20260919-175254-pilot-distillation/distilled/confidence/confidence.pt",
+  "elapsed_seconds": 50.486205204000726,
+  "peak_allocated_mib": 1764.177734375,
+  "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "MODULES_TRAINED",
+  "steps": 64,
+  "best_dev_selection_loss": 21.64216635215516,
+  "checkpoint": "/home/liu/CED/results/training/20260919-173530-smoke/modules/modules.pt",
+  "supervised_tokens": 32640,
+  "elapsed_seconds": 21.03618551299951,
+  "end_to_end_supervised_tokens_per_second": 1551.6121009595493,
+  "peak_allocated_mib": 1858.2763671875,
+  "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+}

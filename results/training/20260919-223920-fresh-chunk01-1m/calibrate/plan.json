@@ -1,0 +1,122 @@
+{
+  "status": "PLAN_ONLY_NO_TRAINING",
+  "profile": "pilot",
+  "semantics": "block12_residual_to_target_self_attn_raw_kv_v1",
+  "trainable_parameters": 4325633,
+  "data": "Salesforce/wikitext",
+  "data_config": "wikitext-103-v1",
+  "split_limit": "Disjoint packed windows, article boundaries unavailable; diagnostic only. Test has prior project exposure.",
+  "workload": {
+    "modules": {
+      "sequences": 3922,
+      "input_tokens": 1004032,
+      "next_token_targets": 1000000
+    },
+    "gate": {
+      "sequences": 512,
+      "input_tokens": 131072,
+      "next_token_targets": 130560
+    },
+    "dev": {
+      "sequences": 128,
+      "input_tokens": 32768,
+      "next_token_targets": 32640
+    },
+    "calibration": {
+      "sequences": 256,
+      "input_tokens": 65536,
+      "next_token_targets": 65280
+    },
+    "test": {
+      "sequences": 128,
+      "input_tokens": 32768,
+      "next_token_targets": 32640
+    }
+  },
+  "generated_target_note": "Generated-data target counts are maxima; first EOS is included, later padding is excluded. Prompt labels are masked.",
+  "epochs": {
+    "modules": 1,
+    "confidence": 5
+  },
+  "budget_minutes_not_measured": [
+    15,
+    30
+  ],
+  "timing_assumption": "Natural-data smoke measured 138.35 seconds total and 1551.6 supervised tokens/s in the modules stage. Pilot is an extrapolation; teacher data generation is additional and not included.",
+  "stages": [
+    "modules",
+    "confidence",
+    "calibrate",
+    "evaluate"
+  ],
+  "config": {
+    "model_path": "models/Qwen3.5-0.8B-Base",
+    "data_path": "data/phase1_wikitext103",
+    "seed": 20260919,
+    "sequence_length": 256,
+    "batch_size": 2,
+    "logit_chunk": 16,
+    "module_epochs": 1,
+    "gate_epochs": 5,
+    "gate_batch_size": 1024,
+    "module_lr": 0.0001,
+    "gate_lr": 0.0003,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "temperature": 1.0,
+    "ce_weight": 1.0,
+    "kd_weight": 1.0,
+    "kv_weight": 1.0,
+    "eval_every_steps": 1000000,
+    "scale_sequences": 32,
+    "risk_limit": 0.01,
+    "minimum_accepted": 1024,
+    "threshold_grid": [
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.85,
+      0.9,
+      0.92,
+      0.94,
+      0.96,
+      0.97,
+      0.98,
+      0.99,
+      0.995,
+      0.999
+    ],
+    "rollout_contexts": [
+      256,
+      2048
+    ],
+    "rollout_prompts": 4,
+    "rollout_tokens": 64,
+    "profiles": {
+      "smoke": {
+        "module_sequences": 128,
+        "gate_sequences": 32,
+        "dev_sequences": 16,
+        "calibration_sequences": 32,
+        "test_sequences": 16
+      },
+      "pilot": {
+        "module_sequences": 4096,
+        "gate_sequences": 512,
+        "dev_sequences": 128,
+        "calibration_sequences": 256,
+        "test_sequences": 128
+      }
+    },
+    "incremental": {
+      "data_path": "data/wikitext103_10000000_fresh_20260919-222037",
+      "chunk_index": 0,
+      "chunk_tokens": 1000000,
+      "source_checkpoint_sha256": "1ff82f9d709a943a8955d3b521cc506818e24df0b9228f178368abf997a3780d"
+    }
+  },
+  "chunk_index": 0,
+  "note": "Exactly one fresh 1M-target chunk; masked edge windows; no automatic next chunk. End-of-chunk metrics.",
+  "requested_stage": "calibrate"
+}

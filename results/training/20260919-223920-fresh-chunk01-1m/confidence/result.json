@@ -1,0 +1,9 @@
+{
+  "status": "CONFIDENCE_TRAINED",
+  "best_dev_bce": 0.456062186348672,
+  "train_positive_rate": 0.30164673924446106,
+  "checkpoint": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m/confidence/confidence.pt",
+  "elapsed_seconds": 50.73983821099682,
+  "peak_allocated_mib": 1764.177734375,
+  "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+}

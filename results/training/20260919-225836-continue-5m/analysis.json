@@ -1,0 +1,3193 @@
+{
+  "execution": {
+    "status": "COMPLETED",
+    "output": "/home/liu/CED/results/training/20260919-225836-continue-5m",
+    "source_run": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m",
+    "requested_additional_effective_targets": 5000000,
+    "interval": [
+      1000000,
+      6000000
+    ],
+    "chunk_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "inspection_policy": "Do not inspect metrics or tune during execution; analyze all five chunks after completion.",
+    "runs": [
+      {
+        "chunk_index": 1,
+        "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk02-1m",
+        "warm_start": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m/modules/modules.pt",
+        "warm_start_sha256": "92d9afaa26a78e9543b82afc377488c79b860d09db0a7e01d6c78d6d6106d361",
+        "wall_seconds": 677.502953862997
+      },
+      {
+        "chunk_index": 2,
+        "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk03-1m",
+        "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk02-1m/modules/modules.pt",
+        "warm_start_sha256": "bca43f0d611a853234d19e7c8049c01969420152cadceabd8c71ed22c06e0420",
+        "wall_seconds": 674.0191206870004
+      },
+      {
+        "chunk_index": 3,
+        "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk04-1m",
+        "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk03-1m/modules/modules.pt",
+        "warm_start_sha256": "93dbc7ba83bf1060f831fc22a67574411e7fda4adf608334f1e51c05e6d63519",
+        "wall_seconds": 676.7983778229973
+      },
+      {
+        "chunk_index": 4,
+        "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk05-1m",
+        "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk04-1m/modules/modules.pt",
+        "warm_start_sha256": "823884415b45e6d61fb749b175f217e1717588a16a9f4a78591cbbc226900124",
+        "wall_seconds": 676.1394127370004
+      },
+      {
+        "chunk_index": 5,
+        "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk06-1m",
+        "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk05-1m/modules/modules.pt",
+        "warm_start_sha256": "b9326a00cf31da1311074583cda3844814463108d4009afaefda4b55457eb70e",
+        "wall_seconds": 687.4821130960045
+      }
+    ],
+    "completed_additional_effective_targets": 5000000,
+    "remaining_fresh_effective_targets": 4000000,
+    "final_modules_checkpoint": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk06-1m/modules/modules.pt",
+    "wall_seconds": 3392.222629265001
+  },
+  "runs": [
+    {
+      "path": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m",
+      "cumulative_fresh_targets": 1000000,
+      "wall_seconds": 678.7727654619957,
+      "stages": [
+        {
+          "stage": "modules",
+          "returncode": 0,
+          "wall_seconds": 491.03866745199775
+        },
+        {
+          "stage": "confidence",
+          "returncode": 0,
+          "wall_seconds": 53.532926789004705
+        },
+        {
+          "stage": "calibrate",
+          "returncode": 0,
+          "wall_seconds": 24.02327355000307
+        },
+        {
+          "stage": "evaluate",
+          "returncode": 0,
+          "wall_seconds": 110.15298636700027
+        }
+      ],
+      "steps": 1961,
+      "selected_step": 1961,
+      "supervised_tokens": 1000000,
+      "chunk": {
+        "chunk_index": 0,
+        "start_effective_target": 0,
+        "end_effective_target_exclusive": 1000000,
+        "effective_targets": 1000000,
+        "windows": 3922,
+        "manifest_sha256": "47716da6c54649263a199d80c5f4e7c188f6ac070967018347d445fa05eb38f9"
+      },
+      "peak_allocated_mib": 1881.953125,
+      "static_test": {
+        "k16": 0.2055029033217579,
+        "v16": 0.27548160310834646,
+        "k20": 0.16112756240181625,
+        "v20": 0.37471158895641565,
+        "k24": 0.21582869091071188,
+        "v24": 0.21849245205521584,
+        "ce": 6.298562270753524,
+        "kd": 3.3836789777758076,
+        "teacher_ce": 3.2613998314256176,
+        "top1_agreement": 0.30897671602775945,
+        "kv": 0.24185746679237732,
+        "selection_loss": 9.924098715321708,
+        "targets": 32640
+      },
+      "confidence_test": {
+        "bce": 0.44487088369388206,
+        "brier": 0.14743182080413816,
+        "positive_rate": 0.3089767098426819,
+        "tokens": 32640,
+        "threshold": null,
+        "accepted": 0,
+        "coverage": 0.0,
+        "disagreement": null
+      },
+      "gate_enabled": false,
+      "calibration": {
+        "status": "NO_ELIGIBLE_THRESHOLD",
+        "threshold": null,
+        "selected": null,
+        "curve": [
+          {
+            "threshold": 0.5,
+            "accepted": 15047,
+            "errors": 4495,
+            "coverage": 0.23049938725490196,
+            "disagreement": 0.2987306439821891
+          },
+          {
+            "threshold": 0.6,
+            "accepted": 10341,
+            "errors": 2425,
+            "coverage": 0.15840992647058824,
+            "disagreement": 0.2345034329368533
+          },
+          {
+            "threshold": 0.7,
+            "accepted": 6519,
+            "errors": 1122,
+            "coverage": 0.09986213235294118,
+            "disagreement": 0.17211228716060745
+          },
+          {
+            "threshold": 0.8,
+            "accepted": 3185,
+            "errors": 407,
+            "coverage": 0.04878982843137255,
+            "disagreement": 0.12778649921507065
+          },
+          {
+            "threshold": 0.85,
+            "accepted": 1808,
+            "errors": 173,
+            "coverage": 0.027696078431372548,
+            "disagreement": 0.0956858407079646
+          },
+          {
+            "threshold": 0.9,
+            "accepted": 739,
+            "errors": 47,
+            "coverage": 0.01132046568627451,
+            "disagreement": 0.06359945872801083
+          },
+          {
+            "threshold": 0.92,
+            "accepted": 427,
+            "errors": 22,
+            "coverage": 0.006541053921568628,
+            "disagreement": 0.05152224824355972
+          },
+          {
+            "threshold": 0.94,
+            "accepted": 215,
+            "errors": 8,
+            "coverage": 0.0032935049019607843,
+            "disagreement": 0.037209302325581395
+          },
+          {
+            "threshold": 0.96,
+            "accepted": 88,
+            "errors": 2,
+            "coverage": 0.0013480392156862745,
+            "disagreement": 0.022727272727272728
+          },
+          {
+            "threshold": 0.97,
+            "accepted": 44,
+            "errors": 1,
+            "coverage": 0.0006740196078431372,
+            "disagreement": 0.022727272727272728
+          },
+          {
+            "threshold": 0.98,
+            "accepted": 18,
+            "errors": 0,
+            "coverage": 0.00027573529411764705,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.99,
+            "accepted": 2,
+            "errors": 0,
+            "coverage": 3.0637254901960784e-05,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.995,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "disagreement": null
+          },
+          {
+            "threshold": 0.999,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "disagreement": null
+          }
+        ],
+        "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+        "metrics": {
+          "bce": 0.4434983919648563,
+          "brier": 0.14650553873583091,
+          "positive_rate": 0.31185662746429443,
+          "tokens": 65280
+        }
+      },
+      "contexts": {
+        "256": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.8206339605676476,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7211538461538461,
+              "top1_agreement": 0.4140625,
+              "nll": 5.705673735268647,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.8298264378818203,
+              "resume_mean_kl": 0.04902654567558784,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7211538461538461,
+              "top1_agreement": 0.39453125,
+              "nll": 5.716867567565714,
+              "teacher_nll": 3.0921165482011475
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.9295948982962727,
+              "resume_mean_kl": 0.5811250012193341,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7211538461538461,
+              "top1_agreement": 0.31640625,
+              "nll": 5.8229209821711265,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.9611488073924193,
+              "resume_mean_kl": 0.7494125163987823,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7211538461538461,
+              "top1_agreement": 0.3125,
+              "nll": 5.856650014678053,
+              "teacher_nll": 3.0921165482011475
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 3.0921165482011475,
+              "teacher_nll": 3.0921165482011475
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 11.856874136697115,
+            "adaptive_ms": 11.996020324204437,
+            "paired_median_speedup": 0.9903446166723452
+          }
+        },
+        "2048": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 3.3147083834919613,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7307692307692308,
+              "top1_agreement": 0.40625,
+              "nll": 5.9499775077165395,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 3.317298728920264,
+              "resume_mean_kl": 0.013815175617613326,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7307692307692308,
+              "top1_agreement": 0.40234375,
+              "nll": 5.948699208442122,
+              "teacher_nll": 2.458545371108926
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 3.4817838971721358,
+              "resume_mean_kl": 0.8910694062942639,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7307692307692308,
+              "top1_agreement": 0.328125,
+              "nll": 6.0901624001562595,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 3.496348284294072,
+              "resume_mean_kl": 0.9687461376112575,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7307692307692308,
+              "top1_agreement": 0.328125,
+              "nll": 6.106962748992373,
+              "teacher_nll": 2.458545371108926
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 2.458545371108926,
+              "teacher_nll": 2.458545371108926
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 11.91361140627123,
+            "adaptive_ms": 12.095187117182604,
+            "paired_median_speedup": 0.9847273553092215
+          }
+        }
+      },
+      "runtime_validation": {
+        "status": "PASS",
+        "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+      },
+      "checkpoint_audit": {
+        "modules/modules.pt": {
+          "sha256": "92d9afaa26a78e9543b82afc377488c79b860d09db0a7e01d6c78d6d6106d361",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1961,
+            "dev": {
+              "k16": 0.20939009170979261,
+              "v16": 0.27633646596223116,
+              "k20": 0.16366384457796812,
+              "v20": 0.3760320018045604,
+              "k24": 0.21825874573551118,
+              "v24": 0.21698085451498628,
+              "ce": 6.056206517053001,
+              "kd": 3.319420350846999,
+              "teacher_ce": 3.155542261337898,
+              "top1_agreement": 0.31685049059965154,
+              "kv": 0.24344366738417497,
+              "selection_loss": 9.619070535284175,
+              "targets": 32640
+            }
+          }
+        },
+        "modules/last_modules.pt": {
+          "sha256": "131a1c7577682fd87a74edf3ca1762541ec48c75a94a9d36e2088174109feee8",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1961
+          }
+        },
+        "confidence/confidence.pt": {
+          "sha256": "51b9bc8920ed1e853996cea44b9a8b978a890bc16552ec419aaa95970e610721",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "dev": {
+              "bce": 0.456062186348672,
+              "brier": 0.15077688807134976,
+              "positive_rate": 0.316850483417511,
+              "tokens": 32640
+            },
+            "epoch": 5,
+            "module_selection": {
+              "step": 1961,
+              "dev": {
+                "k16": 0.20939009170979261,
+                "v16": 0.27633646596223116,
+                "k20": 0.16366384457796812,
+                "v20": 0.3760320018045604,
+                "k24": 0.21825874573551118,
+                "v24": 0.21698085451498628,
+                "ce": 6.056206517053001,
+                "kd": 3.319420350846999,
+                "teacher_ce": 3.155542261337898,
+                "top1_agreement": 0.31685049059965154,
+                "kv": 0.24344366738417497,
+                "selection_loss": 9.619070535284175,
+                "targets": 32640
+              }
+            }
+          }
+        },
+        "calibrate/calibrated.pt": {
+          "sha256": "15eeb82bd3a0abeebdaff0275da8d9577cf2bcb79fa225bf121c4ab750715dc0",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "calibration": {
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "threshold": null,
+              "selected": null,
+              "curve": [
+                {
+                  "threshold": 0.5,
+                  "accepted": 15047,
+                  "errors": 4495,
+                  "coverage": 0.23049938725490196,
+                  "disagreement": 0.2987306439821891
+                },
+                {
+                  "threshold": 0.6,
+                  "accepted": 10341,
+                  "errors": 2425,
+                  "coverage": 0.15840992647058824,
+                  "disagreement": 0.2345034329368533
+                },
+                {
+                  "threshold": 0.7,
+                  "accepted": 6519,
+                  "errors": 1122,
+                  "coverage": 0.09986213235294118,
+                  "disagreement": 0.17211228716060745
+                },
+                {
+                  "threshold": 0.8,
+                  "accepted": 3185,
+                  "errors": 407,
+                  "coverage": 0.04878982843137255,
+                  "disagreement": 0.12778649921507065
+                },
+                {
+                  "threshold": 0.85,
+                  "accepted": 1808,
+                  "errors": 173,
+                  "coverage": 0.027696078431372548,
+                  "disagreement": 0.0956858407079646
+                },
+                {
+                  "threshold": 0.9,
+                  "accepted": 739,
+                  "errors": 47,
+                  "coverage": 0.01132046568627451,
+                  "disagreement": 0.06359945872801083
+                },
+                {
+                  "threshold": 0.92,
+                  "accepted": 427,
+                  "errors": 22,
+                  "coverage": 0.006541053921568628,
+                  "disagreement": 0.05152224824355972
+                },
+                {
+                  "threshold": 0.94,
+                  "accepted": 215,
+                  "errors": 8,
+                  "coverage": 0.0032935049019607843,
+                  "disagreement": 0.037209302325581395
+                },
+                {
+                  "threshold": 0.96,
+                  "accepted": 88,
+                  "errors": 2,
+                  "coverage": 0.0013480392156862745,
+                  "disagreement": 0.022727272727272728
+                },
+                {
+                  "threshold": 0.97,
+                  "accepted": 44,
+                  "errors": 1,
+                  "coverage": 0.0006740196078431372,
+                  "disagreement": 0.022727272727272728
+                },
+                {
+                  "threshold": 0.98,
+                  "accepted": 18,
+                  "errors": 0,
+                  "coverage": 0.00027573529411764705,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.99,
+                  "accepted": 2,
+                  "errors": 0,
+                  "coverage": 3.0637254901960784e-05,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.995,
+                  "accepted": 0,
+                  "errors": 0,
+                  "coverage": 0.0,
+                  "disagreement": null
+                },
+                {
+                  "threshold": 0.999,
+                  "accepted": 0,
+                  "errors": 0,
+                  "coverage": 0.0,
+                  "disagreement": null
+                }
+              ],
+              "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+              "metrics": {
+                "bce": 0.4434983919648563,
+                "brier": 0.14650553873583091,
+                "positive_rate": 0.31185662746429443,
+                "tokens": 65280
+              }
+            },
+            "confidence_selection": {
+              "dev": {
+                "bce": 0.456062186348672,
+                "brier": 0.15077688807134976,
+                "positive_rate": 0.316850483417511,
+                "tokens": 32640
+              },
+              "epoch": 5,
+              "module_selection": {
+                "step": 1961,
+                "dev": {
+                  "k16": 0.20939009170979261,
+                  "v16": 0.27633646596223116,
+                  "k20": 0.16366384457796812,
+                  "v20": 0.3760320018045604,
+                  "k24": 0.21825874573551118,
+                  "v24": 0.21698085451498628,
+                  "ce": 6.056206517053001,
+                  "kd": 3.319420350846999,
+                  "teacher_ce": 3.155542261337898,
+                  "top1_agreement": 0.31685049059965154,
+                  "kv": 0.24344366738417497,
+                  "selection_loss": 9.619070535284175,
+                  "targets": 32640
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk02-1m",
+      "cumulative_fresh_targets": 2000000,
+      "wall_seconds": 677.502953862997,
+      "stages": [
+        {
+          "stage": "modules",
+          "returncode": 0,
+          "wall_seconds": 490.3483907359987
+        },
+        {
+          "stage": "confidence",
+          "returncode": 0,
+          "wall_seconds": 53.4467688559962
+        },
+        {
+          "stage": "calibrate",
+          "returncode": 0,
+          "wall_seconds": 23.812402126997767
+        },
+        {
+          "stage": "evaluate",
+          "returncode": 0,
+          "wall_seconds": 109.86947814299492
+        }
+      ],
+      "steps": 1962,
+      "selected_step": 1962,
+      "supervised_tokens": 1000000,
+      "chunk": {
+        "chunk_index": 1,
+        "start_effective_target": 1000000,
+        "end_effective_target_exclusive": 2000000,
+        "effective_targets": 1000000,
+        "windows": 3923,
+        "manifest_sha256": "47716da6c54649263a199d80c5f4e7c188f6ac070967018347d445fa05eb38f9"
+      },
+      "peak_allocated_mib": 1881.953125,
+      "static_test": {
+        "k16": 0.17245544167235494,
+        "v16": 0.21419240557588637,
+        "k20": 0.13469717628322542,
+        "v20": 0.30643867002800107,
+        "k24": 0.1912262332625687,
+        "v24": 0.11540615744888783,
+        "ce": 5.963780152264471,
+        "kd": 3.094723896528868,
+        "teacher_ce": 3.2613998314256176,
+        "top1_agreement": 0.33131127487320233,
+        "kv": 0.18906934737848738,
+        "selection_loss": 9.247573396171825,
+        "targets": 32640
+      },
+      "confidence_test": {
+        "bce": 0.4684609886477975,
+        "brier": 0.15604670519621494,
+        "positive_rate": 0.33131128549575806,
+        "tokens": 32640,
+        "threshold": null,
+        "accepted": 0,
+        "coverage": 0.0,
+        "disagreement": null
+      },
+      "gate_enabled": false,
+      "calibration": {
+        "status": "NO_ELIGIBLE_THRESHOLD",
+        "threshold": null,
+        "selected": null,
+        "curve": [
+          {
+            "threshold": 0.5,
+            "accepted": 17115,
+            "errors": 5241,
+            "coverage": 0.26217830882352944,
+            "disagreement": 0.30622261174408416
+          },
+          {
+            "threshold": 0.6,
+            "accepted": 11677,
+            "errors": 2856,
+            "coverage": 0.17887561274509803,
+            "disagreement": 0.24458336901601438
+          },
+          {
+            "threshold": 0.7,
+            "accepted": 7249,
+            "errors": 1330,
+            "coverage": 0.11104473039215686,
+            "disagreement": 0.18347358256311216
+          },
+          {
+            "threshold": 0.8,
+            "accepted": 3430,
+            "errors": 452,
+            "coverage": 0.052542892156862746,
+            "disagreement": 0.13177842565597667
+          },
+          {
+            "threshold": 0.85,
+            "accepted": 1947,
+            "errors": 206,
+            "coverage": 0.029825367647058825,
+            "disagreement": 0.10580380071905496
+          },
+          {
+            "threshold": 0.9,
+            "accepted": 795,
+            "errors": 55,
+            "coverage": 0.012178308823529412,
+            "disagreement": 0.06918238993710692
+          },
+          {
+            "threshold": 0.92,
+            "accepted": 466,
+            "errors": 26,
+            "coverage": 0.0071384803921568625,
+            "disagreement": 0.055793991416309016
+          },
+          {
+            "threshold": 0.94,
+            "accepted": 246,
+            "errors": 7,
+            "coverage": 0.0037683823529411765,
+            "disagreement": 0.028455284552845527
+          },
+          {
+            "threshold": 0.96,
+            "accepted": 112,
+            "errors": 1,
+            "coverage": 0.001715686274509804,
+            "disagreement": 0.008928571428571428
+          },
+          {
+            "threshold": 0.97,
+            "accepted": 62,
+            "errors": 1,
+            "coverage": 0.0009497549019607843,
+            "disagreement": 0.016129032258064516
+          },
+          {
+            "threshold": 0.98,
+            "accepted": 25,
+            "errors": 0,
+            "coverage": 0.0003829656862745098,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.99,
+            "accepted": 5,
+            "errors": 0,
+            "coverage": 7.659313725490196e-05,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.995,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "disagreement": null
+          },
+          {
+            "threshold": 0.999,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "disagreement": null
+          }
+        ],
+        "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+        "metrics": {
+          "bce": 0.46543656003241446,
+          "brier": 0.15451855507952908,
+          "positive_rate": 0.3344362676143646,
+          "tokens": 65280
+        }
+      },
+      "contexts": {
+        "256": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.5702915631991345,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6826923076923077,
+              "top1_agreement": 0.4453125,
+              "nll": 5.416977952890193,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.5750736459018526,
+              "resume_mean_kl": 0.025504441081163048,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6826923076923077,
+              "top1_agreement": 0.43359375,
+              "nll": 5.422867585883978,
+              "teacher_nll": 3.0921165482011475
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.6792525009277597,
+              "resume_mean_kl": 0.5811250012193341,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6826923076923077,
+              "top1_agreement": 0.34765625,
+              "nll": 5.534225199792672,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.706152936327271,
+              "resume_mean_kl": 0.7245939900167286,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6826923076923077,
+              "top1_agreement": 0.3515625,
+              "nll": 5.560130963938718,
+              "teacher_nll": 3.0921165482011475
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 3.0921165482011475,
+              "teacher_nll": 3.0921165482011475
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 11.847315285137938,
+            "adaptive_ms": 11.96314562108114,
+            "paired_median_speedup": 0.9893040088483438
+          }
+        },
+        "2048": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 3.048745308042271,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7115384615384616,
+              "top1_agreement": 0.421875,
+              "nll": 5.657672739664122,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 3.0510373035250495,
+              "resume_mean_kl": 0.012223975908151868,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7115384615384616,
+              "top1_agreement": 0.421875,
+              "nll": 5.656755619806063,
+              "teacher_nll": 2.458545371108926
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 3.2158208217224455,
+              "resume_mean_kl": 0.8910694062942639,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7115384615384616,
+              "top1_agreement": 0.34375,
+              "nll": 5.797857632103842,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 3.2291933471060474,
+              "resume_mean_kl": 0.962389541673474,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.7115384615384616,
+              "top1_agreement": 0.34375,
+              "nll": 5.815021387723391,
+              "teacher_nll": 2.458545371108926
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 2.458545371108926,
+              "teacher_nll": 2.458545371108926
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 11.885679496089097,
+            "adaptive_ms": 11.986744007771222,
+            "paired_median_speedup": 0.9922975446690269
+          }
+        }
+      },
+      "runtime_validation": {
+        "status": "PASS",
+        "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+      },
+      "checkpoint_audit": {
+        "modules/modules.pt": {
+          "sha256": "bca43f0d611a853234d19e7c8049c01969420152cadceabd8c71ed22c06e0420",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1962,
+            "dev": {
+              "k16": 0.17619499354623258,
+              "v16": 0.21565840067341924,
+              "k20": 0.13734803232364357,
+              "v20": 0.3086457406170666,
+              "k24": 0.19355420977808535,
+              "v24": 0.11430998565629125,
+              "ce": 5.720362374946183,
+              "kd": 3.0314187299460174,
+              "teacher_ce": 3.155542261337898,
+              "top1_agreement": 0.3421568631966069,
+              "kv": 0.19095189376578978,
+              "selection_loss": 8.942732998657991,
+              "targets": 32640
+            }
+          }
+        },
+        "modules/last_modules.pt": {
+          "sha256": "8d1f9a0eabf46d43841a1cb6539952cdcce34c2ee2d3e7f5afb7fcf0edffb26d",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1962
+          }
+        },
+        "confidence/confidence.pt": {
+          "sha256": "726275b5711d3929d10f9a56e967c9369b0453360b11b64947631fe90bd40be0",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "dev": {
+              "bce": 0.47696172069100773,
+              "brier": 0.158539989659433,
+              "positive_rate": 0.34215685725212097,
+              "tokens": 32640
+            },
+            "epoch": 5,
+            "module_selection": {
+              "step": 1962,
+              "dev": {
+                "k16": 0.17619499354623258,
+                "v16": 0.21565840067341924,
+                "k20": 0.13734803232364357,
+                "v20": 0.3086457406170666,
+                "k24": 0.19355420977808535,
+                "v24": 0.11430998565629125,
+                "ce": 5.720362374946183,
+                "kd": 3.0314187299460174,
+                "teacher_ce": 3.155542261337898,
+                "top1_agreement": 0.3421568631966069,
+                "kv": 0.19095189376578978,
+                "selection_loss": 8.942732998657991,
+                "targets": 32640
+              }
+            }
+          }
+        },
+        "calibrate/calibrated.pt": {
+          "sha256": "befbfbf650a8bd0ec0e84e8cb98aa2172b3d39d893674af1e76ce6c63a18d552",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "calibration": {
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "threshold": null,
+              "selected": null,
+              "curve": [
+                {
+                  "threshold": 0.5,
+                  "accepted": 17115,
+                  "errors": 5241,
+                  "coverage": 0.26217830882352944,
+                  "disagreement": 0.30622261174408416
+                },
+                {
+                  "threshold": 0.6,
+                  "accepted": 11677,
+                  "errors": 2856,
+                  "coverage": 0.17887561274509803,
+                  "disagreement": 0.24458336901601438
+                },
+                {
+                  "threshold": 0.7,
+                  "accepted": 7249,
+                  "errors": 1330,
+                  "coverage": 0.11104473039215686,
+                  "disagreement": 0.18347358256311216
+                },
+                {
+                  "threshold": 0.8,
+                  "accepted": 3430,
+                  "errors": 452,
+                  "coverage": 0.052542892156862746,
+                  "disagreement": 0.13177842565597667
+                },
+                {
+                  "threshold": 0.85,
+                  "accepted": 1947,
+                  "errors": 206,
+                  "coverage": 0.029825367647058825,
+                  "disagreement": 0.10580380071905496
+                },
+                {
+                  "threshold": 0.9,
+                  "accepted": 795,
+                  "errors": 55,
+                  "coverage": 0.012178308823529412,
+                  "disagreement": 0.06918238993710692
+                },
+                {
+                  "threshold": 0.92,
+                  "accepted": 466,
+                  "errors": 26,
+                  "coverage": 0.0071384803921568625,
+                  "disagreement": 0.055793991416309016
+                },
+                {
+                  "threshold": 0.94,
+                  "accepted": 246,
+                  "errors": 7,
+                  "coverage": 0.0037683823529411765,
+                  "disagreement": 0.028455284552845527
+                },
+                {
+                  "threshold": 0.96,
+                  "accepted": 112,
+                  "errors": 1,
+                  "coverage": 0.001715686274509804,
+                  "disagreement": 0.008928571428571428
+                },
+                {
+                  "threshold": 0.97,
+                  "accepted": 62,
+                  "errors": 1,
+                  "coverage": 0.0009497549019607843,
+                  "disagreement": 0.016129032258064516
+                },
+                {
+                  "threshold": 0.98,
+                  "accepted": 25,
+                  "errors": 0,
+                  "coverage": 0.0003829656862745098,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.99,
+                  "accepted": 5,
+                  "errors": 0,
+                  "coverage": 7.659313725490196e-05,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.995,
+                  "accepted": 0,
+                  "errors": 0,
+                  "coverage": 0.0,
+                  "disagreement": null
+                },
+                {
+                  "threshold": 0.999,
+                  "accepted": 0,
+                  "errors": 0,
+                  "coverage": 0.0,
+                  "disagreement": null
+                }
+              ],
+              "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+              "metrics": {
+                "bce": 0.46543656003241446,
+                "brier": 0.15451855507952908,
+                "positive_rate": 0.3344362676143646,
+                "tokens": 65280
+              }
+            },
+            "confidence_selection": {
+              "dev": {
+                "bce": 0.47696172069100773,
+                "brier": 0.158539989659433,
+                "positive_rate": 0.34215685725212097,
+                "tokens": 32640
+              },
+              "epoch": 5,
+              "module_selection": {
+                "step": 1962,
+                "dev": {
+                  "k16": 0.17619499354623258,
+                  "v16": 0.21565840067341924,
+                  "k20": 0.13734803232364357,
+                  "v20": 0.3086457406170666,
+                  "k24": 0.19355420977808535,
+                  "v24": 0.11430998565629125,
+                  "ce": 5.720362374946183,
+                  "kd": 3.0314187299460174,
+                  "teacher_ce": 3.155542261337898,
+                  "top1_agreement": 0.3421568631966069,
+                  "kv": 0.19095189376578978,
+                  "selection_loss": 8.942732998657991,
+                  "targets": 32640
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk03-1m",
+      "cumulative_fresh_targets": 3000000,
+      "wall_seconds": 674.0191206870004,
+      "stages": [
+        {
+          "stage": "modules",
+          "returncode": 0,
+          "wall_seconds": 484.3062780620021
+        },
+        {
+          "stage": "confidence",
+          "returncode": 0,
+          "wall_seconds": 53.27600194400293
+        },
+        {
+          "stage": "calibrate",
+          "returncode": 0,
+          "wall_seconds": 23.85735826999735
+        },
+        {
+          "stage": "evaluate",
+          "returncode": 0,
+          "wall_seconds": 112.55474034499639
+        }
+      ],
+      "steps": 1961,
+      "selected_step": 1961,
+      "supervised_tokens": 1000000,
+      "chunk": {
+        "chunk_index": 2,
+        "start_effective_target": 2000000,
+        "end_effective_target_exclusive": 3000000,
+        "effective_targets": 1000000,
+        "windows": 3922,
+        "manifest_sha256": "47716da6c54649263a199d80c5f4e7c188f6ac070967018347d445fa05eb38f9"
+      },
+      "peak_allocated_mib": 1881.953125,
+      "static_test": {
+        "k16": 0.15486944210715592,
+        "v16": 0.17839025962166488,
+        "k20": 0.12171323306392878,
+        "v20": 0.26673534302972257,
+        "k24": 0.1786961918696761,
+        "v24": 0.06743692827876657,
+        "ce": 5.7475654612277065,
+        "kd": 2.90240421273983,
+        "teacher_ce": 3.2613998314256176,
+        "top1_agreement": 0.3475183827551447,
+        "kv": 0.16130689966181913,
+        "selection_loss": 8.811276573629355,
+        "targets": 32640
+      },
+      "confidence_test": {
+        "bce": 0.48374305449280086,
+        "brier": 0.1616223293101565,
+        "positive_rate": 0.3475183844566345,
+        "tokens": 32640,
+        "threshold": null,
+        "accepted": 0,
+        "coverage": 0.0,
+        "disagreement": null
+      },
+      "gate_enabled": false,
+      "calibration": {
+        "status": "NO_ELIGIBLE_THRESHOLD",
+        "threshold": null,
+        "selected": null,
+        "curve": [
+          {
+            "threshold": 0.5,
+            "accepted": 18586,
+            "errors": 5701,
+            "coverage": 0.2847120098039216,
+            "disagreement": 0.3067362530937265
+          },
+          {
+            "threshold": 0.6,
+            "accepted": 12810,
+            "errors": 3193,
+            "coverage": 0.19623161764705882,
+            "disagreement": 0.2492583918813427
+          },
+          {
+            "threshold": 0.7,
+            "accepted": 7909,
+            "errors": 1467,
+            "coverage": 0.12115502450980392,
+            "disagreement": 0.1854848906309268
+          },
+          {
+            "threshold": 0.8,
+            "accepted": 3865,
+            "errors": 514,
+            "coverage": 0.059206495098039214,
+            "disagreement": 0.13298835705045278
+          },
+          {
+            "threshold": 0.85,
+            "accepted": 2230,
+            "errors": 263,
+            "coverage": 0.03416053921568627,
+            "disagreement": 0.1179372197309417
+          },
+          {
+            "threshold": 0.9,
+            "accepted": 954,
+            "errors": 83,
+            "coverage": 0.014613970588235294,
+            "disagreement": 0.0870020964360587
+          },
+          {
+            "threshold": 0.92,
+            "accepted": 609,
+            "errors": 37,
+            "coverage": 0.009329044117647059,
+            "disagreement": 0.060755336617405585
+          },
+          {
+            "threshold": 0.94,
+            "accepted": 331,
+            "errors": 15,
+            "coverage": 0.00507046568627451,
+            "disagreement": 0.045317220543806644
+          },
+          {
+            "threshold": 0.96,
+            "accepted": 166,
+            "errors": 2,
+            "coverage": 0.002542892156862745,
+            "disagreement": 0.012048192771084338
+          },
+          {
+            "threshold": 0.97,
+            "accepted": 97,
+            "errors": 2,
+            "coverage": 0.001485906862745098,
+            "disagreement": 0.020618556701030927
+          },
+          {
+            "threshold": 0.98,
+            "accepted": 48,
+            "errors": 1,
+            "coverage": 0.0007352941176470588,
+            "disagreement": 0.020833333333333332
+          },
+          {
+            "threshold": 0.99,
+            "accepted": 11,
+            "errors": 0,
+            "coverage": 0.0001685049019607843,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.995,
+            "accepted": 1,
+            "errors": 0,
+            "coverage": 1.5318627450980392e-05,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.999,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "disagreement": null
+          }
+        ],
+        "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+        "metrics": {
+          "bce": 0.4792295877840005,
+          "brier": 0.15944445655997533,
+          "positive_rate": 0.3494025766849518,
+          "tokens": 65280
+        }
+      },
+      "contexts": {
+        "256": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.4088588555459864,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6730769230769231,
+              "top1_agreement": 0.453125,
+              "nll": 5.241197799595284,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.412195842083918,
+              "resume_mean_kl": 0.01779726153563388,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6730769230769231,
+              "top1_agreement": 0.4453125,
+              "nll": 5.243529370630313,
+              "teacher_nll": 3.0921165482011475
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.5178197932746116,
+              "resume_mean_kl": 0.5811250012193341,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6730769230769231,
+              "top1_agreement": 0.35546875,
+              "nll": 5.3584450464977635,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.541283167736765,
+              "resume_mean_kl": 0.7062629983508183,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6730769230769231,
+              "top1_agreement": 0.35546875,
+              "nll": 5.3804068682538855,
+              "teacher_nll": 3.0921165482011475
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 3.0921165482011475,
+              "teacher_nll": 3.0921165482011475
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 12.252997207014005,
+            "adaptive_ms": 12.491843054704077,
+            "paired_median_speedup": 0.987993030387436
+          }
+        },
+        "2048": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.8761914825299755,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6923076923076923,
+              "top1_agreement": 0.4375,
+              "nll": 5.4622138549348165,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.8782458695332025,
+              "resume_mean_kl": 0.010956730683877444,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6923076923076923,
+              "top1_agreement": 0.4375,
+              "nll": 5.462433759417763,
+              "teacher_nll": 2.458545371108926
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 3.04326699621015,
+              "resume_mean_kl": 0.8910694062942639,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6923076923076923,
+              "top1_agreement": 0.359375,
+              "nll": 5.6023987473745365,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 3.0568921410813346,
+              "resume_mean_kl": 0.9637368456072484,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6923076923076923,
+              "top1_agreement": 0.359375,
+              "nll": 5.619339331344236,
+              "teacher_nll": 2.458545371108926
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 2.458545371108926,
+              "teacher_nll": 2.458545371108926
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 12.202738703138039,
+            "adaptive_ms": 12.372635582039493,
+            "paired_median_speedup": 0.986078594318007
+          }
+        }
+      },
+      "runtime_validation": {
+        "status": "PASS",
+        "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+      },
+      "checkpoint_audit": {
+        "modules/modules.pt": {
+          "sha256": "93dbc7ba83bf1060f831fc22a67574411e7fda4adf608334f1e51c05e6d63519",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1961,
+            "dev": {
+              "k16": 0.15841104462742805,
+              "v16": 0.18004588247276843,
+              "k20": 0.12445728690363467,
+              "v20": 0.2692950109485537,
+              "k24": 0.18108244775794446,
+              "v24": 0.06666377541841939,
+              "ce": 5.499114188128242,
+              "kd": 2.8345875582639493,
+              "teacher_ce": 3.155542261337898,
+              "top1_agreement": 0.3579044122518241,
+              "kv": 0.1633259080214581,
+              "selection_loss": 8.49702765441365,
+              "targets": 32640
+            }
+          }
+        },
+        "modules/last_modules.pt": {
+          "sha256": "e5c99bb22aa04b398610d027dae428a8e796daf3d7b00ff42b33751b40c64695",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1961
+          }
+        },
+        "confidence/confidence.pt": {
+          "sha256": "6723b15d7cec3cc5c60b7ed4ff5fc65276e1758631a0c381906b225af520ce37",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "dev": {
+              "bce": 0.4880134951834585,
+              "brier": 0.1625948994401689,
+              "positive_rate": 0.3579044044017792,
+              "tokens": 32640
+            },
+            "epoch": 5,
+            "module_selection": {
+              "step": 1961,
+              "dev": {
+                "k16": 0.15841104462742805,
+                "v16": 0.18004588247276843,
+                "k20": 0.12445728690363467,
+                "v20": 0.2692950109485537,
+                "k24": 0.18108244775794446,
+                "v24": 0.06666377541841939,
+                "ce": 5.499114188128242,
+                "kd": 2.8345875582639493,
+                "teacher_ce": 3.155542261337898,
+                "top1_agreement": 0.3579044122518241,
+                "kv": 0.1633259080214581,
+                "selection_loss": 8.49702765441365,
+                "targets": 32640
+              }
+            }
+          }
+        },
+        "calibrate/calibrated.pt": {
+          "sha256": "214f3467f5b5fed90e2e6e7ac2aab897cb3be242fe3fcc062775795257d45957",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "calibration": {
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "threshold": null,
+              "selected": null,
+              "curve": [
+                {
+                  "threshold": 0.5,
+                  "accepted": 18586,
+                  "errors": 5701,
+                  "coverage": 0.2847120098039216,
+                  "disagreement": 0.3067362530937265
+                },
+                {
+                  "threshold": 0.6,
+                  "accepted": 12810,
+                  "errors": 3193,
+                  "coverage": 0.19623161764705882,
+                  "disagreement": 0.2492583918813427
+                },
+                {
+                  "threshold": 0.7,
+                  "accepted": 7909,
+                  "errors": 1467,
+                  "coverage": 0.12115502450980392,
+                  "disagreement": 0.1854848906309268
+                },
+                {
+                  "threshold": 0.8,
+                  "accepted": 3865,
+                  "errors": 514,
+                  "coverage": 0.059206495098039214,
+                  "disagreement": 0.13298835705045278
+                },
+                {
+                  "threshold": 0.85,
+                  "accepted": 2230,
+                  "errors": 263,
+                  "coverage": 0.03416053921568627,
+                  "disagreement": 0.1179372197309417
+                },
+                {
+                  "threshold": 0.9,
+                  "accepted": 954,
+                  "errors": 83,
+                  "coverage": 0.014613970588235294,
+                  "disagreement": 0.0870020964360587
+                },
+                {
+                  "threshold": 0.92,
+                  "accepted": 609,
+                  "errors": 37,
+                  "coverage": 0.009329044117647059,
+                  "disagreement": 0.060755336617405585
+                },
+                {
+                  "threshold": 0.94,
+                  "accepted": 331,
+                  "errors": 15,
+                  "coverage": 0.00507046568627451,
+                  "disagreement": 0.045317220543806644
+                },
+                {
+                  "threshold": 0.96,
+                  "accepted": 166,
+                  "errors": 2,
+                  "coverage": 0.002542892156862745,
+                  "disagreement": 0.012048192771084338
+                },
+                {
+                  "threshold": 0.97,
+                  "accepted": 97,
+                  "errors": 2,
+                  "coverage": 0.001485906862745098,
+                  "disagreement": 0.020618556701030927
+                },
+                {
+                  "threshold": 0.98,
+                  "accepted": 48,
+                  "errors": 1,
+                  "coverage": 0.0007352941176470588,
+                  "disagreement": 0.020833333333333332
+                },
+                {
+                  "threshold": 0.99,
+                  "accepted": 11,
+                  "errors": 0,
+                  "coverage": 0.0001685049019607843,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.995,
+                  "accepted": 1,
+                  "errors": 0,
+                  "coverage": 1.5318627450980392e-05,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.999,
+                  "accepted": 0,
+                  "errors": 0,
+                  "coverage": 0.0,
+                  "disagreement": null
+                }
+              ],
+              "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+              "metrics": {
+                "bce": 0.4792295877840005,
+                "brier": 0.15944445655997533,
+                "positive_rate": 0.3494025766849518,
+                "tokens": 65280
+              }
+            },
+            "confidence_selection": {
+              "dev": {
+                "bce": 0.4880134951834585,
+                "brier": 0.1625948994401689,
+                "positive_rate": 0.3579044044017792,
+                "tokens": 32640
+              },
+              "epoch": 5,
+              "module_selection": {
+                "step": 1961,
+                "dev": {
+                  "k16": 0.15841104462742805,
+                  "v16": 0.18004588247276843,
+                  "k20": 0.12445728690363467,
+                  "v20": 0.2692950109485537,
+                  "k24": 0.18108244775794446,
+                  "v24": 0.06666377541841939,
+                  "ce": 5.499114188128242,
+                  "kd": 2.8345875582639493,
+                  "teacher_ce": 3.155542261337898,
+                  "top1_agreement": 0.3579044122518241,
+                  "kv": 0.1633259080214581,
+                  "selection_loss": 8.49702765441365,
+                  "targets": 32640
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk04-1m",
+      "cumulative_fresh_targets": 4000000,
+      "wall_seconds": 676.7983778229973,
+      "stages": [
+        {
+          "stage": "modules",
+          "returncode": 0,
+          "wall_seconds": 490.33041336300084
+        },
+        {
+          "stage": "confidence",
+          "returncode": 0,
+          "wall_seconds": 53.445946266001556
+        },
+        {
+          "stage": "calibrate",
+          "returncode": 0,
+          "wall_seconds": 23.854959632000828
+        },
+        {
+          "stage": "evaluate",
+          "returncode": 0,
+          "wall_seconds": 109.14494700400246
+        }
+      ],
+      "steps": 1962,
+      "selected_step": 1962,
+      "supervised_tokens": 1000000,
+      "chunk": {
+        "chunk_index": 3,
+        "start_effective_target": 3000000,
+        "end_effective_target_exclusive": 4000000,
+        "effective_targets": 1000000,
+        "windows": 3923,
+        "manifest_sha256": "47716da6c54649263a199d80c5f4e7c188f6ac070967018347d445fa05eb38f9"
+      },
+      "peak_allocated_mib": 1881.953125,
+      "static_test": {
+        "k16": 0.1446408648043871,
+        "v16": 0.1559564578346908,
+        "k20": 0.11447415826842189,
+        "v20": 0.2436968768015504,
+        "k24": 0.17158327414654195,
+        "v24": 0.048542385920882225,
+        "ce": 5.600655157024077,
+        "kd": 2.767489947269068,
+        "teacher_ce": 3.2613998314256176,
+        "top1_agreement": 0.3598651965345055,
+        "kv": 0.14648233629607907,
+        "selection_loss": 8.514627440589225,
+        "targets": 32640
+      },
+      "confidence_test": {
+        "bce": 0.4916990359624227,
+        "brier": 0.1646900842415818,
+        "positive_rate": 0.3598651885986328,
+        "tokens": 32640,
+        "threshold": null,
+        "accepted": 0,
+        "coverage": 0.0,
+        "disagreement": null
+      },
+      "gate_enabled": false,
+      "calibration": {
+        "status": "NO_ELIGIBLE_THRESHOLD",
+        "threshold": null,
+        "selected": null,
+        "curve": [
+          {
+            "threshold": 0.5,
+            "accepted": 19752,
+            "errors": 6129,
+            "coverage": 0.3025735294117647,
+            "disagreement": 0.31029769137302554
+          },
+          {
+            "threshold": 0.6,
+            "accepted": 13680,
+            "errors": 3450,
+            "coverage": 0.20955882352941177,
+            "disagreement": 0.25219298245614036
+          },
+          {
+            "threshold": 0.7,
+            "accepted": 8454,
+            "errors": 1617,
+            "coverage": 0.12950367647058825,
+            "disagreement": 0.19127040454222852
+          },
+          {
+            "threshold": 0.8,
+            "accepted": 4074,
+            "errors": 558,
+            "coverage": 0.06240808823529412,
+            "disagreement": 0.13696612665684832
+          },
+          {
+            "threshold": 0.85,
+            "accepted": 2389,
+            "errors": 296,
+            "coverage": 0.03659620098039216,
+            "disagreement": 0.12390121389702805
+          },
+          {
+            "threshold": 0.9,
+            "accepted": 1050,
+            "errors": 105,
+            "coverage": 0.01608455882352941,
+            "disagreement": 0.1
+          },
+          {
+            "threshold": 0.92,
+            "accepted": 656,
+            "errors": 45,
+            "coverage": 0.010049019607843138,
+            "disagreement": 0.06859756097560976
+          },
+          {
+            "threshold": 0.94,
+            "accepted": 363,
+            "errors": 19,
+            "coverage": 0.0055606617647058825,
+            "disagreement": 0.05234159779614325
+          },
+          {
+            "threshold": 0.96,
+            "accepted": 173,
+            "errors": 5,
+            "coverage": 0.002650122549019608,
+            "disagreement": 0.028901734104046242
+          },
+          {
+            "threshold": 0.97,
+            "accepted": 106,
+            "errors": 2,
+            "coverage": 0.0016237745098039217,
+            "disagreement": 0.018867924528301886
+          },
+          {
+            "threshold": 0.98,
+            "accepted": 53,
+            "errors": 2,
+            "coverage": 0.0008118872549019608,
+            "disagreement": 0.03773584905660377
+          },
+          {
+            "threshold": 0.99,
+            "accepted": 9,
+            "errors": 0,
+            "coverage": 0.00013786764705882353,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.995,
+            "accepted": 1,
+            "errors": 0,
+            "coverage": 1.5318627450980392e-05,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.999,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "disagreement": null
+          }
+        ],
+        "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+        "metrics": {
+          "bce": 0.48864097151101804,
+          "brier": 0.1630820777349258,
+          "positive_rate": 0.3604932725429535,
+          "tokens": 65280
+        }
+      },
+      "contexts": {
+        "256": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.288000060914783,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.46484375,
+              "nll": 5.110710030971404,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.290776155941842,
+              "resume_mean_kl": 0.014805840144314669,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.453125,
+              "nll": 5.110585346130847,
+              "teacher_nll": 3.0921165482011475
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.396960998643408,
+              "resume_mean_kl": 0.5811250012193341,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.3671875,
+              "nll": 5.227957277873884,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.4178681547673477,
+              "resume_mean_kl": 0.6926298338803463,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.3671875,
+              "nll": 5.247373754529235,
+              "teacher_nll": 3.0921165482011475
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 3.0921165482011475,
+              "teacher_nll": 3.0921165482011475
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 11.841601847635275,
+            "adaptive_ms": 11.896119914069914,
+            "paired_median_speedup": 0.9898304980577372
+          }
+        },
+        "2048": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.7584956087666797,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6682692307692308,
+              "top1_agreement": 0.45703125,
+              "nll": 5.329451592613623,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.7603641661642655,
+              "resume_mean_kl": 0.00996563945379118,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6682692307692308,
+              "top1_agreement": 0.45703125,
+              "nll": 5.330393239768455,
+              "teacher_nll": 2.458545371108926
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.925571122446854,
+              "resume_mean_kl": 0.8910694062942639,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6682692307692308,
+              "top1_agreement": 0.37890625,
+              "nll": 5.469636485053343,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.937798584236589,
+              "resume_mean_kl": 0.9562825358395154,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6682692307692308,
+              "top1_agreement": 0.37890625,
+              "nll": 5.485044603672577,
+              "teacher_nll": 2.458545371108926
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 2.458545371108926,
+              "teacher_nll": 2.458545371108926
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 11.729814460949228,
+            "adaptive_ms": 11.881875449233803,
+            "paired_median_speedup": 0.9878016997201526
+          }
+        }
+      },
+      "runtime_validation": {
+        "status": "PASS",
+        "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+      },
+      "checkpoint_audit": {
+        "modules/modules.pt": {
+          "sha256": "823884415b45e6d61fb749b175f217e1717588a16a9f4a78591cbbc226900124",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1962,
+            "dev": {
+              "k16": 0.14802046841941774,
+              "v16": 0.15777214081026614,
+              "k20": 0.11722238513175398,
+              "v20": 0.2464935751631856,
+              "k24": 0.17409884184598923,
+              "v24": 0.04794971935916692,
+              "ce": 5.351042977048486,
+              "kd": 2.698946512567208,
+              "teacher_ce": 3.155542261337898,
+              "top1_agreement": 0.3669424023680097,
+              "kv": 0.14859285512162992,
+              "selection_loss": 8.198582344737323,
+              "targets": 32640
+            }
+          }
+        },
+        "modules/last_modules.pt": {
+          "sha256": "70327b2c873d005dfc9064fd77ce2dad70c9fa3eb2bf6b4eff91f70326475a26",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1962
+          }
+        },
+        "confidence/confidence.pt": {
+          "sha256": "e4b643141c01e1d0ddc0c55cb92d6bdc5c0cc5d2677929bf49bbdd965f7b5283",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "dev": {
+              "bce": 0.49557314199559827,
+              "brier": 0.1653788912345267,
+              "positive_rate": 0.3669424057006836,
+              "tokens": 32640
+            },
+            "epoch": 5,
+            "module_selection": {
+              "step": 1962,
+              "dev": {
+                "k16": 0.14802046841941774,
+                "v16": 0.15777214081026614,
+                "k20": 0.11722238513175398,
+                "v20": 0.2464935751631856,
+                "k24": 0.17409884184598923,
+                "v24": 0.04794971935916692,
+                "ce": 5.351042977048486,
+                "kd": 2.698946512567208,
+                "teacher_ce": 3.155542261337898,
+                "top1_agreement": 0.3669424023680097,
+                "kv": 0.14859285512162992,
+                "selection_loss": 8.198582344737323,
+                "targets": 32640
+              }
+            }
+          }
+        },
+        "calibrate/calibrated.pt": {
+          "sha256": "a181dc9f31845ffafa754c7ca7263bb7324ed26162318486a0efec11f9316176",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "calibration": {
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "threshold": null,
+              "selected": null,
+              "curve": [
+                {
+                  "threshold": 0.5,
+                  "accepted": 19752,
+                  "errors": 6129,
+                  "coverage": 0.3025735294117647,
+                  "disagreement": 0.31029769137302554
+                },
+                {
+                  "threshold": 0.6,
+                  "accepted": 13680,
+                  "errors": 3450,
+                  "coverage": 0.20955882352941177,
+                  "disagreement": 0.25219298245614036
+                },
+                {
+                  "threshold": 0.7,
+                  "accepted": 8454,
+                  "errors": 1617,
+                  "coverage": 0.12950367647058825,
+                  "disagreement": 0.19127040454222852
+                },
+                {
+                  "threshold": 0.8,
+                  "accepted": 4074,
+                  "errors": 558,
+                  "coverage": 0.06240808823529412,
+                  "disagreement": 0.13696612665684832
+                },
+                {
+                  "threshold": 0.85,
+                  "accepted": 2389,
+                  "errors": 296,
+                  "coverage": 0.03659620098039216,
+                  "disagreement": 0.12390121389702805
+                },
+                {
+                  "threshold": 0.9,
+                  "accepted": 1050,
+                  "errors": 105,
+                  "coverage": 0.01608455882352941,
+                  "disagreement": 0.1
+                },
+                {
+                  "threshold": 0.92,
+                  "accepted": 656,
+                  "errors": 45,
+                  "coverage": 0.010049019607843138,
+                  "disagreement": 0.06859756097560976
+                },
+                {
+                  "threshold": 0.94,
+                  "accepted": 363,
+                  "errors": 19,
+                  "coverage": 0.0055606617647058825,
+                  "disagreement": 0.05234159779614325
+                },
+                {
+                  "threshold": 0.96,
+                  "accepted": 173,
+                  "errors": 5,
+                  "coverage": 0.002650122549019608,
+                  "disagreement": 0.028901734104046242
+                },
+                {
+                  "threshold": 0.97,
+                  "accepted": 106,
+                  "errors": 2,
+                  "coverage": 0.0016237745098039217,
+                  "disagreement": 0.018867924528301886
+                },
+                {
+                  "threshold": 0.98,
+                  "accepted": 53,
+                  "errors": 2,
+                  "coverage": 0.0008118872549019608,
+                  "disagreement": 0.03773584905660377
+                },
+                {
+                  "threshold": 0.99,
+                  "accepted": 9,
+                  "errors": 0,
+                  "coverage": 0.00013786764705882353,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.995,
+                  "accepted": 1,
+                  "errors": 0,
+                  "coverage": 1.5318627450980392e-05,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.999,
+                  "accepted": 0,
+                  "errors": 0,
+                  "coverage": 0.0,
+                  "disagreement": null
+                }
+              ],
+              "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+              "metrics": {
+                "bce": 0.48864097151101804,
+                "brier": 0.1630820777349258,
+                "positive_rate": 0.3604932725429535,
+                "tokens": 65280
+              }
+            },
+            "confidence_selection": {
+              "dev": {
+                "bce": 0.49557314199559827,
+                "brier": 0.1653788912345267,
+                "positive_rate": 0.3669424057006836,
+                "tokens": 32640
+              },
+              "epoch": 5,
+              "module_selection": {
+                "step": 1962,
+                "dev": {
+                  "k16": 0.14802046841941774,
+                  "v16": 0.15777214081026614,
+                  "k20": 0.11722238513175398,
+                  "v20": 0.2464935751631856,
+                  "k24": 0.17409884184598923,
+                  "v24": 0.04794971935916692,
+                  "ce": 5.351042977048486,
+                  "kd": 2.698946512567208,
+                  "teacher_ce": 3.155542261337898,
+                  "top1_agreement": 0.3669424023680097,
+                  "kv": 0.14859285512162992,
+                  "selection_loss": 8.198582344737323,
+                  "targets": 32640
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk05-1m",
+      "cumulative_fresh_targets": 5000000,
+      "wall_seconds": 676.1394127370004,
+      "stages": [
+        {
+          "stage": "modules",
+          "returncode": 0,
+          "wall_seconds": 482.98481403599726
+        },
+        {
+          "stage": "confidence",
+          "returncode": 0,
+          "wall_seconds": 54.897958026995184
+        },
+        {
+          "stage": "calibrate",
+          "returncode": 0,
+          "wall_seconds": 24.398191175001557
+        },
+        {
+          "stage": "evaluate",
+          "returncode": 0,
+          "wall_seconds": 113.83589523300179
+        }
+      ],
+      "steps": 1961,
+      "selected_step": 1961,
+      "supervised_tokens": 1000000,
+      "chunk": {
+        "chunk_index": 4,
+        "start_effective_target": 4000000,
+        "end_effective_target_exclusive": 5000000,
+        "effective_targets": 1000000,
+        "windows": 3922,
+        "manifest_sha256": "47716da6c54649263a199d80c5f4e7c188f6ac070967018347d445fa05eb38f9"
+      },
+      "peak_allocated_mib": 1881.953125,
+      "static_test": {
+        "k16": 0.1380271571688354,
+        "v16": 0.14107097522355616,
+        "k20": 0.10998226783704013,
+        "v20": 0.2277374961413443,
+        "k24": 0.16683233715593815,
+        "v24": 0.04119459190405905,
+        "ce": 5.489520878059899,
+        "kd": 2.662513055995691,
+        "teacher_ce": 3.2613998314256176,
+        "top1_agreement": 0.36988357886553325,
+        "kv": 0.13747413757179552,
+        "selection_loss": 8.289508071627385,
+        "targets": 32640
+      },
+      "confidence_test": {
+        "bce": 0.49670923574298037,
+        "brier": 0.16667209929890486,
+        "positive_rate": 0.36988356709480286,
+        "tokens": 32640,
+        "threshold": null,
+        "accepted": 0,
+        "coverage": 0.0,
+        "disagreement": null
+      },
+      "gate_enabled": false,
+      "calibration": {
+        "status": "NO_ELIGIBLE_THRESHOLD",
+        "threshold": null,
+        "selected": null,
+        "curve": [
+          {
+            "threshold": 0.5,
+            "accepted": 20411,
+            "errors": 6326,
+            "coverage": 0.3126685049019608,
+            "disagreement": 0.3099309196021753
+          },
+          {
+            "threshold": 0.6,
+            "accepted": 14168,
+            "errors": 3563,
+            "coverage": 0.2170343137254902,
+            "disagreement": 0.25148221343873517
+          },
+          {
+            "threshold": 0.7,
+            "accepted": 8755,
+            "errors": 1664,
+            "coverage": 0.13411458333333334,
+            "disagreement": 0.19006282124500284
+          },
+          {
+            "threshold": 0.8,
+            "accepted": 4236,
+            "errors": 581,
+            "coverage": 0.06488970588235295,
+            "disagreement": 0.13715769593956562
+          },
+          {
+            "threshold": 0.85,
+            "accepted": 2488,
+            "errors": 316,
+            "coverage": 0.03811274509803922,
+            "disagreement": 0.1270096463022508
+          },
+          {
+            "threshold": 0.9,
+            "accepted": 1098,
+            "errors": 113,
+            "coverage": 0.01681985294117647,
+            "disagreement": 0.1029143897996357
+          },
+          {
+            "threshold": 0.92,
+            "accepted": 693,
+            "errors": 56,
+            "coverage": 0.010615808823529412,
+            "disagreement": 0.08080808080808081
+          },
+          {
+            "threshold": 0.94,
+            "accepted": 391,
+            "errors": 21,
+            "coverage": 0.005989583333333334,
+            "disagreement": 0.05370843989769821
+          },
+          {
+            "threshold": 0.96,
+            "accepted": 196,
+            "errors": 9,
+            "coverage": 0.003002450980392157,
+            "disagreement": 0.04591836734693878
+          },
+          {
+            "threshold": 0.97,
+            "accepted": 120,
+            "errors": 3,
+            "coverage": 0.001838235294117647,
+            "disagreement": 0.025
+          },
+          {
+            "threshold": 0.98,
+            "accepted": 60,
+            "errors": 2,
+            "coverage": 0.0009191176470588235,
+            "disagreement": 0.03333333333333333
+          },
+          {
+            "threshold": 0.99,
+            "accepted": 10,
+            "errors": 0,
+            "coverage": 0.00015318627450980392,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.995,
+            "accepted": 1,
+            "errors": 0,
+            "coverage": 1.5318627450980392e-05,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.999,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "disagreement": null
+          }
+        ],
+        "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+        "metrics": {
+          "bce": 0.4945061068908841,
+          "brier": 0.16525228737240039,
+          "positive_rate": 0.36864277720451355,
+          "tokens": 65280
+        }
+      },
+      "contexts": {
+        "256": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.2040495404507965,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6490384615384616,
+              "top1_agreement": 0.47265625,
+              "nll": 5.022732917505891,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.206621796464333,
+              "resume_mean_kl": 0.013718698738860743,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6490384615384616,
+              "top1_agreement": 0.46484375,
+              "nll": 5.021965422453832,
+              "teacher_nll": 3.0921165482011475
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.3130104781794216,
+              "resume_mean_kl": 0.5811250012193341,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6490384615384616,
+              "top1_agreement": 0.375,
+              "nll": 5.139980164408371,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.332486885094113,
+              "resume_mean_kl": 0.6849991714310212,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6490384615384616,
+              "top1_agreement": 0.37109375,
+              "nll": 5.156376469322822,
+              "teacher_nll": 3.0921165482011475
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 3.0921165482011475,
+              "teacher_nll": 3.0921165482011475
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 12.348238070302386,
+            "adaptive_ms": 12.547617941379485,
+            "paired_median_speedup": 0.9863437678642353
+          }
+        },
+        "2048": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.671127715249895,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.46484375,
+              "nll": 5.230991041087691,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.672732207514997,
+              "resume_mean_kl": 0.008557292080543752,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.46484375,
+              "nll": 5.232189122601994,
+              "teacher_nll": 2.458545371108926
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.8382032289300696,
+              "resume_mean_kl": 0.8910694062942639,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.38671875,
+              "nll": 5.371175933527411,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.849974237396964,
+              "resume_mean_kl": 0.9538481181177,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.38671875,
+              "nll": 5.385651671036612,
+              "teacher_nll": 2.458545371108926
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 2.458545371108926,
+              "teacher_nll": 2.458545371108926
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 12.298475640591278,
+            "adaptive_ms": 12.424457996075944,
+            "paired_median_speedup": 0.9899413206278034
+          }
+        }
+      },
+      "runtime_validation": {
+        "status": "PASS",
+        "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+      },
+      "checkpoint_audit": {
+        "modules/modules.pt": {
+          "sha256": "b9326a00cf31da1311074583cda3844814463108d4009afaefda4b55457eb70e",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1961,
+            "dev": {
+              "k16": 0.14118642592802644,
+              "v16": 0.14278412540443242,
+              "k20": 0.11267540999688208,
+              "v20": 0.23051713546738029,
+              "k24": 0.16934159607626498,
+              "v24": 0.040797335910610855,
+              "ce": 5.237675054721972,
+              "kd": 2.592730572304743,
+              "teacher_ce": 3.155542261337898,
+              "top1_agreement": 0.3751838239895947,
+              "kv": 0.1395503381305995,
+              "selection_loss": 7.9699559651573155,
+              "targets": 32640
+            }
+          }
+        },
+        "modules/last_modules.pt": {
+          "sha256": "a64d5a3be3f612fe98c4cc983ab38a614c16d7e3bf52652e819185d38dd6851e",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1961
+          }
+        },
+        "confidence/confidence.pt": {
+          "sha256": "e0fbd095178675749a2f15544afde379897ad150f6d61093f93cdee5a092cb81",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "dev": {
+              "bce": 0.5019780864902571,
+              "brier": 0.16783913826127103,
+              "positive_rate": 0.3751838207244873,
+              "tokens": 32640
+            },
+            "epoch": 5,
+            "module_selection": {
+              "step": 1961,
+              "dev": {
+                "k16": 0.14118642592802644,
+                "v16": 0.14278412540443242,
+                "k20": 0.11267540999688208,
+                "v20": 0.23051713546738029,
+                "k24": 0.16934159607626498,
+                "v24": 0.040797335910610855,
+                "ce": 5.237675054721972,
+                "kd": 2.592730572304743,
+                "teacher_ce": 3.155542261337898,
+                "top1_agreement": 0.3751838239895947,
+                "kv": 0.1395503381305995,
+                "selection_loss": 7.9699559651573155,
+                "targets": 32640
+              }
+            }
+          }
+        },
+        "calibrate/calibrated.pt": {
+          "sha256": "3632269bf1a711602df47867842d1fcd8a38e06d298226fe91559285775db06e",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "calibration": {
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "threshold": null,
+              "selected": null,
+              "curve": [
+                {
+                  "threshold": 0.5,
+                  "accepted": 20411,
+                  "errors": 6326,
+                  "coverage": 0.3126685049019608,
+                  "disagreement": 0.3099309196021753
+                },
+                {
+                  "threshold": 0.6,
+                  "accepted": 14168,
+                  "errors": 3563,
+                  "coverage": 0.2170343137254902,
+                  "disagreement": 0.25148221343873517
+                },
+                {
+                  "threshold": 0.7,
+                  "accepted": 8755,
+                  "errors": 1664,
+                  "coverage": 0.13411458333333334,
+                  "disagreement": 0.19006282124500284
+                },
+                {
+                  "threshold": 0.8,
+                  "accepted": 4236,
+                  "errors": 581,
+                  "coverage": 0.06488970588235295,
+                  "disagreement": 0.13715769593956562
+                },
+                {
+                  "threshold": 0.85,
+                  "accepted": 2488,
+                  "errors": 316,
+                  "coverage": 0.03811274509803922,
+                  "disagreement": 0.1270096463022508
+                },
+                {
+                  "threshold": 0.9,
+                  "accepted": 1098,
+                  "errors": 113,
+                  "coverage": 0.01681985294117647,
+                  "disagreement": 0.1029143897996357
+                },
+                {
+                  "threshold": 0.92,
+                  "accepted": 693,
+                  "errors": 56,
+                  "coverage": 0.010615808823529412,
+                  "disagreement": 0.08080808080808081
+                },
+                {
+                  "threshold": 0.94,
+                  "accepted": 391,
+                  "errors": 21,
+                  "coverage": 0.005989583333333334,
+                  "disagreement": 0.05370843989769821
+                },
+                {
+                  "threshold": 0.96,
+                  "accepted": 196,
+                  "errors": 9,
+                  "coverage": 0.003002450980392157,
+                  "disagreement": 0.04591836734693878
+                },
+                {
+                  "threshold": 0.97,
+                  "accepted": 120,
+                  "errors": 3,
+                  "coverage": 0.001838235294117647,
+                  "disagreement": 0.025
+                },
+                {
+                  "threshold": 0.98,
+                  "accepted": 60,
+                  "errors": 2,
+                  "coverage": 0.0009191176470588235,
+                  "disagreement": 0.03333333333333333
+                },
+                {
+                  "threshold": 0.99,
+                  "accepted": 10,
+                  "errors": 0,
+                  "coverage": 0.00015318627450980392,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.995,
+                  "accepted": 1,
+                  "errors": 0,
+                  "coverage": 1.5318627450980392e-05,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.999,
+                  "accepted": 0,
+                  "errors": 0,
+                  "coverage": 0.0,
+                  "disagreement": null
+                }
+              ],
+              "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+              "metrics": {
+                "bce": 0.4945061068908841,
+                "brier": 0.16525228737240039,
+                "positive_rate": 0.36864277720451355,
+                "tokens": 65280
+              }
+            },
+            "confidence_selection": {
+              "dev": {
+                "bce": 0.5019780864902571,
+                "brier": 0.16783913826127103,
+                "positive_rate": 0.3751838207244873,
+                "tokens": 32640
+              },
+              "epoch": 5,
+              "module_selection": {
+                "step": 1961,
+                "dev": {
+                  "k16": 0.14118642592802644,
+                  "v16": 0.14278412540443242,
+                  "k20": 0.11267540999688208,
+                  "v20": 0.23051713546738029,
+                  "k24": 0.16934159607626498,
+                  "v24": 0.040797335910610855,
+                  "ce": 5.237675054721972,
+                  "kd": 2.592730572304743,
+                  "teacher_ce": 3.155542261337898,
+                  "top1_agreement": 0.3751838239895947,
+                  "kv": 0.1395503381305995,
+                  "selection_loss": 7.9699559651573155,
+                  "targets": 32640
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk06-1m",
+      "cumulative_fresh_targets": 6000000,
+      "wall_seconds": 687.4821130960045,
+      "stages": [
+        {
+          "stage": "modules",
+          "returncode": 0,
+          "wall_seconds": 494.95467800400365
+        },
+        {
+          "stage": "confidence",
+          "returncode": 0,
+          "wall_seconds": 54.857767463996424
+        },
+        {
+          "stage": "calibrate",
+          "returncode": 0,
+          "wall_seconds": 24.346337060000224
+        },
+        {
+          "stage": "evaluate",
+          "returncode": 0,
+          "wall_seconds": 113.29903430899867
+        }
+      ],
+      "steps": 1962,
+      "selected_step": 1962,
+      "supervised_tokens": 1000000,
+      "chunk": {
+        "chunk_index": 5,
+        "start_effective_target": 5000000,
+        "end_effective_target_exclusive": 6000000,
+        "effective_targets": 1000000,
+        "windows": 3923,
+        "manifest_sha256": "47716da6c54649263a199d80c5f4e7c188f6ac070967018347d445fa05eb38f9"
+      },
+      "peak_allocated_mib": 1881.953125,
+      "static_test": {
+        "k16": 0.13358346442691982,
+        "v16": 0.1308564506471157,
+        "k20": 0.10718825028743595,
+        "v20": 0.21539189061149955,
+        "k24": 0.16402476676739752,
+        "v24": 0.03729926352389157,
+        "ce": 5.398658563671451,
+        "kd": 2.5792072896352587,
+        "teacher_ce": 3.2613998314256176,
+        "top1_agreement": 0.37328431419526026,
+        "kv": 0.13139068104404336,
+        "selection_loss": 8.109256534350754,
+        "targets": 32640
+      },
+      "confidence_test": {
+        "bce": 0.49979837992612053,
+        "brier": 0.16775368686381611,
+        "positive_rate": 0.37328431010246277,
+        "tokens": 32640,
+        "threshold": null,
+        "accepted": 0,
+        "coverage": 0.0,
+        "disagreement": null
+      },
+      "gate_enabled": false,
+      "calibration": {
+        "status": "NO_ELIGIBLE_THRESHOLD",
+        "threshold": null,
+        "selected": null,
+        "curve": [
+          {
+            "threshold": 0.5,
+            "accepted": 20704,
+            "errors": 6404,
+            "coverage": 0.317156862745098,
+            "disagreement": 0.30931221020092736
+          },
+          {
+            "threshold": 0.6,
+            "accepted": 14424,
+            "errors": 3624,
+            "coverage": 0.22095588235294117,
+            "disagreement": 0.2512479201331115
+          },
+          {
+            "threshold": 0.7,
+            "accepted": 8875,
+            "errors": 1686,
+            "coverage": 0.13595281862745098,
+            "disagreement": 0.1899718309859155
+          },
+          {
+            "threshold": 0.8,
+            "accepted": 4306,
+            "errors": 591,
+            "coverage": 0.06596200980392157,
+            "disagreement": 0.13725034835113795
+          },
+          {
+            "threshold": 0.85,
+            "accepted": 2544,
+            "errors": 323,
+            "coverage": 0.03897058823529412,
+            "disagreement": 0.12696540880503146
+          },
+          {
+            "threshold": 0.9,
+            "accepted": 1152,
+            "errors": 128,
+            "coverage": 0.01764705882352941,
+            "disagreement": 0.1111111111111111
+          },
+          {
+            "threshold": 0.92,
+            "accepted": 719,
+            "errors": 58,
+            "coverage": 0.011014093137254903,
+            "disagreement": 0.08066759388038942
+          },
+          {
+            "threshold": 0.94,
+            "accepted": 417,
+            "errors": 28,
+            "coverage": 0.006387867647058823,
+            "disagreement": 0.0671462829736211
+          },
+          {
+            "threshold": 0.96,
+            "accepted": 205,
+            "errors": 9,
+            "coverage": 0.0031403186274509805,
+            "disagreement": 0.04390243902439024
+          },
+          {
+            "threshold": 0.97,
+            "accepted": 127,
+            "errors": 3,
+            "coverage": 0.0019454656862745098,
+            "disagreement": 0.023622047244094488
+          },
+          {
+            "threshold": 0.98,
+            "accepted": 62,
+            "errors": 2,
+            "coverage": 0.0009497549019607843,
+            "disagreement": 0.03225806451612903
+          },
+          {
+            "threshold": 0.99,
+            "accepted": 10,
+            "errors": 0,
+            "coverage": 0.00015318627450980392,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.995,
+            "accepted": 1,
+            "errors": 0,
+            "coverage": 1.5318627450980392e-05,
+            "disagreement": 0.0
+          },
+          {
+            "threshold": 0.999,
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0.0,
+            "disagreement": null
+          }
+        ],
+        "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+        "metrics": {
+          "bce": 0.49990114113863776,
+          "brier": 0.16720769147505646,
+          "positive_rate": 0.374111533164978,
+          "tokens": 65280
+        }
+      },
+      "contexts": {
+        "256": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.1346600556571502,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6346153846153846,
+              "top1_agreement": 0.484375,
+              "nll": 4.949699431851968,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.1370594697938827,
+              "resume_mean_kl": 0.012796875395906682,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6346153846153846,
+              "top1_agreement": 0.4765625,
+              "nll": 4.949223982880994,
+              "teacher_nll": 3.0921165482011475
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.2436209933857754,
+              "resume_mean_kl": 0.5811250012193341,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6346153846153846,
+              "top1_agreement": 0.38671875,
+              "nll": 5.066946678754448,
+              "teacher_nll": 3.0921165482011475
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.2615245378965483,
+              "resume_mean_kl": 0.6766105719434563,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6346153846153846,
+              "top1_agreement": 0.37890625,
+              "nll": 5.082304688044587,
+              "teacher_nll": 3.0921165482011475
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 3.0921165482011475,
+              "teacher_nll": 3.0921165482011475
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 12.185976953134059,
+            "adaptive_ms": 12.335294828119459,
+            "paired_median_speedup": 0.9912448117930585
+          }
+        },
+        "2048": {
+          "state_cases": {
+            "oracle_kv_updated_gdn": {
+              "mean_kl": 2.60140432784101,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.46484375,
+              "nll": 5.150722053938807,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_updated_gdn": {
+              "mean_kl": 2.6028574127265074,
+              "resume_mean_kl": 0.007749786055986381,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.46484375,
+              "nll": 5.152152260405273,
+              "teacher_nll": 2.458545371108926
+            },
+            "oracle_kv_held_gdn": {
+              "mean_kl": 2.7684798415211844,
+              "resume_mean_kl": 0.8910694062942639,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.38671875,
+              "nll": 5.290906946378527,
+              "teacher_nll": 2.458545371108926
+            },
+            "projected_kv_held_gdn": {
+              "mean_kl": 2.779927195129858,
+              "resume_mean_kl": 0.9521219588738555,
+              "exit_rate": 0.8125,
+              "exit_disagreement": 0.6586538461538461,
+              "top1_agreement": 0.38671875,
+              "nll": 5.304722598317312,
+              "teacher_nll": 2.458545371108926
+            },
+            "adaptive": {
+              "mean_kl": 0.0,
+              "resume_mean_kl": 0.0,
+              "exit_rate": 0.0,
+              "exit_disagreement": null,
+              "top1_agreement": 1.0,
+              "nll": 2.458545371108926,
+              "teacher_nll": 2.458545371108926
+            }
+          },
+          "generation": {
+            "pairs": 4,
+            "identical_pairs": 4,
+            "adaptive_exits": 0,
+            "full_ms": 12.187252410143401,
+            "adaptive_ms": 12.355364445312489,
+            "paired_median_speedup": 0.9865820438134331
+          }
+        }
+      },
+      "runtime_validation": {
+        "status": "PASS",
+        "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+      },
+      "checkpoint_audit": {
+        "modules/modules.pt": {
+          "sha256": "21605e11ee14fd5cff2a3fc7cfc131b1df0db2c6330ba1300359277d0c293292",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1962,
+            "dev": {
+              "k16": 0.13626816170290112,
+              "v16": 0.13218257937114686,
+              "k20": 0.10944411321543157,
+              "v20": 0.21776349819265306,
+              "k24": 0.16578540042974055,
+              "v24": 0.036949741770513356,
+              "ce": 5.143363422944265,
+              "kd": 2.5063172111579894,
+              "teacher_ce": 3.155542261337898,
+              "top1_agreement": 0.3778186278979239,
+              "kv": 0.13306558244706443,
+              "selection_loss": 7.782746216549319,
+              "targets": 32640
+            }
+          }
+        },
+        "modules/last_modules.pt": {
+          "sha256": "cf896aa3f6088d7a6a0bedb09431fd98abfd807b4dc2f28512e4a22d03f4d94c",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "step": 1962
+          }
+        },
+        "confidence/confidence.pt": {
+          "sha256": "5a42e96a5cbf928d285ab2bda552701ed9947cab724418c2bd995ee956436f24",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "dev": {
+              "bce": 0.5043572070551854,
+              "brier": 0.16859742073300732,
+              "positive_rate": 0.37781861424446106,
+              "tokens": 32640
+            },
+            "epoch": 5,
+            "module_selection": {
+              "step": 1962,
+              "dev": {
+                "k16": 0.13626816170290112,
+                "v16": 0.13218257937114686,
+                "k20": 0.10944411321543157,
+                "v20": 0.21776349819265306,
+                "k24": 0.16578540042974055,
+                "v24": 0.036949741770513356,
+                "ce": 5.143363422944265,
+                "kd": 2.5063172111579894,
+                "teacher_ce": 3.155542261337898,
+                "top1_agreement": 0.3778186278979239,
+                "kv": 0.13306558244706443,
+                "selection_loss": 7.782746216549319,
+                "targets": 32640
+              }
+            }
+          }
+        },
+        "calibrate/calibrated.pt": {
+          "sha256": "fecfce024235788ea60e057f8a495555f680f6d35460febbc5545b8149cd875a",
+          "finite": true,
+          "parameters": 4325633,
+          "selection": {
+            "calibration": {
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "threshold": null,
+              "selected": null,
+              "curve": [
+                {
+                  "threshold": 0.5,
+                  "accepted": 20704,
+                  "errors": 6404,
+                  "coverage": 0.317156862745098,
+                  "disagreement": 0.30931221020092736
+                },
+                {
+                  "threshold": 0.6,
+                  "accepted": 14424,
+                  "errors": 3624,
+                  "coverage": 0.22095588235294117,
+                  "disagreement": 0.2512479201331115
+                },
+                {
+                  "threshold": 0.7,
+                  "accepted": 8875,
+                  "errors": 1686,
+                  "coverage": 0.13595281862745098,
+                  "disagreement": 0.1899718309859155
+                },
+                {
+                  "threshold": 0.8,
+                  "accepted": 4306,
+                  "errors": 591,
+                  "coverage": 0.06596200980392157,
+                  "disagreement": 0.13725034835113795
+                },
+                {
+                  "threshold": 0.85,
+                  "accepted": 2544,
+                  "errors": 323,
+                  "coverage": 0.03897058823529412,
+                  "disagreement": 0.12696540880503146
+                },
+                {
+                  "threshold": 0.9,
+                  "accepted": 1152,
+                  "errors": 128,
+                  "coverage": 0.01764705882352941,
+                  "disagreement": 0.1111111111111111
+                },
+                {
+                  "threshold": 0.92,
+                  "accepted": 719,
+                  "errors": 58,
+                  "coverage": 0.011014093137254903,
+                  "disagreement": 0.08066759388038942
+                },
+                {
+                  "threshold": 0.94,
+                  "accepted": 417,
+                  "errors": 28,
+                  "coverage": 0.006387867647058823,
+                  "disagreement": 0.0671462829736211
+                },
+                {
+                  "threshold": 0.96,
+                  "accepted": 205,
+                  "errors": 9,
+                  "coverage": 0.0031403186274509805,
+                  "disagreement": 0.04390243902439024
+                },
+                {
+                  "threshold": 0.97,
+                  "accepted": 127,
+                  "errors": 3,
+                  "coverage": 0.0019454656862745098,
+                  "disagreement": 0.023622047244094488
+                },
+                {
+                  "threshold": 0.98,
+                  "accepted": 62,
+                  "errors": 2,
+                  "coverage": 0.0009497549019607843,
+                  "disagreement": 0.03225806451612903
+                },
+                {
+                  "threshold": 0.99,
+                  "accepted": 10,
+                  "errors": 0,
+                  "coverage": 0.00015318627450980392,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.995,
+                  "accepted": 1,
+                  "errors": 0,
+                  "coverage": 1.5318627450980392e-05,
+                  "disagreement": 0.0
+                },
+                {
+                  "threshold": 0.999,
+                  "accepted": 0,
+                  "errors": 0,
+                  "coverage": 0.0,
+                  "disagreement": null
+                }
+              ],
+              "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+              "metrics": {
+                "bce": 0.49990114113863776,
+                "brier": 0.16720769147505646,
+                "positive_rate": 0.374111533164978,
+                "tokens": 65280
+              }
+            },
+            "confidence_selection": {
+              "dev": {
+                "bce": 0.5043572070551854,
+                "brier": 0.16859742073300732,
+                "positive_rate": 0.37781861424446106,
+                "tokens": 32640
+              },
+              "epoch": 5,
+              "module_selection": {
+                "step": 1962,
+                "dev": {
+                  "k16": 0.13626816170290112,
+                  "v16": 0.13218257937114686,
+                  "k20": 0.10944411321543157,
+                  "v20": 0.21776349819265306,
+                  "k24": 0.16578540042974055,
+                  "v24": 0.036949741770513356,
+                  "ce": 5.143363422944265,
+                  "kd": 2.5063172111579894,
+                  "teacher_ce": 3.155542261337898,
+                  "top1_agreement": 0.3778186278979239,
+                  "kv": 0.13306558244706443,
+                  "selection_loss": 7.782746216549319,
+                  "targets": 32640
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "audit": [
+    {
+      "path": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m",
+      "status": "PASS",
+      "dev_evaluation_steps": [
+        1961
+      ],
+      "interval": [
+        0,
+        1000000
+      ]
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk02-1m",
+      "status": "PASS",
+      "dev_evaluation_steps": [
+        1962
+      ],
+      "interval": [
+        1000000,
+        2000000
+      ]
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk03-1m",
+      "status": "PASS",
+      "dev_evaluation_steps": [
+        1961
+      ],
+      "interval": [
+        2000000,
+        3000000
+      ]
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk04-1m",
+      "status": "PASS",
+      "dev_evaluation_steps": [
+        1962
+      ],
+      "interval": [
+        3000000,
+        4000000
+      ]
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk05-1m",
+      "status": "PASS",
+      "dev_evaluation_steps": [
+        1961
+      ],
+      "interval": [
+        4000000,
+        5000000
+      ]
+    },
+    {
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk06-1m",
+      "status": "PASS",
+      "dev_evaluation_steps": [
+        1962
+      ],
+      "interval": [
+        5000000,
+        6000000
+      ]
+    }
+  ],
+  "change": {
+    "agreement_percentage_points": 6.430759816750081,
+    "kv_reduction_pct": 45.67433340528794,
+    "ce_reduction_pct": 14.287446379003788,
+    "kd_reduction_pct": 23.775059437504677
+  },
+  "limits": [
+    "Previously explored English WikiText diagnostic set, not new task accuracy or a generalization benchmark.",
+    "Each chunk inherits selected M12 and KV projectors; optimizer and confidence training are reset per existing protocol.",
+    "Unselected forced exits do not test the selective easy-token GDN-hold assumption.",
+    "Fallback-only equal generation does not demonstrate early-exit quality."
+  ],
+  "batch_source_audit": "PASS",
+  "post_completion_log_scan": "No traceback, runtime error, warning, NaN, or Inf found in stage logs and training logs."
+}

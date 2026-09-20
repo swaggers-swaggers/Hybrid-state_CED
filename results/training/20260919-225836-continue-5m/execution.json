@@ -1,0 +1,59 @@
+{
+  "status": "COMPLETED",
+  "output": "/home/liu/CED/results/training/20260919-225836-continue-5m",
+  "source_run": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m",
+  "requested_additional_effective_targets": 5000000,
+  "interval": [
+    1000000,
+    6000000
+  ],
+  "chunk_indices": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "inspection_policy": "Do not inspect metrics or tune during execution; analyze all five chunks after completion.",
+  "runs": [
+    {
+      "chunk_index": 1,
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk02-1m",
+      "warm_start": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m/modules/modules.pt",
+      "warm_start_sha256": "92d9afaa26a78e9543b82afc377488c79b860d09db0a7e01d6c78d6d6106d361",
+      "wall_seconds": 677.502953862997
+    },
+    {
+      "chunk_index": 2,
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk03-1m",
+      "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk02-1m/modules/modules.pt",
+      "warm_start_sha256": "bca43f0d611a853234d19e7c8049c01969420152cadceabd8c71ed22c06e0420",
+      "wall_seconds": 674.0191206870004
+    },
+    {
+      "chunk_index": 3,
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk04-1m",
+      "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk03-1m/modules/modules.pt",
+      "warm_start_sha256": "93dbc7ba83bf1060f831fc22a67574411e7fda4adf608334f1e51c05e6d63519",
+      "wall_seconds": 676.7983778229973
+    },
+    {
+      "chunk_index": 4,
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk05-1m",
+      "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk04-1m/modules/modules.pt",
+      "warm_start_sha256": "823884415b45e6d61fb749b175f217e1717588a16a9f4a78591cbbc226900124",
+      "wall_seconds": 676.1394127370004
+    },
+    {
+      "chunk_index": 5,
+      "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk06-1m",
+      "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk05-1m/modules/modules.pt",
+      "warm_start_sha256": "b9326a00cf31da1311074583cda3844814463108d4009afaefda4b55457eb70e",
+      "wall_seconds": 687.4821130960045
+    }
+  ],
+  "completed_additional_effective_targets": 5000000,
+  "remaining_fresh_effective_targets": 4000000,
+  "final_modules_checkpoint": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk06-1m/modules/modules.pt",
+  "wall_seconds": 3392.222629265001
+}

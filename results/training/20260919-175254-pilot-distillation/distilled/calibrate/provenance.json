@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "ced_training/__init__.py": "fec9ef5b301106f68add7a8f97e54298eda8bec0be4da9fe53b8df5651daf04e",
+    "ced_training/distillation.py": "968d6e4ea0ecbda40728a4d68bb235a6b305c73b8f2a2d54c39198cb50d0ccc8",
+    "ced_training/engine.py": "5d0e95848dccc3e24d6d7724794fb9ea0f98dc40b2afffd698cfc710d72ca41a",
+    "ced_training/evaluation.py": "cb6cdaf09f323ef9dfa59e22966e884a16021d7f6d38e7628ff3e9857d094f6c",
+    "ced_training/losses.py": "311ec30dd5d2c8c982e2098f46ad25db0b4487a68eb0aaed288578e5f7e1cc0a",
+    "ced_training/protocol.py": "ad4efa6518deea218bca3d45da3306d1544aeac67d82a2668ef5acc93c3cb8bf",
+    "ced_training/teacher.py": "7e0456069c36dc52640f9c96c1581e3c41e1fd6e3e4820a9d0a3caceb82327ca",
+    "exit_cost/__init__.py": "304f6cb1be0057f273bef722a12303063fdf1cb7f8655b6bb6b59a40b48bbdf2",
+    "exit_cost/cache.py": "8804c7cc08e23e4ea4360a7de5d46cd7db81f48d6bde9b823df908f3df007fbb",
+    "exit_cost/protocol.py": "cdd0ac2d7a421af37b1476fd9454200c045660b851309528cae341c0f75dd0d3",
+    "exit_cost/runtime.py": "57262bc07f393d62a0134b208bb706227690f7ab8a65f97045d3a0e67d1df523"
+  },
+  "entrypoint_sha256": "8577d8482368d4bef3bd68eff76b2a9d301fc02fab35802e3d05e57582eff714",
+  "checkpoint_sha256": "50cce1c8ab0869450c3752fec22d5824a5a066fd7f2b0fc5038f62aa45a25b29",
+  "warm_start_sha256": null,
+  "distilled_manifest_sha256": "559e9d702e653c0a6989f3bb9aac54c20b80de9020e1a39c95515ea05e1410fd",
+  "torch": "2.11.0+cu130",
+  "transformers": "5.12.1",
+  "data_manifest_sha256": "313770f785305c26433b8a621bb7cf05659588e569f5e5c1db9aa30215865470",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti"
+}

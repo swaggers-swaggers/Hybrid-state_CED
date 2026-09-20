@@ -1,0 +1,13 @@
+{
+  "status": "MODULES_TRAINED",
+  "steps": 2048,
+  "best_dev_selection_loss": 10.957661798144416,
+  "checkpoint": "/home/liu/CED/results/training/20260919-175254-pilot-distillation/distilled/modules/modules.pt",
+  "supervised_tokens": 1042144,
+  "training_data": "teacher_generated_completions",
+  "warm_started": true,
+  "elapsed_seconds": 571.4606216959983,
+  "end_to_end_supervised_tokens_per_second": 1823.6497151931367,
+  "peak_allocated_mib": 1868.568359375,
+  "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+}

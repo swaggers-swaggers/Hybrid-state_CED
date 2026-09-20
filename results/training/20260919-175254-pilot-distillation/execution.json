@@ -1,0 +1,52 @@
+{
+  "status": "COMPLETED",
+  "output": "/home/liu/CED/results/training/20260919-175254-pilot-distillation",
+  "stages": [
+    {
+      "name": "pilot-modules",
+      "returncode": 0,
+      "wall_seconds": 550.973785422997
+    },
+    {
+      "name": "pilot-confidence",
+      "returncode": 0,
+      "wall_seconds": 53.554967166001006
+    },
+    {
+      "name": "pilot-calibrate",
+      "returncode": 0,
+      "wall_seconds": 23.81104533799953
+    },
+    {
+      "name": "pilot-evaluate",
+      "returncode": 0,
+      "wall_seconds": 114.44988396599729
+    },
+    {
+      "name": "teacher-data",
+      "returncode": 0,
+      "wall_seconds": 1814.3345979550031
+    },
+    {
+      "name": "distilled-modules",
+      "returncode": 0,
+      "wall_seconds": 574.2556077640002
+    },
+    {
+      "name": "distilled-confidence",
+      "returncode": 0,
+      "wall_seconds": 53.27305014599915
+    },
+    {
+      "name": "distilled-calibrate",
+      "returncode": 0,
+      "wall_seconds": 23.842238334000285
+    },
+    {
+      "name": "distilled-evaluate",
+      "returncode": 0,
+      "wall_seconds": 110.03995780299738
+    }
+  ],
+  "wall_seconds": 3318.5649867190004
+}

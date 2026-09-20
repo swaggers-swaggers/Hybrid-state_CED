@@ -1,0 +1,115 @@
+{
+  "status": "NO_ELIGIBLE_THRESHOLD",
+  "threshold": null,
+  "selected": null,
+  "curve": [
+    {
+      "threshold": 0.5,
+      "accepted": 20704,
+      "errors": 6404,
+      "coverage": 0.317156862745098,
+      "disagreement": 0.30931221020092736
+    },
+    {
+      "threshold": 0.6,
+      "accepted": 14424,
+      "errors": 3624,
+      "coverage": 0.22095588235294117,
+      "disagreement": 0.2512479201331115
+    },
+    {
+      "threshold": 0.7,
+      "accepted": 8875,
+      "errors": 1686,
+      "coverage": 0.13595281862745098,
+      "disagreement": 0.1899718309859155
+    },
+    {
+      "threshold": 0.8,
+      "accepted": 4306,
+      "errors": 591,
+      "coverage": 0.06596200980392157,
+      "disagreement": 0.13725034835113795
+    },
+    {
+      "threshold": 0.85,
+      "accepted": 2544,
+      "errors": 323,
+      "coverage": 0.03897058823529412,
+      "disagreement": 0.12696540880503146
+    },
+    {
+      "threshold": 0.9,
+      "accepted": 1152,
+      "errors": 128,
+      "coverage": 0.01764705882352941,
+      "disagreement": 0.1111111111111111
+    },
+    {
+      "threshold": 0.92,
+      "accepted": 719,
+      "errors": 58,
+      "coverage": 0.011014093137254903,
+      "disagreement": 0.08066759388038942
+    },
+    {
+      "threshold": 0.94,
+      "accepted": 417,
+      "errors": 28,
+      "coverage": 0.006387867647058823,
+      "disagreement": 0.0671462829736211
+    },
+    {
+      "threshold": 0.96,
+      "accepted": 205,
+      "errors": 9,
+      "coverage": 0.0031403186274509805,
+      "disagreement": 0.04390243902439024
+    },
+    {
+      "threshold": 0.97,
+      "accepted": 127,
+      "errors": 3,
+      "coverage": 0.0019454656862745098,
+      "disagreement": 0.023622047244094488
+    },
+    {
+      "threshold": 0.98,
+      "accepted": 62,
+      "errors": 2,
+      "coverage": 0.0009497549019607843,
+      "disagreement": 0.03225806451612903
+    },
+    {
+      "threshold": 0.99,
+      "accepted": 10,
+      "errors": 0,
+      "coverage": 0.00015318627450980392,
+      "disagreement": 0.0
+    },
+    {
+      "threshold": 0.995,
+      "accepted": 1,
+      "errors": 0,
+      "coverage": 1.5318627450980392e-05,
+      "disagreement": 0.0
+    },
+    {
+      "threshold": 0.999,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "disagreement": null
+    }
+  ],
+  "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+  "metrics": {
+    "bce": 0.49990114113863776,
+    "brier": 0.16720769147505646,
+    "positive_rate": 0.374111533164978,
+    "tokens": 65280
+  },
+  "elapsed_seconds": 21.480865124001866,
+  "peak_allocated_mib": 1764.177734375,
+  "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE_DATA_ONLY_NO_TRAINING",
+  "dataset": "Salesforce/wikitext",
+  "dataset_config": "wikitext-103-v1",
+  "dataset_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "upstream_split": "train",
+  "source_url": "https://huggingface.co/datasets/Salesforce/wikitext",
+  "source_files": [
+    {
+      "path": "/home/liu/CED/.cache/huggingface/hub/datasets--Salesforce--wikitext/snapshots/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-v1/train-00000-of-00002.parquet",
+      "bytes": 155788327,
+      "sha256": "c2ecca8c3250e79518e45d125f3a9a757d8014f6b2d8435c602be87c1f79ec3b",
+      "rows": 900675
+    },
+    {
+      "path": "/home/liu/CED/.cache/huggingface/hub/datasets--Salesforce--wikitext/snapshots/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-v1/train-00001-of-00002.parquet",
+      "bytes": 155928670,
+      "sha256": "720f2503551f33c25bb822aad74d699fee4d5331a7373d0c262f1bfb01354fcf",
+      "rows": 900675
+    }
+  ],
+  "tokenizer": "/home/liu/CED/models/Qwen3.5-0.8B-Base",
+  "model_revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
+  "tokenizer_files": {
+    "tokenizer.json": "fe000e3ed39ed12b8d2481d527d44f93c65d37e87645d2dcc80d1bf9d50d2927",
+    "tokenizer_config.json": "e611fbccc7c29ef3b1cafb1cb7ea548d189968632901d678fd62be68c47885de"
+  },
+  "sequence_length": 256,
+  "num_sequences": 39216,
+  "input_tokens": 10039296,
+  "effective_next_token_targets": 10000000,
+  "articles": 2440,
+  "eos_token_id": 248044,
+  "encoding": "Nonempty source records unchanged, each tokenized without added special tokens, then EOS appended. Windows never cross article boundaries.",
+  "loss_mask": "uint8 [N,256], position t=1 supervises token[t+1]; last position always 0; final row is truncated by mask to meet exact budget.",
+  "packing": "Non-overlapping complete 256-token windows within each article; short article tails discarded; no synthetic generation or repeated epochs.",
+  "freshness": {
+    "prior_manifest_sha256": "313770f785305c26433b8a621bb7cf05659588e569f5e5c1db9aa30215865470",
+    "verified_prefix_tokens": 4999936,
+    "skipped_nonempty_records": 47586,
+    "last_skipped_source_row": 73331,
+    "policy": "Skip entire cached prefix and its boundary article; exclude repeated article titles and exact windows matching any existing split or this output.",
+    "excluded_prior_article_titles": 1247,
+    "skipped_repeated_article_titles": 60,
+    "skipped_duplicate_windows": 0,
+    "considered_articles": 2563
+  },
+  "discarded_short_article_tail_tokens": 312826,
+  "files": {
+    "train.int32.bin": {
+      "bytes": 40157184,
+      "sha256": "8cf768b5e573156883a1e8a2fb2ab50b816fd6ea58719a36c6b0e5f21b1adb1b"
+    },
+    "loss_mask.uint8.bin": {
+      "bytes": 10039296,
+      "sha256": "257ce368088af4291eb3ace0e405c48aeba99895f1bf71d6831dcd2511898b95"
+    },
+    "window_article_ids.int32.bin": {
+      "bytes": 156864,
+      "sha256": "9c6897a1122a35dfb428f466ac9f8973f1cad32ee4f329ae6bb7175256389629"
+    },
+    "articles.jsonl": {
+      "bytes": 726052,
+      "sha256": "7e24b702901aeb7a5abb7471343001f83fc36f86e93dba6a6ab0ca35f59ff61c"
+    }
+  },
+  "elapsed_seconds": 20.2811958759994,
+  "script_sha256": "f9b3ed5e8f0323d9bf9645052a9395d02ce7cf0fb6e2b0ca43bf0d158f5ae1f8",
+  "limitations": "Natural English text only. Existing dev/calibration/test caches unchanged. This dataset is not yet wired into the current training loader; no training was started."
+}

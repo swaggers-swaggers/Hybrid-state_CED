@@ -1,0 +1,41 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 17625.16it/s]
+{
+  "status": "EVALUATION_FINISHED",
+  "gate_enabled": false,
+  "runtime_validation": {
+    "status": "PASS",
+    "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+  },
+  "static_test": {
+    "k16": 0.17245544167235494,
+    "v16": 0.21419240557588637,
+    "k20": 0.13469717628322542,
+    "v20": 0.30643867002800107,
+    "k24": 0.1912262332625687,
+    "v24": 0.11540615744888783,
+    "ce": 5.963780152264471,
+    "kd": 3.094723896528868,
+    "teacher_ce": 3.2613998314256176,
+    "top1_agreement": 0.33131127487320233,
+    "kv": 0.18906934737848738,
+    "selection_loss": 9.247573396171825,
+    "targets": 32640
+  },
+  "confidence_test": {
+    "bce": 0.4684609886477975,
+    "brier": 0.15604670519621494,
+    "positive_rate": 0.33131128549575806,
+    "tokens": 32640,
+    "threshold": null,
+    "accepted": 0,
+    "coverage": 0.0,
+    "disagreement": null
+  },
+  "rollout_cases": 40,
+  "generation_pairs": 8,
+  "limits": "Diagnostic English WikiText only. Fixed oracle controls cost full shadow steps and are never speed results. Quality/speed acceptance requires reviewing continuations and generation; no automatic PASS.",
+  "elapsed_seconds": 107.08857009100029,
+  "peak_allocated_mib": 1881.953125,
+  "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+}

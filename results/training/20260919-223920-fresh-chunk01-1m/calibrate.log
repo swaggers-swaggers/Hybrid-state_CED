@@ -1,0 +1,117 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 16840.16it/s]
+{
+  "status": "NO_ELIGIBLE_THRESHOLD",
+  "threshold": null,
+  "selected": null,
+  "curve": [
+    {
+      "threshold": 0.5,
+      "accepted": 15047,
+      "errors": 4495,
+      "coverage": 0.23049938725490196,
+      "disagreement": 0.2987306439821891
+    },
+    {
+      "threshold": 0.6,
+      "accepted": 10341,
+      "errors": 2425,
+      "coverage": 0.15840992647058824,
+      "disagreement": 0.2345034329368533
+    },
+    {
+      "threshold": 0.7,
+      "accepted": 6519,
+      "errors": 1122,
+      "coverage": 0.09986213235294118,
+      "disagreement": 0.17211228716060745
+    },
+    {
+      "threshold": 0.8,
+      "accepted": 3185,
+      "errors": 407,
+      "coverage": 0.04878982843137255,
+      "disagreement": 0.12778649921507065
+    },
+    {
+      "threshold": 0.85,
+      "accepted": 1808,
+      "errors": 173,
+      "coverage": 0.027696078431372548,
+      "disagreement": 0.0956858407079646
+    },
+    {
+      "threshold": 0.9,
+      "accepted": 739,
+      "errors": 47,
+      "coverage": 0.01132046568627451,
+      "disagreement": 0.06359945872801083
+    },
+    {
+      "threshold": 0.92,
+      "accepted": 427,
+      "errors": 22,
+      "coverage": 0.006541053921568628,
+      "disagreement": 0.05152224824355972
+    },
+    {
+      "threshold": 0.94,
+      "accepted": 215,
+      "errors": 8,
+      "coverage": 0.0032935049019607843,
+      "disagreement": 0.037209302325581395
+    },
+    {
+      "threshold": 0.96,
+      "accepted": 88,
+      "errors": 2,
+      "coverage": 0.0013480392156862745,
+      "disagreement": 0.022727272727272728
+    },
+    {
+      "threshold": 0.97,
+      "accepted": 44,
+      "errors": 1,
+      "coverage": 0.0006740196078431372,
+      "disagreement": 0.022727272727272728
+    },
+    {
+      "threshold": 0.98,
+      "accepted": 18,
+      "errors": 0,
+      "coverage": 0.00027573529411764705,
+      "disagreement": 0.0
+    },
+    {
+      "threshold": 0.99,
+      "accepted": 2,
+      "errors": 0,
+      "coverage": 3.0637254901960784e-05,
+      "disagreement": 0.0
+    },
+    {
+      "threshold": 0.995,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "disagreement": null
+    },
+    {
+      "threshold": 0.999,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "disagreement": null
+    }
+  ],
+  "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+  "metrics": {
+    "bce": 0.4434983919648563,
+    "brier": 0.14650553873583091,
+    "positive_rate": 0.31185662746429443,
+    "tokens": 65280
+  },
+  "elapsed_seconds": 21.225422881005215,
+  "peak_allocated_mib": 1764.177734375,
+  "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+}

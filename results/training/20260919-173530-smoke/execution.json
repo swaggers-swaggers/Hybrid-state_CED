@@ -1,0 +1,32 @@
+{
+  "profile": "smoke",
+  "status": "COMPLETED",
+  "output": "/home/liu/CED/results/training/20260919-173530-smoke",
+  "stages": [
+    {
+      "stage": "modules",
+      "returncode": 0,
+      "wall_seconds": 23.883248597998318,
+      "output": "/home/liu/CED/results/training/20260919-173530-smoke/modules"
+    },
+    {
+      "stage": "confidence",
+      "returncode": 0,
+      "wall_seconds": 8.54327214300065,
+      "output": "/home/liu/CED/results/training/20260919-173530-smoke/confidence"
+    },
+    {
+      "stage": "calibrate",
+      "returncode": 0,
+      "wall_seconds": 7.051033955998719,
+      "output": "/home/liu/CED/results/training/20260919-173530-smoke/calibrate"
+    },
+    {
+      "stage": "evaluate",
+      "returncode": 0,
+      "wall_seconds": 98.84161398200013,
+      "output": "/home/liu/CED/results/training/20260919-173530-smoke/evaluate"
+    }
+  ],
+  "wall_seconds": 138.34918340199874
+}

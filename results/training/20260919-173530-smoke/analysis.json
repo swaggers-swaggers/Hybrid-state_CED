@@ -1,0 +1,172 @@
+{
+  "source_run": "/home/liu/CED/results/training/20260919-173530-smoke",
+  "continuations": [
+    {
+      "context": 256,
+      "case": "oracle_kv_updated_gdn",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 7.222902586683631,
+      "nll": 10.32175799671677,
+      "teacher_nll": 3.0921165482011475,
+      "top1_agreement": 0.19921875,
+      "exit_rate": 0.8125,
+      "resume_mean_kl": 0.0,
+      "exit_disagreement": 0.9855769230769231,
+      "pooled_ppl_ratio": 1379.7277119689654
+    },
+    {
+      "context": 256,
+      "case": "projected_kv_updated_gdn",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 7.258844049697927,
+      "nll": 10.361779127717455,
+      "teacher_nll": 3.0921165482011475,
+      "top1_agreement": 0.1640625,
+      "exit_rate": 0.8125,
+      "resume_mean_kl": 0.19168780274291447,
+      "exit_disagreement": 0.9855769230769231,
+      "pooled_ppl_ratio": 1436.065813256182
+    },
+    {
+      "context": 256,
+      "case": "oracle_kv_held_gdn",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 7.331863524412256,
+      "nll": 10.439005243619249,
+      "teacher_nll": 3.0921165482011475,
+      "top1_agreement": 0.1015625,
+      "exit_rate": 0.8125,
+      "resume_mean_kl": 0.5811250012193341,
+      "exit_disagreement": 0.9855769230769231,
+      "pooled_ppl_ratio": 1551.3622508036387
+    },
+    {
+      "context": 256,
+      "case": "projected_kv_held_gdn",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 7.377983300599226,
+      "nll": 10.49693768959878,
+      "teacher_nll": 3.0921165482011475,
+      "top1_agreement": 0.109375,
+      "exit_rate": 0.8125,
+      "resume_mean_kl": 0.8270971408831732,
+      "exit_disagreement": 0.9855769230769231,
+      "pooled_ppl_ratio": 1643.8907857726203
+    },
+    {
+      "context": 256,
+      "case": "adaptive",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 0.0,
+      "nll": 3.0921165482011475,
+      "teacher_nll": 3.0921165482011475,
+      "top1_agreement": 1.0,
+      "exit_rate": 0.0,
+      "resume_mean_kl": 0.0,
+      "exit_disagreement": null,
+      "pooled_ppl_ratio": 1.0
+    },
+    {
+      "context": 2048,
+      "case": "oracle_kv_updated_gdn",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 7.741582352668047,
+      "nll": 10.292002260994195,
+      "teacher_nll": 2.458545371108926,
+      "top1_agreement": 0.2109375,
+      "exit_rate": 0.8125,
+      "resume_mean_kl": 0.0,
+      "exit_disagreement": 0.9711538461538461,
+      "pooled_ppl_ratio": 2523.6382514758043
+    },
+    {
+      "context": 2048,
+      "case": "projected_kv_updated_gdn",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 7.745360368463309,
+      "nll": 10.291550212412403,
+      "teacher_nll": 2.458545371108926,
+      "top1_agreement": 0.1953125,
+      "exit_rate": 0.8125,
+      "resume_mean_kl": 0.02014941757473328,
+      "exit_disagreement": 0.9711538461538461,
+      "pooled_ppl_ratio": 2522.4977021945338
+    },
+    {
+      "context": 2048,
+      "case": "oracle_kv_held_gdn",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 7.908657866348221,
+      "nll": 10.432187153433915,
+      "teacher_nll": 2.458545371108926,
+      "top1_agreement": 0.1328125,
+      "exit_rate": 0.8125,
+      "resume_mean_kl": 0.8910694062942639,
+      "exit_disagreement": 0.9711538461538461,
+      "pooled_ppl_ratio": 2903.4117277205164
+    },
+    {
+      "context": 2048,
+      "case": "projected_kv_held_gdn",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 7.932216238958063,
+      "nll": 10.458443914947566,
+      "teacher_nll": 2.458545371108926,
+      "top1_agreement": 0.1328125,
+      "exit_rate": 0.8125,
+      "resume_mean_kl": 1.0167140602134168,
+      "exit_disagreement": 0.9711538461538461,
+      "pooled_ppl_ratio": 2980.6555658286943
+    },
+    {
+      "context": 2048,
+      "case": "adaptive",
+      "prompts": 4,
+      "steps": 256,
+      "mean_kl": 0.0,
+      "nll": 2.458545371108926,
+      "teacher_nll": 2.458545371108926,
+      "top1_agreement": 1.0,
+      "exit_rate": 0.0,
+      "resume_mean_kl": 0.0,
+      "exit_disagreement": null,
+      "pooled_ppl_ratio": 1.0
+    }
+  ],
+  "generation": [
+    {
+      "context": 256,
+      "full_mean_ms": 12.808592988292844,
+      "adaptive_mean_ms": 12.846658433602443,
+      "paired_median_speedup": 0.992246512658157,
+      "exits": 0,
+      "identical_pairs": 4
+    },
+    {
+      "context": 2048,
+      "full_mean_ms": 12.788891578153994,
+      "adaptive_mean_ms": 12.92254534763515,
+      "paired_median_speedup": 0.9883988893126859,
+      "exits": 0,
+      "identical_pairs": 4
+    }
+  ],
+  "calibration": {
+    "score_min": 0.2806163728237152,
+    "score_mean": 0.37950268861125497,
+    "score_max": 0.4423955976963043,
+    "positives": 370,
+    "tokens": 8160,
+    "maximum_acceptable_count_at_1pct_empirical_risk": 373,
+    "minimum_required_count": 1024
+  }
+}

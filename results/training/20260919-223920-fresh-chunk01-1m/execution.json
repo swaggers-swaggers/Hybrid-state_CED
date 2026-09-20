@@ -1,0 +1,30 @@
+{
+  "status": "COMPLETED",
+  "output": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m",
+  "chunk_index": 0,
+  "effective_targets": 1000000,
+  "warm_start": "/home/liu/CED/results/training/20260919-175254-pilot-distillation/distilled/modules/modules.pt",
+  "stages": [
+    {
+      "stage": "modules",
+      "returncode": 0,
+      "wall_seconds": 491.03866745199775
+    },
+    {
+      "stage": "confidence",
+      "returncode": 0,
+      "wall_seconds": 53.532926789004705
+    },
+    {
+      "stage": "calibrate",
+      "returncode": 0,
+      "wall_seconds": 24.02327355000307
+    },
+    {
+      "stage": "evaluate",
+      "returncode": 0,
+      "wall_seconds": 110.15298636700027
+    }
+  ],
+  "wall_seconds": 678.7727654619957
+}

@@ -1,0 +1,39 @@
+{
+  "status": "EVALUATION_FINISHED",
+  "gate_enabled": false,
+  "runtime_validation": {
+    "status": "PASS",
+    "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+  },
+  "static_test": {
+    "k16": 0.1380271571688354,
+    "v16": 0.14107097522355616,
+    "k20": 0.10998226783704013,
+    "v20": 0.2277374961413443,
+    "k24": 0.16683233715593815,
+    "v24": 0.04119459190405905,
+    "ce": 5.489520878059899,
+    "kd": 2.662513055995691,
+    "teacher_ce": 3.2613998314256176,
+    "top1_agreement": 0.36988357886553325,
+    "kv": 0.13747413757179552,
+    "selection_loss": 8.289508071627385,
+    "targets": 32640
+  },
+  "confidence_test": {
+    "bce": 0.49670923574298037,
+    "brier": 0.16667209929890486,
+    "positive_rate": 0.36988356709480286,
+    "tokens": 32640,
+    "threshold": null,
+    "accepted": 0,
+    "coverage": 0.0,
+    "disagreement": null
+  },
+  "rollout_cases": 40,
+  "generation_pairs": 8,
+  "limits": "Diagnostic English WikiText only. Fixed oracle controls cost full shadow steps and are never speed results. Quality/speed acceptance requires reviewing continuations and generation; no automatic PASS.",
+  "elapsed_seconds": 111.00813419000042,
+  "peak_allocated_mib": 1881.953125,
+  "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+}

@@ -1,0 +1,379 @@
+{
+  "run": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m",
+  "previous_run": "/home/liu/CED/results/training/20260919-175254-pilot-distillation/distilled",
+  "execution": {
+    "status": "COMPLETED",
+    "output": "/home/liu/CED/results/training/20260919-223920-fresh-chunk01-1m",
+    "chunk_index": 0,
+    "effective_targets": 1000000,
+    "warm_start": "/home/liu/CED/results/training/20260919-175254-pilot-distillation/distilled/modules/modules.pt",
+    "stages": [
+      {
+        "stage": "modules",
+        "returncode": 0,
+        "wall_seconds": 491.03866745199775
+      },
+      {
+        "stage": "confidence",
+        "returncode": 0,
+        "wall_seconds": 53.532926789004705
+      },
+      {
+        "stage": "calibrate",
+        "returncode": 0,
+        "wall_seconds": 24.02327355000307
+      },
+      {
+        "stage": "evaluate",
+        "returncode": 0,
+        "wall_seconds": 110.15298636700027
+      }
+    ],
+    "wall_seconds": 678.7727654619957
+  },
+  "consumed_interval": [
+    0,
+    1000000
+  ],
+  "remaining_effective_targets": 9000000,
+  "before": {
+    "status": "EVALUATION_FINISHED",
+    "gate_enabled": false,
+    "runtime_validation": {
+      "status": "PASS",
+      "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+    },
+    "static_test": {
+      "k16": 0.29134572856128216,
+      "v16": 0.4003457874059677,
+      "k20": 0.23601059010252357,
+      "v20": 0.4983830126002431,
+      "k24": 0.284805784933269,
+      "v24": 0.4056691098958254,
+      "ce": 7.001675636175216,
+      "kd": 3.9583824627904916,
+      "teacher_ce": 3.2613998314256176,
+      "top1_agreement": 0.24509803948732203,
+      "kv": 0.3527600022498518,
+      "selection_loss": 11.312818101215559,
+      "targets": 32640
+    },
+    "confidence_test": {
+      "bce": 0.387717393099093,
+      "brier": 0.12408294563604688,
+      "positive_rate": 0.2450980395078659,
+      "tokens": 32640,
+      "threshold": null,
+      "accepted": 0,
+      "coverage": 0.0,
+      "disagreement": null
+    },
+    "rollout_cases": 40,
+    "generation_pairs": 8,
+    "limits": "Diagnostic English WikiText only. Fixed oracle controls cost full shadow steps and are never speed results. Quality/speed acceptance requires reviewing continuations and generation; no automatic PASS.",
+    "elapsed_seconds": 107.2341551770005,
+    "peak_allocated_mib": 1881.953125,
+    "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+  },
+  "after": {
+    "status": "EVALUATION_FINISHED",
+    "gate_enabled": false,
+    "runtime_validation": {
+      "status": "PASS",
+      "checks": "native parity for full/reject; exact confidence-before-vocab call order; three direct h12 projectors; KV growth; held deep GDN C/S and flags; full resume; partial RoPE"
+    },
+    "static_test": {
+      "k16": 0.2055029033217579,
+      "v16": 0.27548160310834646,
+      "k20": 0.16112756240181625,
+      "v20": 0.37471158895641565,
+      "k24": 0.21582869091071188,
+      "v24": 0.21849245205521584,
+      "ce": 6.298562270753524,
+      "kd": 3.3836789777758076,
+      "teacher_ce": 3.2613998314256176,
+      "top1_agreement": 0.30897671602775945,
+      "kv": 0.24185746679237732,
+      "selection_loss": 9.924098715321708,
+      "targets": 32640
+    },
+    "confidence_test": {
+      "bce": 0.44487088369388206,
+      "brier": 0.14743182080413816,
+      "positive_rate": 0.3089767098426819,
+      "tokens": 32640,
+      "threshold": null,
+      "accepted": 0,
+      "coverage": 0.0,
+      "disagreement": null
+    },
+    "rollout_cases": 40,
+    "generation_pairs": 8,
+    "limits": "Diagnostic English WikiText only. Fixed oracle controls cost full shadow steps and are never speed results. Quality/speed acceptance requires reviewing continuations and generation; no automatic PASS.",
+    "elapsed_seconds": 107.36765575000027,
+    "peak_allocated_mib": 1881.953125,
+    "quality_status": "DIAGNOSTIC_ONLY_NOT_A_GENERALIZATION_CLAIM"
+  },
+  "continuations": [
+    {
+      "context": 256,
+      "case": "oracle_kv_updated_gdn",
+      "prompts": 4,
+      "mean_kl": 2.8206339605676476,
+      "resume_mean_kl": 0.0,
+      "exit_rate": 0.8125,
+      "exit_disagreement": 0.7211538461538461,
+      "nll": 5.705673735268647,
+      "teacher_nll": 3.0921165482011475,
+      "pooled_ppl_ratio": 13.647511360098074
+    },
+    {
+      "context": 256,
+      "case": "projected_kv_updated_gdn",
+      "prompts": 4,
+      "mean_kl": 2.8298264378818203,
+      "resume_mean_kl": 0.04902654567558784,
+      "exit_rate": 0.8125,
+      "exit_disagreement": 0.7211538461538461,
+      "nll": 5.716867567565714,
+      "teacher_nll": 3.0921165482011475,
+      "pooled_ppl_ratio": 13.801137542260994
+    },
+    {
+      "context": 256,
+      "case": "oracle_kv_held_gdn",
+      "prompts": 4,
+      "mean_kl": 2.9295948982962727,
+      "resume_mean_kl": 0.5811250012193341,
+      "exit_rate": 0.8125,
+      "exit_disagreement": 0.7211538461538461,
+      "nll": 5.8229209821711265,
+      "teacher_nll": 3.0921165482011475,
+      "pooled_ppl_ratio": 15.345226277477428
+    },
+    {
+      "context": 256,
+      "case": "projected_kv_held_gdn",
+      "prompts": 4,
+      "mean_kl": 2.9611488073924193,
+      "resume_mean_kl": 0.7494125163987823,
+      "exit_rate": 0.8125,
+      "exit_disagreement": 0.7211538461538461,
+      "nll": 5.856650014678053,
+      "teacher_nll": 3.0921165482011475,
+      "pooled_ppl_ratio": 15.871633613939467
+    },
+    {
+      "context": 256,
+      "case": "adaptive",
+      "prompts": 4,
+      "mean_kl": 0.0,
+      "resume_mean_kl": 0.0,
+      "exit_rate": 0.0,
+      "exit_disagreement": null,
+      "nll": 3.0921165482011475,
+      "teacher_nll": 3.0921165482011475,
+      "pooled_ppl_ratio": 1.0
+    },
+    {
+      "context": 2048,
+      "case": "oracle_kv_updated_gdn",
+      "prompts": 4,
+      "mean_kl": 3.3147083834919613,
+      "resume_mean_kl": 0.0,
+      "exit_rate": 0.8125,
+      "exit_disagreement": 0.7307692307692308,
+      "nll": 5.9499775077165395,
+      "teacher_nll": 2.458545371108926,
+      "pooled_ppl_ratio": 32.832935300453165
+    },
+    {
+      "context": 2048,
+      "case": "projected_kv_updated_gdn",
+      "prompts": 4,
+      "mean_kl": 3.317298728920264,
+      "resume_mean_kl": 0.013815175617613326,
+      "exit_rate": 0.8125,
+      "exit_disagreement": 0.7307692307692308,
+      "nll": 5.948699208442122,
+      "teacher_nll": 2.458545371108926,
+      "pooled_ppl_ratio": 32.7909917969681
+    },
+    {
+      "context": 2048,
+      "case": "oracle_kv_held_gdn",
+      "prompts": 4,
+      "mean_kl": 3.4817838971721358,
+      "resume_mean_kl": 0.8910694062942639,
+      "exit_rate": 0.8125,
+      "exit_disagreement": 0.7307692307692308,
+      "nll": 6.0901624001562595,
+      "teacher_nll": 2.458545371108926,
+      "pooled_ppl_ratio": 37.7738486691101
+    },
+    {
+      "context": 2048,
+      "case": "projected_kv_held_gdn",
+      "prompts": 4,
+      "mean_kl": 3.496348284294072,
+      "resume_mean_kl": 0.9687461376112575,
+      "exit_rate": 0.8125,
+      "exit_disagreement": 0.7307692307692308,
+      "nll": 6.106962748992373,
+      "teacher_nll": 2.458545371108926,
+      "pooled_ppl_ratio": 38.41382334981601
+    },
+    {
+      "context": 2048,
+      "case": "adaptive",
+      "prompts": 4,
+      "mean_kl": 0.0,
+      "resume_mean_kl": 0.0,
+      "exit_rate": 0.0,
+      "exit_disagreement": null,
+      "nll": 2.458545371108926,
+      "teacher_nll": 2.458545371108926,
+      "pooled_ppl_ratio": 1.0
+    }
+  ],
+  "generations": [
+    {
+      "context": 256,
+      "full_ms": 11.856874136697115,
+      "adaptive_ms": 11.996020324204437,
+      "paired_median_speedup": 0.9903446166723452,
+      "exits": 0,
+      "identical_pairs": 4
+    },
+    {
+      "context": 2048,
+      "full_ms": 11.91361140627123,
+      "adaptive_ms": 12.095187117182604,
+      "paired_median_speedup": 0.9847273553092215,
+      "exits": 0,
+      "identical_pairs": 4
+    }
+  ],
+  "improvements": {
+    "agreement_percentage_points": 6.387867654043741,
+    "kv_error_reduction_pct": 31.438523287831476,
+    "ce_reduction_pct": 10.042072811670256
+  },
+  "calibration": {
+    "status": "NO_ELIGIBLE_THRESHOLD",
+    "threshold": null,
+    "selected": null,
+    "curve": [
+      {
+        "threshold": 0.5,
+        "accepted": 15047,
+        "errors": 4495,
+        "coverage": 0.23049938725490196,
+        "disagreement": 0.2987306439821891
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 10341,
+        "errors": 2425,
+        "coverage": 0.15840992647058824,
+        "disagreement": 0.2345034329368533
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 6519,
+        "errors": 1122,
+        "coverage": 0.09986213235294118,
+        "disagreement": 0.17211228716060745
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 3185,
+        "errors": 407,
+        "coverage": 0.04878982843137255,
+        "disagreement": 0.12778649921507065
+      },
+      {
+        "threshold": 0.85,
+        "accepted": 1808,
+        "errors": 173,
+        "coverage": 0.027696078431372548,
+        "disagreement": 0.0956858407079646
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 739,
+        "errors": 47,
+        "coverage": 0.01132046568627451,
+        "disagreement": 0.06359945872801083
+      },
+      {
+        "threshold": 0.92,
+        "accepted": 427,
+        "errors": 22,
+        "coverage": 0.006541053921568628,
+        "disagreement": 0.05152224824355972
+      },
+      {
+        "threshold": 0.94,
+        "accepted": 215,
+        "errors": 8,
+        "coverage": 0.0032935049019607843,
+        "disagreement": 0.037209302325581395
+      },
+      {
+        "threshold": 0.96,
+        "accepted": 88,
+        "errors": 2,
+        "coverage": 0.0013480392156862745,
+        "disagreement": 0.022727272727272728
+      },
+      {
+        "threshold": 0.97,
+        "accepted": 44,
+        "errors": 1,
+        "coverage": 0.0006740196078431372,
+        "disagreement": 0.022727272727272728
+      },
+      {
+        "threshold": 0.98,
+        "accepted": 18,
+        "errors": 0,
+        "coverage": 0.00027573529411764705,
+        "disagreement": 0.0
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 2,
+        "errors": 0,
+        "coverage": 3.0637254901960784e-05,
+        "disagreement": 0.0
+      },
+      {
+        "threshold": 0.995,
+        "accepted": 0,
+        "errors": 0,
+        "coverage": 0.0,
+        "disagreement": null
+      },
+      {
+        "threshold": 0.999,
+        "accepted": 0,
+        "errors": 0,
+        "coverage": 0.0,
+        "disagreement": null
+      }
+    ],
+    "interpretation": "Teacher top-1 agreement only; correlated tokens and threshold search preclude a formal risk guarantee. No eligible threshold disables early exit.",
+    "metrics": {
+      "bce": 0.4434983919648563,
+      "brier": 0.14650553873583091,
+      "positive_rate": 0.31185662746429443,
+      "tokens": 65280
+    }
+  },
+  "limitations": [
+    "Same previously explored diagnostic test; not a new generalization benchmark.",
+    "No eligible threshold, so identical adaptive generation measures fallback only.",
+    "State controls force exits, not exits selected by a reliable learned gate."
+  ]
+}

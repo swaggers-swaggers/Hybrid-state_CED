@@ -1,0 +1,30 @@
+{
+  "status": "COMPLETED",
+  "output": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk05-1m",
+  "chunk_index": 4,
+  "effective_targets": 1000000,
+  "warm_start": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk04-1m/modules/modules.pt",
+  "stages": [
+    {
+      "stage": "modules",
+      "returncode": 0,
+      "wall_seconds": 482.98481403599726
+    },
+    {
+      "stage": "confidence",
+      "returncode": 0,
+      "wall_seconds": 54.897958026995184
+    },
+    {
+      "stage": "calibrate",
+      "returncode": 0,
+      "wall_seconds": 24.398191175001557
+    },
+    {
+      "stage": "evaluate",
+      "returncode": 0,
+      "wall_seconds": 113.83589523300179
+    }
+  ],
+  "wall_seconds": 676.1394127370004
+}

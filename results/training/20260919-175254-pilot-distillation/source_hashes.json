@@ -1,0 +1,18 @@
+{
+  "ced_training/__init__.py": "fec9ef5b301106f68add7a8f97e54298eda8bec0be4da9fe53b8df5651daf04e",
+  "ced_training/engine.py": "5d0e95848dccc3e24d6d7724794fb9ea0f98dc40b2afffd698cfc710d72ca41a",
+  "ced_training/losses.py": "311ec30dd5d2c8c982e2098f46ad25db0b4487a68eb0aaed288578e5f7e1cc0a",
+  "ced_training/evaluation.py": "cb6cdaf09f323ef9dfa59e22966e884a16021d7f6d38e7628ff3e9857d094f6c",
+  "ced_training/teacher.py": "7e0456069c36dc52640f9c96c1581e3c41e1fd6e3e4820a9d0a3caceb82327ca",
+  "ced_training/protocol.py": "ad4efa6518deea218bca3d45da3306d1544aeac67d82a2668ef5acc93c3cb8bf",
+  "ced_training/distillation.py": "968d6e4ea0ecbda40728a4d68bb235a6b305c73b8f2a2d54c39198cb50d0ccc8",
+  "exit_cost/__init__.py": "304f6cb1be0057f273bef722a12303063fdf1cb7f8655b6bb6b59a40b48bbdf2",
+  "exit_cost/runtime.py": "57262bc07f393d62a0134b208bb706227690f7ab8a65f97045d3a0e67d1df523",
+  "exit_cost/protocol.py": "cdd0ac2d7a421af37b1476fd9454200c045660b851309528cae341c0f75dd0d3",
+  "exit_cost/cache.py": "8804c7cc08e23e4ea4360a7de5d46cd7db81f48d6bde9b823df908f3df007fbb",
+  "scripts/generate_distillation_data.py": "692b86e43b0f92b8922f3ea3743820dd46c4f99a123e0f265f0e8e2217aa9859",
+  "scripts/train_ced.py": "8577d8482368d4bef3bd68eff76b2a9d301fc02fab35802e3d05e57582eff714",
+  "scripts/run_pilot_distillation.py": "455d880130463a9555da66422f41f136070fb8f67e34cca609f3e0ea94614e60",
+  "scripts/benchmark_exit_cost.py": "ab28d5e190d32a49eef67927b483444fc183142de74a6d5f0082c9e0ec1fc6fd",
+  "configs/qwen35_08b_train.json": "4bb9174457211ae66976b4ec6da2a12338cdf6ef80e81b9a68686d1c00c7303c"
+}
