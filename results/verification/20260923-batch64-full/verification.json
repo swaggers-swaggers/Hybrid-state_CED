@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "optimizer_steps": 0,
+  "trained_weights_saved": false,
+  "cost_benchmark_executed": false,
+  "warm_start_exact": {
+    "readout_map": true,
+    "kv_projectors": true,
+    "confidence_head": true
+  },
+  "batched_shallow_relative_errors": [
+    0.012149284593760967,
+    0.011099481955170631
+  ],
+  "batched_deep_output_relative_errors": [
+    0.009047556668519974,
+    0.010580805130302906
+  ],
+  "full_length_production_loop": {
+    "positions": 1021,
+    "qualified_candidates": 1021,
+    "kv_projections": 16,
+    "kv_supervised_positions": 1005,
+    "readout_updates": 1,
+    "projection_updates": 1,
+    "readout_batches": 16,
+    "shallow_batches": 16,
+    "response_batches": 1,
+    "maximum_response_batch": 2,
+    "projection_horizon": 64,
+    "checkpoint_steps": 8,
+    "readout_kl_sum": 3385.6617120816372,
+    "rollout_kl_sum": 5.558845520019531,
+    "readout_kl": 3.316025183233729,
+    "rollout_full_kl": 0.005531189572158738,
+    "mean_top8_overlap": 2.492654260528893,
+    "top1_agreement": 0.29187071498530853,
+    "qualification_rate": 1.0,
+    "status": "FINISHED",
+    "actual_interval": [
+      0,
+      1021
+    ]
+  },
+  "other_lane_change_has_no_effect": true,
+  "projection_successor_64_gradient_norms": [
+    0.0006406052270904183,
+    0.00037625530967488885,
+    0.00013039426994509995,
+    0.00014978155377320945,
+    0.0002797002671286464,
+    0.00010500390635570511
+  ],
+  "successor_65_outside_horizon": true,
+  "checkpoint_vs_plain_gradient_difference_norms": [
+    8.49237221700605e-06,
+    3.3401981909264578e-06,
+    1.564035414958198e-06,
+    9.191342087433441e-07,
+    0.0,
+    0.0
+  ],
+  "checkpoint_vs_plain_losses": [
+    0.01581275463104248,
+    0.01581275463104248
+  ],
+  "anchor_gdn_held_and_input_cache_unchanged": true,
+  "production_loop": {
+    "positions": 11,
+    "qualified_candidates": 11,
+    "kv_projections": 2,
+    "kv_supervised_positions": 9,
+    "readout_updates": 1,
+    "projection_updates": 1,
+    "readout_batches": 1,
+    "shallow_batches": 1,
+    "response_batches": 1,
+    "maximum_response_batch": 2,
+    "projection_horizon": 64,
+    "checkpoint_steps": 2,
+    "readout_kl_sum": 32.948610216379166,
+    "rollout_kl_sum": 0.01581275463104248,
+    "readout_kl": 2.995328201489015,
+    "rollout_full_kl": 0.0017569727367824977,
+    "mean_top8_overlap": 2.4545454545454546,
+    "top1_agreement": 0.09090909090909091,
+    "qualification_rate": 1.0,
+    "status": "FINISHED",
+    "actual_interval": [
+      0,
+      11
+    ]
+  },
+  "readout_gradient_norms": [
+    0.2647531032562256
+  ],
+  "projection_gradient_norms": [
+    0.00010237086098641157,
+    6.892460078233853e-05,
+    4.210074621369131e-05,
+    5.5161930504255e-05,
+    1.945728581631556e-05,
+    4.14071291743312e-05
+  ],
+  "frozen_base_no_grad": true,
+  "all_auxiliary_weights_unchanged": true,
+  "unconditional_detector_evaluation": true,
+  "peak_allocated_mib": 4957.39404296875,
+  "verification_labels": "Synthetic qualifying anchors for gradient/branch coverage, not quality evaluation."
+}

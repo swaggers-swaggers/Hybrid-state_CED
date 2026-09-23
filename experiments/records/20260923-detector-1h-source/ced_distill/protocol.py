@@ -3,19 +3,18 @@ import json
 import math
 from pathlib import Path
 from ced_training.protocol import sha256
-SEMANTICS='top8_shared_batch_multistep64_v3'
+SEMANTICS='top8_or_top1_all_position_chunked_pair_v2'
 
 def validate(c):
     if c['temperature'] not in (1.,2.): raise ValueError('Only T=1/2 normalizers were stored')
     if type(c['minimum_overlap']) is not int or not 1<=c['minimum_overlap']<=8: raise ValueError('Invalid overlap')
     for k in ('readout_lr','projection_lr','gate_lr','gradient_clip'):
         if not math.isfinite(c[k]) or c[k]<=0: raise ValueError(k)
-    for k in ('response_batch_size','projection_horizon','checkpoint_steps','gate_epochs','gate_batch_size','minimum_accepted','readout_chunk_size'):
+    for k in ('accumulation_positions','gate_epochs','gate_batch_size','minimum_accepted','readout_chunk_size'):
         if type(c[k]) is not int or c[k]<1: raise ValueError(k)
     if not 0<c['risk_limit']<1 or not c['threshold_grid']: raise ValueError('Invalid calibration')
     if any(not 0<=x<=1 for x in c['threshold_grid']): raise ValueError('Invalid threshold')
-    if c['response_batch_size']>2 or c['projection_horizon']>64 or c['checkpoint_steps']>16:raise ValueError('Unverified batch/horizon/checkpoint memory configuration')
-    if c['readout_chunk_size']*c['response_batch_size']>128:raise ValueError('Bound vocabulary memory with chunk size <=128')
+    if c['readout_chunk_size']>128:raise ValueError('Bound vocabulary memory with chunk size <=128')
     if c['maximum_artifact_bytes']>2_000_000_000 or c['minimum_free_bytes']<20_000_000_000: raise ValueError('Disk safeguards cannot be relaxed')
 
 def plan(root,c,start,count):
@@ -26,11 +25,9 @@ def plan(root,c,start,count):
     if start<0 or count<1 or start+count>n: raise ValueError('Training interval outside dataset')
     return {'status':'PLAN_ONLY_NO_TRAINING','semantics':SEMANTICS,'interval':[start,start+count],
             'teacher_forcing':True,'kv_trigger':{'minimum_top8_overlap':c['minimum_overlap'],'or_top1_equal':True,'kl_cutoff':None},
-            'kv_loss':'Mean full-model output Top8+tail KL over EVERY successor in each projection rollout; no KV MSE or GDN alignment',
-            'shared_parameter_batch_size':c['response_batch_size'],'projection_horizon':c['projection_horizon'],
-            'checkpoint_steps':c['checkpoint_steps'],
-            'rollout':'Qualified exit at j -> up to 64 successive teacher-forced full steps; no new projection inside that rollout',
-            'truncate_graph':'Per lane AFTER the projection horizon or response end; checkpoint boundaries never detach',
+            'kv_loss':'Only next-step full-model output Top8+tail KL; no KV MSE or GDN alignment',
+            'pair':'Qualified exit at j -> input teacher completion[j] -> full output supervises teacher logits[j+1]',
+            'truncate_graph':'After each completed pair; preserve cache values, never teacher-repair the cache',
             'stages':['modules','confidence','evaluate'],'evaluation':'Every detector output, independent of confidence; no cost benchmark','config':c}
 
 def pair_action(pending,qualified,has_successor):

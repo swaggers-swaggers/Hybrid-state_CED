@@ -1,4 +1,4 @@
-"""Split at block 12 and support differentiable projected KV across subsequent steps."""
+"""Split at block 12 and keep differentiable projected KV until the next full step."""
 import torch
 from transformers import DynamicCache
 from transformers.models.qwen3_5.modeling_qwen3_5 import (
@@ -42,7 +42,7 @@ class Runtime:
             self.threshold=state.get('threshold')
         else:
             if checkpoint is not None:raise ValueError('Expected Top8 checkpoint')
-            if state.get('semantics') not in ('top8_or_top1_all_position_chunked_pair_v2','top8_tail_teacher_forced_qualified_exit_immediate_full_v1','block12_residual_to_target_self_attn_raw_kv_v1'):raise ValueError('Unsupported warm-start semantics')
+            if state.get('semantics') not in ('top8_tail_teacher_forced_qualified_exit_immediate_full_v1','block12_residual_to_target_self_attn_raw_kv_v1'):raise ValueError('Unsupported warm-start semantics')
             if state.get('manifest_sha256',data.digest)!=data.digest:raise ValueError('Warm-start dataset differs')
             if state.get('stage') not in ('modules','confidence','calibrated') or state.get('model_weights_sha256')!=data.manifest['model_weights_sha256']:raise ValueError('Invalid initial weights')
             for name in ('readout_map','kv_projectors','confidence_head'):getattr(self.runner,name).load_state_dict(state['modules'][name])

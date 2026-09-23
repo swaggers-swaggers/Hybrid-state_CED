@@ -2,7 +2,7 @@
   "model_path": "models/Qwen3.5-0.8B-Base",
   "data_path": "data/teacher_top8_20260920/dataset",
   "manifest_sha256": "c0ae786b42bcec3fd145c38ffc902d583a24a7b84c8e5668aef00ac159d455f1",
-  "warm_start": "results/training/20260923-detector-1h/experiment/confidence.pt",
+  "warm_start": "results/training/20260923-top8-warm-8h/experiment/calibrated.pt",
   "seed": 20260922,
   "temperature": 1.0,
   "minimum_overlap": 6,
@@ -11,6 +11,7 @@
   "gate_lr": 0.0003,
   "weight_decay": 0.01,
   "gradient_clip": 1.0,
+  "accumulation_positions": 32,
   "gate_epochs": 5,
   "gate_batch_size": 1024,
   "risk_limit": 0.01,
@@ -32,9 +33,6 @@
   ],
   "maximum_artifact_bytes": 2000000000,
   "minimum_free_bytes": 20000000000,
-  "start_token": 643275,
-  "readout_chunk_size": 32,
-  "response_batch_size": 2,
-  "projection_horizon": 64,
-  "checkpoint_steps": 8
+  "start_token": 500000,
+  "readout_chunk_size": 32
 }

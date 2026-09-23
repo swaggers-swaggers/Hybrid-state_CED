@@ -1,4 +1,4 @@
-"""Predeclared throughput sizing and response-batch-safe wall-clock limits; no metric tuning."""
+"""Predeclared throughput sizing and pair-safe wall-clock limits; no metric tuning."""
 import time
 
 class TokenBudget:

@@ -1,0 +1,13 @@
+{
+  "path": "/home/liu/CED/results/training/20260923-detector-1h/experiment/confidence.pt",
+  "sha256": "15037a1147b9509b3d4ccce93e8c2635d954060e37a495d675975e9e2a6adbb2",
+  "all_modules_exactly_loaded": {
+    "readout_map": true,
+    "kv_projectors": true,
+    "confidence_head": true
+  },
+  "source_interval": [
+    500000,
+    643275
+  ]
+}

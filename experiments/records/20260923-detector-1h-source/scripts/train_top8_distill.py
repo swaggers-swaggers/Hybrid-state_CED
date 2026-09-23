@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Top8 batched multi-step distillation entry. Default is a plan; verification never updates weights."""
+"""Top8 pair-distillation entry. Default is a plan; verification never updates weights."""
 import argparse
 import json
 import os
@@ -17,7 +17,7 @@ def main():
     p.add_argument('--stage',choices=('all','modules','confidence','calibrate','evaluate'),default='all')
     p.add_argument('--checkpoint',type=Path);p.add_argument('--output',type=Path)
     p.add_argument('--start',type=int);p.add_argument('--tokens',type=int,default=1_000_000)
-    p.add_argument('--training-hours',type=float,help='Size data using first 1024 positions, stop only between completed response batches')
+    p.add_argument('--training-hours',type=float,help='Size data using first 1024 positions, stop only at a complete pair boundary')
     p.add_argument('--evaluation-responses',type=int,help='Fixed response limit for each held-out and gate split')
     p.add_argument('--soft-hours',type=float,help='Whole worker time limit; completed-stage checkpoints survive')
     p.add_argument('--smoke',action='store_true',help='Separate bounded experiment; still requires --run')
