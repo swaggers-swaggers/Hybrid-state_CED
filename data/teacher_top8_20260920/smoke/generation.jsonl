@@ -1,0 +1,5 @@
+{"split": "train", "batch": 1, "effective_targets": 372, "last_batch_targets": 372}
+{"split": "gate", "batch": 2, "effective_targets": 372, "last_batch_targets": 372}
+{"split": "dev", "batch": 3, "effective_targets": 372, "last_batch_targets": 372}
+{"split": "calibration", "batch": 4, "effective_targets": 341, "last_batch_targets": 341}
+{"split": "test", "batch": 5, "effective_targets": 372, "last_batch_targets": 372}

@@ -1,0 +1,7 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 20134.84it/s]
+{
+  "status": "COMPLETED",
+  "output": "/home/liu/CED/results/training/20260923-top8-warm-8h/experiment",
+  "elapsed_seconds": 10540.938409185
+}

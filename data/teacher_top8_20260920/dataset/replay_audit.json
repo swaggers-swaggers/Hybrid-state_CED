@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "split": "train",
+      "file": "train/batch-000000.npz",
+      "steps": 16,
+      "max_logit_error": 0.0
+    },
+    {
+      "split": "gate",
+      "file": "gate/batch-000951.npz",
+      "steps": 16,
+      "max_logit_error": 0.0
+    },
+    {
+      "split": "dev",
+      "file": "dev/batch-000989.npz",
+      "steps": 16,
+      "max_logit_error": 0.0
+    },
+    {
+      "split": "calibration",
+      "file": "calibration/batch-001008.npz",
+      "steps": 16,
+      "max_logit_error": 0.0
+    },
+    {
+      "split": "test",
+      "file": "test/batch-001046.npz",
+      "steps": 16,
+      "max_logit_error": 0.0
+    }
+  ],
+  "meaning": "Full original model replay on stored prefixes, including first output; no training."
+}

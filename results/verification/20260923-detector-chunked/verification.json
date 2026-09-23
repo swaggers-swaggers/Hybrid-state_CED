@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "optimizer_steps": 0,
+  "trained_weights_saved": false,
+  "cost_benchmark_executed": false,
+  "warm_start_exact": {
+    "readout_map": true,
+    "kv_projectors": true,
+    "confidence_head": true
+  },
+  "native_full_max_logit_errors": [
+    0.0,
+    0.0
+  ],
+  "chunk_hidden_relative_error": 0.010807163082063198,
+  "chunk_max_detector_kl_difference": 0.015986919403076172,
+  "future_token_change_prefix_max_error": 0.0,
+  "unconditional_detector_evaluation": true,
+  "production_loop": {
+    "positions": 34,
+    "qualified_candidates": 33,
+    "kv_pairs": 16,
+    "readout_updates": 1,
+    "projection_updates": 1,
+    "last_position_candidates_without_successor": 1,
+    "readout_batches": 2,
+    "shallow_batches": 2,
+    "readout_kl_sum": 9.149328579194844,
+    "full_pair_kl_sum": 10.475431615486741,
+    "readout_kl": 0.26909789938808365,
+    "next_full_kl": 0.6547144759679213,
+    "mean_top8_overlap": 7.764705882352941,
+    "top1_agreement": 0.9705882352941176,
+    "qualification_rate": 0.9705882352941176,
+    "status": "FINISHED",
+    "actual_interval": [
+      0,
+      34
+    ]
+  },
+  "readout_gradient_norms": [
+    0.051782459020614624
+  ],
+  "projection_gradient_norms": [
+    0.007687882520258427,
+    0.0048835389316082,
+    0.004194387700408697,
+    0.008325732313096523,
+    0.0032162440475076437,
+    0.0030209245160222054
+  ],
+  "frozen_base_no_grad": true,
+  "all_auxiliary_weights_unchanged": true,
+  "verification_labels": "Synthetic OR-qualified positions exercise pair and chunk boundaries; not a training-quality result."
+}

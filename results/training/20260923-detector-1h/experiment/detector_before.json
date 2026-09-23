@@ -1,0 +1,29 @@
+{
+  "positions": 9409,
+  "top8_tail_kl": 2.6783818226588343,
+  "target_token_nll": 4.464546034244615,
+  "teacher_target_nll": 1.081474340079834,
+  "top1_agreement": 0.34817727707514085,
+  "mean_top8_overlap": 3.084599851206292,
+  "top8_recall": 0.3855749814007865,
+  "top8_overlap_ge6_rate": 0.1538952067169731,
+  "qualification_rate": 0.4329896907216495,
+  "tail_mass_mae": 0.46177931736019595,
+  "conditional_top8_kl": 1.6563589689974603,
+  "confidence_bce": 1.683548383421872,
+  "top8_overlap_histogram": [
+    1228,
+    1285,
+    1474,
+    1581,
+    1359,
+    1034,
+    821,
+    501,
+    126
+  ],
+  "output_source": "block12_readout_at_every_position",
+  "temperature": 1.0,
+  "confidence_filter_applied": false,
+  "limitation": "Teacher-prefix held-out detector outputs; not free-generation task accuracy."
+}

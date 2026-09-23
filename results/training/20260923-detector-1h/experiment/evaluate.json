@@ -1,0 +1,36 @@
+{
+  "status": "DETECTOR_EVALUATION_FINISHED",
+  "detector": {
+    "positions": 10661,
+    "top8_tail_kl": 2.660826458692573,
+    "target_token_nll": 4.5341873793337655,
+    "teacher_target_nll": 1.156525496212786,
+    "top1_agreement": 0.3480911734358878,
+    "mean_top8_overlap": 2.899071381671513,
+    "top8_recall": 0.3623839227089391,
+    "top8_overlap_ge6_rate": 0.1153737923271738,
+    "qualification_rate": 0.41206265828721506,
+    "tail_mass_mae": 0.46338874578543043,
+    "conditional_top8_kl": 1.5607520767788359,
+    "confidence_bce": 0.6505526467611257,
+    "top8_overlap_histogram": [
+      1744,
+      1469,
+      1465,
+      1711,
+      1762,
+      1280,
+      784,
+      345,
+      101
+    ],
+    "output_source": "block12_readout_at_every_position",
+    "temperature": 1.0,
+    "confidence_filter_applied": false,
+    "limitation": "Teacher-prefix held-out detector outputs; not free-generation task accuracy."
+  },
+  "cost_benchmark_executed": false,
+  "state_bias_controls": false,
+  "calibration_required": false,
+  "elapsed_seconds": 11.241347884999414
+}

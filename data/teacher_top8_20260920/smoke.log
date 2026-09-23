@@ -1,0 +1,63 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 16765.45it/s]
+{
+  "output": "/home/liu/CED/data/teacher_top8_20260920/smoke",
+  "status": "COMPLETE_DATA_ONLY_NO_TRAINING",
+  "elapsed_seconds": 9.925469972999053,
+  "peak_allocated_mib": 2194.0927734375,
+  "total_effective_targets": 1829,
+  "total_bytes": 232970,
+  "audits": {
+    "readback": "PASS",
+    "teacher_prefix_replay": "PASS",
+    "base_weights_unchanged": "PASS",
+    "all_parameters_frozen": "PASS"
+  },
+  "splits": {
+    "train": {
+      "stored_generated_tokens": 384,
+      "effective_targets": 372,
+      "accepted_responses": 12,
+      "shards": 1,
+      "top8_mass_t1_min": 0.1115526907394733,
+      "top8_mass_t1_max": 0.9999169334031822,
+      "mean_top8_mass_t1": 0.7270710513675658
+    },
+    "gate": {
+      "stored_generated_tokens": 384,
+      "effective_targets": 372,
+      "accepted_responses": 12,
+      "shards": 1,
+      "top8_mass_t1_min": 0.15564899315611638,
+      "top8_mass_t1_max": 0.9999945014505764,
+      "mean_top8_mass_t1": 0.7687327061336063
+    },
+    "dev": {
+      "stored_generated_tokens": 384,
+      "effective_targets": 372,
+      "accepted_responses": 12,
+      "shards": 1,
+      "top8_mass_t1_min": 0.12040368880552944,
+      "top8_mass_t1_max": 0.9999065044571025,
+      "mean_top8_mass_t1": 0.7061410421340243
+    },
+    "calibration": {
+      "stored_generated_tokens": 353,
+      "effective_targets": 341,
+      "accepted_responses": 11,
+      "shards": 1,
+      "top8_mass_t1_min": 0.23340973415487712,
+      "top8_mass_t1_max": 0.9999945695517686,
+      "mean_top8_mass_t1": 0.7870463012149903
+    },
+    "test": {
+      "stored_generated_tokens": 384,
+      "effective_targets": 372,
+      "accepted_responses": 12,
+      "shards": 1,
+      "top8_mass_t1_min": 0.10587077683336094,
+      "top8_mass_t1_max": 0.9999612310570437,
+      "mean_top8_mass_t1": 0.7195990760981226
+    }
+  }
+}

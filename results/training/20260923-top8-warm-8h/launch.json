@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/home/liu/miniconda3/envs/ai/bin/python",
+    "/home/liu/CED/scripts/train_top8_distill.py",
+    "--run",
+    "--stage",
+    "all",
+    "--tokens",
+    "500000",
+    "--training-hours",
+    "6",
+    "--soft-hours",
+    "7.5",
+    "--evaluation-responses",
+    "64",
+    "--output",
+    "/home/liu/CED/results/training/20260923-top8-warm-8h/experiment"
+  ],
+  "started_unix": 1790151175.6744492,
+  "hard_limit_seconds": 28200
+}

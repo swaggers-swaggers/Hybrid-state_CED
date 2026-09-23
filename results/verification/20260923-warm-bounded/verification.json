@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "optimizer_steps": 0,
+  "trained_weights_saved": false,
+  "native_full_max_logit_errors": [
+    0.0,
+    0.0
+  ],
+  "readout_grad_norm": 0.31215351819992065,
+  "projection_grad_norms": {
+    "16.key.weight": 0.025330383330583572,
+    "16.value.weight": 0.008652043528854847,
+    "20.key.weight": 0.01322708185762167,
+    "20.value.weight": 0.006976934149861336,
+    "24.key.weight": 0.0031481452751904726,
+    "24.value.weight": 0.0016726861940696836
+  },
+  "projected_cache_lengths": {
+    "16": 257,
+    "20": 257,
+    "24": 257
+  },
+  "base_frozen_and_no_grad": true,
+  "reject_skips_readout_and_projectors": true,
+  "pair_graph_check": "Forced synthetic branch only in --verify; production training always uses strict Top8 qualification.",
+  "real_position_qualification": {
+    "accepted": false,
+    "overlap": 2,
+    "kl": 0.24979683756828308
+  },
+  "input_alignment": "Next full step consumes teacher completion[j] and supervises stored logits[j+1]",
+  "warm_start_exact": {
+    "readout_map": true,
+    "kv_projectors": true,
+    "confidence_head": true
+  },
+  "pair_safe_time_limit": true,
+  "one_position_budget_no_projection": true,
+  "state_bias_metrics": false,
+  "bounded_evaluation_check": {
+    "positions": 8,
+    "generated_steps": 4,
+    "reject_path_identical": true,
+    "calibration_uses_top8_labels": true
+  },
+  "production_pair_loop_no_update_check": {
+    "positions": 2,
+    "qualified_candidates": 2,
+    "pairs": 1,
+    "weights_unchanged": true
+  }
+}

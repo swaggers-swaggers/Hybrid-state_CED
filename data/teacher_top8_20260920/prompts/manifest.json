@@ -1,0 +1,54 @@
+{
+  "status": "COMPLETE_PROMPTS_ONLY_NO_GENERATION_OR_TRAINING",
+  "count": 24835,
+  "counts": {
+    "train": 21807,
+    "gate": 1026,
+    "dev": 500,
+    "calibration": 741,
+    "test": 761
+  },
+  "prompt_length": 256,
+  "dataset_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "model_revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
+  "model_weights_sha256": "c2b1e5a17d9c1e27685d92ed9b382911ebb99955ecd89052d1721241adfbab6c",
+  "source_files": [
+    {
+      "path": "/home/liu/CED/.cache/huggingface/hub/datasets--Salesforce--wikitext/snapshots/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-v1/train-00000-of-00002.parquet",
+      "bytes": 155788327,
+      "sha256": "c2ecca8c3250e79518e45d125f3a9a757d8014f6b2d8435c602be87c1f79ec3b",
+      "rows": 900675
+    },
+    {
+      "path": "/home/liu/CED/.cache/huggingface/hub/datasets--Salesforce--wikitext/snapshots/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-v1/train-00001-of-00002.parquet",
+      "bytes": 155928670,
+      "sha256": "720f2503551f33c25bb822aad74d699fee4d5331a7373d0c262f1bfb01354fcf",
+      "rows": 900675
+    }
+  ],
+  "cutoff_source_row": 223394,
+  "fresh_manifest_sha256": "47716da6c54649263a199d80c5f4e7c188f6ac070967018347d445fa05eb38f9",
+  "prior_manifest_sha256": "313770f785305c26433b8a621bb7cf05659588e569f5e5c1db9aa30215865470",
+  "tokenizer_files": {
+    "tokenizer.json": "fe000e3ed39ed12b8d2481d527d44f93c65d37e87645d2dcc80d1bf9d50d2927",
+    "tokenizer_config.json": "e611fbccc7c29ef3b1cafb1cb7ea548d189968632901d678fd62be68c47885de"
+  },
+  "skips": {
+    "consumed_prefix_or_boundary": 3825,
+    "repeated_title": 576,
+    "short_article": 207,
+    "repeated_prompt": 0
+  },
+  "split_policy": "One unique article and one prompt per article; deterministic title hash; all answers stay in that split.",
+  "freshness": "Entire source prefix used by prior natural corpora excluded, plus repeated titles and exact cached windows.",
+  "files": {
+    "prompts.int32.bin": {
+      "bytes": 25431040,
+      "sha256": "de39866c3d2d5a46ff78631cabb473fd4cb44280543f34f3204c0deb58b9ea5c"
+    },
+    "articles.jsonl": {
+      "bytes": 6315123,
+      "sha256": "3a48efccabf874b9bb653fee65f3e6ff2d0afcc94a5c728d5dce9bacdaae4c3e"
+    }
+  }
+}

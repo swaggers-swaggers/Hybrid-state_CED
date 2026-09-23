@@ -1,0 +1,50 @@
+{
+  "status": "CONFIDENCE_TRAINED",
+  "initial_dev": {
+    "bce": 1.7371708154678345,
+    "brier": 0.4168478548526764,
+    "positive_rate": 0.44659367203712463,
+    "positions": 9409
+  },
+  "warm_started": true,
+  "history": [
+    {
+      "epoch": 1,
+      "bce": 1.4621264934539795,
+      "brier": 0.39685529470443726,
+      "positive_rate": 0.44659367203712463,
+      "positions": 9409
+    },
+    {
+      "epoch": 2,
+      "bce": 1.2086951732635498,
+      "brier": 0.36624300479888916,
+      "positive_rate": 0.44659367203712463,
+      "positions": 9409
+    },
+    {
+      "epoch": 3,
+      "bce": 0.9864504933357239,
+      "brier": 0.32491740584373474,
+      "positive_rate": 0.44659367203712463,
+      "positions": 9409
+    },
+    {
+      "epoch": 4,
+      "bce": 0.8113401532173157,
+      "brier": 0.27965259552001953,
+      "positive_rate": 0.44659367203712463,
+      "positions": 9409
+    },
+    {
+      "epoch": 5,
+      "bce": 0.6885006427764893,
+      "brier": 0.2402382642030716,
+      "positive_rate": 0.44659367203712463,
+      "positions": 9409
+    }
+  ],
+  "training_positions": 10708,
+  "label": "Top8 overlap >=6 OR Top1 match",
+  "elapsed_seconds": 20.677697889001138
+}

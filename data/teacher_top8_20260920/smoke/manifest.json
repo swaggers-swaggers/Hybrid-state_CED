@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE_DATA_ONLY_NO_TRAINING",
+  "config": {
+    "model_path": "models/Qwen3.5-0.8B-Base",
+    "fresh_corpus": "data/wikitext103_10000000_fresh_20260919-222037",
+    "prior_corpus": "data/phase1_wikitext103",
+    "seed": 20260920,
+    "prompt_length": 256,
+    "answers_per_prompt": 3,
+    "prompts_per_batch": 4,
+    "max_new_tokens": 32,
+    "stored_topk": 8,
+    "sampling_temperature": 0.8,
+    "sampling_top_p": 0.95,
+    "normalizer_temperatures": [
+      1.0,
+      2.0
+    ],
+    "target_effective_tokens": {
+      "train": 100,
+      "gate": 100,
+      "dev": 100,
+      "calibration": 100,
+      "test": 100
+    },
+    "maximum_artifact_bytes": 2000000000,
+    "minimum_free_bytes": 20000000000
+  },
+  "smoke": true,
+  "teacher": "/home/liu/CED/models/Qwen3.5-0.8B-Base",
+  "model_revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
+  "model_weights_sha256": "c2b1e5a17d9c1e27685d92ed9b382911ebb99955ecd89052d1721241adfbab6c",
+  "prompt_pool": "/home/liu/CED/data/teacher_top8_20260920/prompts",
+  "prompt_manifest_sha256": "d36b634bdbe95b3437fca6f33b3fb938ab4887d943a08937f845b05874d3d3f9",
+  "eos_token_ids": [
+    248044
+  ],
+  "pad_token_id": 248044,
+  "source_sha256": {
+    "ced_training/topk_data.py": "b36bd0c6267e59f07d6905ef0e8cb664221aa52e84f1a9af82ea3e7cee3e42ce",
+    "scripts/generate_top8_data.py": "0645fadf0d44a89e82ebcf70efa59216621e1da2d03728b776d345638748831e"
+  },
+  "splits": {
+    "train": {
+      "effective_targets": 372,
+      "stored_generated_tokens": 384,
+      "accepted_responses": 12,
+      "shards": [
+        {
+          "file": "train/batch-000000.npz",
+          "bytes": 46594,
+          "sha256": "66118845f1be249c7dcbff8c032ed180f64d0718a2de0ad563f9e36b7b3236b0",
+          "effective_targets": 372,
+          "batch_seed": 20260920,
+          "prompt_ids": [
+            0,
+            2,
+            3,
+            4
+          ]
+        }
+      ]
+    },
+    "gate": {
+      "effective_targets": 372,
+      "stored_generated_tokens": 384,
+      "accepted_responses": 12,
+      "shards": [
+        {
+          "file": "gate/batch-000001.npz",
+          "bytes": 46594,
+          "sha256": "4f5055361d2ae241b66503fd58c9f101bdb9da77664abd71ae237d1c397da661",
+          "effective_targets": 372,
+          "batch_seed": 20260921,
+          "prompt_ids": [
+            18,
+            23,
+            30,
+            37
+          ]
+        }
+      ]
+    },
+    "dev": {
+      "effective_targets": 372,
+      "stored_generated_tokens": 384,
+      "accepted_responses": 12,
+      "shards": [
+        {
+          "file": "dev/batch-000002.npz",
+          "bytes": 46594,
+          "sha256": "058b5fdd6e27f4fb32c9ab495968b06e68cbc213d1f20ff02a64787da715a18d",
+          "effective_targets": 372,
+          "batch_seed": 20260922,
+          "prompt_ids": [
+            33,
+            175,
+            244,
+            251
+          ]
+        }
+      ]
+    },
+    "calibration": {
+      "effective_targets": 341,
+      "stored_generated_tokens": 353,
+      "accepted_responses": 11,
+      "shards": [
+        {
+          "file": "calibration/batch-000003.npz",
+          "bytes": 46594,
+          "sha256": "6d2ca3bbe828eddfc76bc64c3bffebb1c5c8a571c7b2cc6cc69e33a65bee6e0f",
+          "effective_targets": 341,
+          "batch_seed": 20260923,
+          "prompt_ids": [
+            1,
+            13,
+            25,
+            27
+          ]
+        }
+      ]
+    },
+    "test": {
+      "effective_targets": 372,
+      "stored_generated_tokens": 384,
+      "accepted_responses": 12,
+      "shards": [
+        {
+          "file": "test/batch-000004.npz",
+          "bytes": 46594,
+          "sha256": "ac79e87c20159fef4126b9e9fe57461561e337a9b766070271fb4cd45e73c59e",
+          "effective_targets": 372,
+          "batch_seed": 20260924,
+          "prompt_ids": [
+            32,
+            54,
+            83,
+            140
+          ]
+        }
+      ]
+    }
+  },
+  "alignment": "Record j stores raw teacher logits from prompt + completion[:j], predicting completion[j]. j=0 is full-prefill output; its loss mask is 0.",
+  "sparse_distribution": "Top8 raw FP32 logits + int32 IDs; full-vocab FP32 logsumexp at T=1,2; chosen token raw FP32 logit even outside Top8. Not full-vocabulary logits.",
+  "mask": "1 only for accepted response positions 1..length-1, EOS included; prompt, first output, padding and rejected answers are 0.",
+  "sampling": "Exact full-vocabulary nucleus after temperature scaling. Stored logits are before all sampling transformations.",
+  "response_policy": "Three independently sampled attempts per prompt. Keep 2 or 3 distinct responses; reject entire prompt if fewer than 2. Global exact completion deduplication.",
+  "limitations": "English WikiText continuation by the original Base teacher; no instruction quality guarantee or state targets. Separate dataset, not wired into current training.",
+  "elapsed_seconds": 9.925469972999053,
+  "peak_allocated_mib": 2194.0927734375,
+  "total_effective_targets": 1829,
+  "total_bytes": 232970,
+  "audits": {
+    "readback": "PASS",
+    "teacher_prefix_replay": "PASS",
+    "base_weights_unchanged": "PASS",
+    "all_parameters_frozen": "PASS"
+  }
+}

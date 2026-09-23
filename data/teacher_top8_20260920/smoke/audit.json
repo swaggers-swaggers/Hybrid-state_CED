@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "splits": {
+    "train": {
+      "stored_generated_tokens": 384,
+      "effective_targets": 372,
+      "accepted_responses": 12,
+      "shards": 1,
+      "top8_mass_t1_min": 0.1115526907394733,
+      "top8_mass_t1_max": 0.9999169334031822,
+      "mean_top8_mass_t1": 0.7270710513675658
+    },
+    "gate": {
+      "stored_generated_tokens": 384,
+      "effective_targets": 372,
+      "accepted_responses": 12,
+      "shards": 1,
+      "top8_mass_t1_min": 0.15564899315611638,
+      "top8_mass_t1_max": 0.9999945014505764,
+      "mean_top8_mass_t1": 0.7687327061336063
+    },
+    "dev": {
+      "stored_generated_tokens": 384,
+      "effective_targets": 372,
+      "accepted_responses": 12,
+      "shards": 1,
+      "top8_mass_t1_min": 0.12040368880552944,
+      "top8_mass_t1_max": 0.9999065044571025,
+      "mean_top8_mass_t1": 0.7061410421340243
+    },
+    "calibration": {
+      "stored_generated_tokens": 353,
+      "effective_targets": 341,
+      "accepted_responses": 11,
+      "shards": 1,
+      "top8_mass_t1_min": 0.23340973415487712,
+      "top8_mass_t1_max": 0.9999945695517686,
+      "mean_top8_mass_t1": 0.7870463012149903
+    },
+    "test": {
+      "stored_generated_tokens": 384,
+      "effective_targets": 372,
+      "accepted_responses": 12,
+      "shards": 1,
+      "top8_mass_t1_min": 0.10587077683336094,
+      "top8_mass_t1_max": 0.9999612310570437,
+      "mean_top8_mass_t1": 0.7195990760981226
+    }
+  },
+  "unique_articles_used": 20,
+  "checks": "SHA256, exact quota, prompt/article split isolation, duplicate answers, token-logit alignment, raw-logit finiteness/order, T1/T2 mass, EOS, first-token/padding/rejected-answer masks"
+}

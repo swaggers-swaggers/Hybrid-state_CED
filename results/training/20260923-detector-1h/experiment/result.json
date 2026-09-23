@@ -1,0 +1,193 @@
+{
+  "status": "COMPLETED",
+  "semantics": "top8_or_top1_all_position_chunked_pair_v2",
+  "stages": {
+    "modules": {
+      "positions": 143275,
+      "qualified_candidates": 62632,
+      "kv_pairs": 42081,
+      "readout_updates": 3044,
+      "projection_updates": 3039,
+      "last_position_candidates_without_successor": 92,
+      "readout_batches": 4527,
+      "shallow_batches": 4527,
+      "readout_kl_sum": 388208.5551666939,
+      "full_pair_kl_sum": 15728.918357260893,
+      "readout_kl": 2.709534497760907,
+      "next_full_kl": 0.3737772000965018,
+      "mean_top8_overlap": 3.012158436573024,
+      "top1_agreement": 0.36136101901936835,
+      "qualification_rate": 0.43714534985168385,
+      "status": "FINISHED",
+      "budget": {
+        "maximum_tokens": 500000,
+        "chosen_tokens": 143275,
+        "actual_seconds": 1269.788674841002,
+        "training_seconds_limit": 1980.0000000000002,
+        "initial_tokens_per_second": 111.04590318653996,
+        "sizing_safety_factor": 0.65,
+        "stop_reason": "TOKEN_TARGET"
+      },
+      "actual_interval": [
+        500000,
+        643275
+      ],
+      "detector_before": {
+        "positions": 9409,
+        "top8_tail_kl": 2.6783818226588343,
+        "target_token_nll": 4.464546034244615,
+        "teacher_target_nll": 1.081474340079834,
+        "top1_agreement": 0.34817727707514085,
+        "mean_top8_overlap": 3.084599851206292,
+        "top8_recall": 0.3855749814007865,
+        "top8_overlap_ge6_rate": 0.1538952067169731,
+        "qualification_rate": 0.4329896907216495,
+        "tail_mass_mae": 0.46177931736019595,
+        "conditional_top8_kl": 1.6563589689974603,
+        "confidence_bce": 1.683548383421872,
+        "top8_overlap_histogram": [
+          1228,
+          1285,
+          1474,
+          1581,
+          1359,
+          1034,
+          821,
+          501,
+          126
+        ],
+        "output_source": "block12_readout_at_every_position",
+        "temperature": 1.0,
+        "confidence_filter_applied": false,
+        "limitation": "Teacher-prefix held-out detector outputs; not free-generation task accuracy."
+      },
+      "detector_after": {
+        "positions": 9409,
+        "top8_tail_kl": 2.625788390389385,
+        "target_token_nll": 4.403463072142802,
+        "teacher_target_nll": 1.081474340079834,
+        "top1_agreement": 0.36093102348814965,
+        "mean_top8_overlap": 3.1137209055159953,
+        "top8_recall": 0.3892151131894994,
+        "top8_overlap_ge6_rate": 0.1566585184397917,
+        "qualification_rate": 0.4465936868955256,
+        "tail_mass_mae": 0.45630424868250924,
+        "conditional_top8_kl": 1.6238733083690717,
+        "confidence_bce": 1.7371706043778172,
+        "top8_overlap_histogram": [
+          1200,
+          1275,
+          1453,
+          1581,
+          1361,
+          1065,
+          848,
+          492,
+          134
+        ],
+        "output_source": "block12_readout_at_every_position",
+        "temperature": 1.0,
+        "confidence_filter_applied": false,
+        "limitation": "Teacher-prefix held-out detector outputs; not free-generation task accuracy."
+      },
+      "detector_delta": {
+        "top8_tail_kl": -0.05259343226944946,
+        "target_token_nll": -0.0610829621018123,
+        "top1_agreement": 0.012753746413008804,
+        "mean_top8_overlap": 0.029121054309703354,
+        "top8_recall": 0.003640131788712919,
+        "qualification_rate": 0.013603996173876087,
+        "conditional_top8_kl": -0.032485660628388535
+      },
+      "elapsed_seconds": 1290.5257005540007
+    },
+    "confidence": {
+      "status": "CONFIDENCE_TRAINED",
+      "initial_dev": {
+        "bce": 1.7371708154678345,
+        "brier": 0.4168478548526764,
+        "positive_rate": 0.44659367203712463,
+        "positions": 9409
+      },
+      "warm_started": true,
+      "history": [
+        {
+          "epoch": 1,
+          "bce": 1.4621264934539795,
+          "brier": 0.39685529470443726,
+          "positive_rate": 0.44659367203712463,
+          "positions": 9409
+        },
+        {
+          "epoch": 2,
+          "bce": 1.2086951732635498,
+          "brier": 0.36624300479888916,
+          "positive_rate": 0.44659367203712463,
+          "positions": 9409
+        },
+        {
+          "epoch": 3,
+          "bce": 0.9864504933357239,
+          "brier": 0.32491740584373474,
+          "positive_rate": 0.44659367203712463,
+          "positions": 9409
+        },
+        {
+          "epoch": 4,
+          "bce": 0.8113401532173157,
+          "brier": 0.27965259552001953,
+          "positive_rate": 0.44659367203712463,
+          "positions": 9409
+        },
+        {
+          "epoch": 5,
+          "bce": 0.6885006427764893,
+          "brier": 0.2402382642030716,
+          "positive_rate": 0.44659367203712463,
+          "positions": 9409
+        }
+      ],
+      "training_positions": 10708,
+      "label": "Top8 overlap >=6 OR Top1 match",
+      "elapsed_seconds": 20.677697889001138
+    },
+    "evaluate": {
+      "status": "DETECTOR_EVALUATION_FINISHED",
+      "detector": {
+        "positions": 10661,
+        "top8_tail_kl": 2.660826458692573,
+        "target_token_nll": 4.5341873793337655,
+        "teacher_target_nll": 1.156525496212786,
+        "top1_agreement": 0.3480911734358878,
+        "mean_top8_overlap": 2.899071381671513,
+        "top8_recall": 0.3623839227089391,
+        "top8_overlap_ge6_rate": 0.1153737923271738,
+        "qualification_rate": 0.41206265828721506,
+        "tail_mass_mae": 0.46338874578543043,
+        "conditional_top8_kl": 1.5607520767788359,
+        "confidence_bce": 0.6505526467611257,
+        "top8_overlap_histogram": [
+          1744,
+          1469,
+          1465,
+          1711,
+          1762,
+          1280,
+          784,
+          345,
+          101
+        ],
+        "output_source": "block12_readout_at_every_position",
+        "temperature": 1.0,
+        "confidence_filter_applied": false,
+        "limitation": "Teacher-prefix held-out detector outputs; not free-generation task accuracy."
+      },
+      "cost_benchmark_executed": false,
+      "state_bias_controls": false,
+      "calibration_required": false,
+      "elapsed_seconds": 11.241347884999414
+    }
+  },
+  "elapsed_seconds": 1323.8261259909996,
+  "peak_allocated_mib": 1979.27587890625
+}

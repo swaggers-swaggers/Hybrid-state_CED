@@ -1,0 +1,40 @@
+{
+  "positions": 500000,
+  "readout_kl_sum": 1421555.8396636478,
+  "full_pair_kl_sum": 256.43805685589905,
+  "qualified_candidates": 1798,
+  "kv_pairs": 1763,
+  "readout_updates": 15624,
+  "projection_updates": 1521,
+  "last_position_candidates_without_successor": 2,
+  "readout_kl": 2.8431116793272957,
+  "next_full_kl": 0.145455505874021,
+  "status": "FINISHED",
+  "budget": {
+    "maximum_tokens": 500000,
+    "chosen_tokens": 500000,
+    "actual_seconds": 8364.228622426,
+    "training_seconds_limit": 21600.0,
+    "initial_tokens_per_second": 57.615030473395045,
+    "sizing_safety_factor": 0.65,
+    "stop_reason": "TOKEN_TARGET"
+  },
+  "actual_interval": [
+    0,
+    500000
+  ],
+  "dev": {
+    "positions": 26662,
+    "readout_kl_sum": 71143.09890049195,
+    "full_pair_kl_sum": 12.746790247503668,
+    "qualified_candidates": 106,
+    "kv_pairs": 106,
+    "readout_updates": 0,
+    "projection_updates": 0,
+    "last_position_candidates_without_successor": 0,
+    "readout_kl": 2.668333167072686,
+    "next_full_kl": 0.12025273818399687,
+    "status": "FINISHED"
+  },
+  "elapsed_seconds": 8808.840498784
+}

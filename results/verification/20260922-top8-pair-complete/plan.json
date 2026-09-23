@@ -1,0 +1,64 @@
+{
+  "status": "PLAN_ONLY_NO_TRAINING",
+  "semantics": "top8_tail_teacher_forced_qualified_exit_immediate_full_v1",
+  "interval": [
+    0,
+    1000000
+  ],
+  "teacher_forcing": true,
+  "kv_trigger": {
+    "minimum_top8_overlap": 6,
+    "maximum_top8_plus_tail_kl_T1": 0.05
+  },
+  "kv_loss": "Only next-step full-model output Top8+tail KL; no KV MSE or GDN alignment",
+  "pair": "Qualified exit at j -> input teacher completion[j] -> full output supervises teacher logits[j+1]",
+  "truncate_graph": "After each completed pair; preserve cache values, never teacher-repair the cache",
+  "stages": [
+    "modules",
+    "confidence",
+    "calibrate",
+    "evaluate"
+  ],
+  "config": {
+    "model_path": "models/Qwen3.5-0.8B-Base",
+    "data_path": "data/teacher_top8_20260920/dataset",
+    "manifest_sha256": "c0ae786b42bcec3fd145c38ffc902d583a24a7b84c8e5668aef00ac159d455f1",
+    "warm_start": "results/training/20260919-225836-continue-5m/chunk06-1m/modules/modules.pt",
+    "seed": 20260922,
+    "temperature": 1.0,
+    "minimum_overlap": 6,
+    "maximum_top8_kl": 0.05,
+    "readout_lr": 0.0001,
+    "projection_lr": 1e-05,
+    "gate_lr": 0.0003,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "accumulation_positions": 32,
+    "gate_epochs": 5,
+    "gate_batch_size": 1024,
+    "risk_limit": 0.01,
+    "minimum_accepted": 1024,
+    "threshold_grid": [
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.85,
+      0.9,
+      0.92,
+      0.94,
+      0.96,
+      0.98,
+      0.99,
+      0.995,
+      0.999
+    ],
+    "eval_prompts": 8,
+    "decode_lengths": [
+      64,
+      256
+    ],
+    "maximum_artifact_bytes": 2000000000,
+    "minimum_free_bytes": 20000000000
+  }
+}

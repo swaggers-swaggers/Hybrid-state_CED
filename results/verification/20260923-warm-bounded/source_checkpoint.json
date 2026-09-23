@@ -1,0 +1,9 @@
+{
+  "path": "/home/liu/CED/results/training/20260919-225836-continue-5m/chunk06-1m/confidence/confidence.pt",
+  "sha256": "5a42e96a5cbf928d285ab2bda552701ed9947cab724418c2bd995ee956436f24",
+  "all_modules_exactly_loaded": {
+    "readout_map": true,
+    "kv_projectors": true,
+    "confidence_head": true
+  }
+}

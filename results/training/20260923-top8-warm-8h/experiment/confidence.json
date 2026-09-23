@@ -1,0 +1,50 @@
+{
+  "status": "CONFIDENCE_TRAINED",
+  "initial_dev": {
+    "bce": 0.5961025357246399,
+    "brier": 0.2080964893102646,
+    "positive_rate": 0.003975695930421352,
+    "positions": 26662
+  },
+  "warm_started": true,
+  "history": [
+    {
+      "epoch": 1,
+      "bce": 0.22054192423820496,
+      "brier": 0.057491838932037354,
+      "positive_rate": 0.003975695930421352,
+      "positions": 26662
+    },
+    {
+      "epoch": 2,
+      "bce": 0.10218600928783417,
+      "brier": 0.018273403868079185,
+      "positive_rate": 0.003975695930421352,
+      "positions": 26662
+    },
+    {
+      "epoch": 3,
+      "bce": 0.06391073763370514,
+      "brier": 0.009317350573837757,
+      "positive_rate": 0.003975695930421352,
+      "positions": 26662
+    },
+    {
+      "epoch": 4,
+      "bce": 0.047447122633457184,
+      "brier": 0.006460943259298801,
+      "positive_rate": 0.003975695930421352,
+      "positions": 26662
+    },
+    {
+      "epoch": 5,
+      "bce": 0.03884406387805939,
+      "brier": 0.005291237961500883,
+      "positive_rate": 0.003975695930421352,
+      "positions": 26662
+    }
+  ],
+  "training_positions": 29487,
+  "label": "Top8 overlap AND Top8+tail KL; not Top1 match",
+  "elapsed_seconds": 517.941196060001
+}

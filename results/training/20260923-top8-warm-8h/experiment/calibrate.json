@@ -1,0 +1,106 @@
+{
+  "status": "NO_ELIGIBLE_THRESHOLD",
+  "threshold": null,
+  "selected": null,
+  "curve": [
+    {
+      "threshold": 0.5,
+      "accepted": 2,
+      "errors": 2,
+      "coverage": 6.839945280437756e-05,
+      "top8_violation_rate": 1.0
+    },
+    {
+      "threshold": 0.6,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.7,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.8,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.85,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.9,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.92,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.94,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.96,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.98,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.99,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.995,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    },
+    {
+      "threshold": 0.999,
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0.0,
+      "top8_violation_rate": null
+    }
+  ],
+  "interpretation": "Empirical Top8+tail qualification risk, not Top1 disagreement or a formal statistical bound.",
+  "metrics": {
+    "bce": 0.04530937224626541,
+    "brier": 0.007002264726907015,
+    "positive_rate": 0.005574555601924658,
+    "positions": 29240
+  },
+  "elapsed_seconds": 269.6624290180007
+}

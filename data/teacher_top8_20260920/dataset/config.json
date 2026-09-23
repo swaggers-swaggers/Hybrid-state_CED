@@ -1,0 +1,26 @@
+{
+  "model_path": "models/Qwen3.5-0.8B-Base",
+  "fresh_corpus": "data/wikitext103_10000000_fresh_20260919-222037",
+  "prior_corpus": "data/phase1_wikitext103",
+  "seed": 20260920,
+  "prompt_length": 256,
+  "answers_per_prompt": 3,
+  "prompts_per_batch": 4,
+  "max_new_tokens": 512,
+  "stored_topk": 8,
+  "sampling_temperature": 0.8,
+  "sampling_top_p": 0.95,
+  "normalizer_temperatures": [
+    1.0,
+    2.0
+  ],
+  "target_effective_tokens": {
+    "train": 5000000,
+    "gate": 200000,
+    "dev": 100000,
+    "calibration": 200000,
+    "test": 200000
+  },
+  "maximum_artifact_bytes": 2000000000,
+  "minimum_free_bytes": 20000000000
+}
